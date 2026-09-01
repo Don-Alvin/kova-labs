@@ -12,6 +12,12 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // AI agent harness directories, not project source.
+    ".agent/**",
+    ".claude/**",
+    ".gemini/**",
+    ".opencode/**",
+    ".impeccable/**",
   ]),
 ]);
 

@@ -39,3 +39,26 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# project docs (solo project, local only)
+CLAUDE.md
+AGENTS.md
+implementation.md
+
+# ai agent harness config
+/.claude/
+/.agent/
+/.gemini/
+/.opencode/
+/.cursor/
+/.codex/
+/.github/copilot-instructions.md
+
+# editor
+/.idea/
+/.vscode/
+
+# impeccable
+PRODUCT.md
+DESIGN.md
+/.impeccable/
