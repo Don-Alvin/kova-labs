@@ -5,6 +5,7 @@
   --bg-warm: #f0ebe3;
   --dark: #0c0c0c;
   --dark-card: #161616;
+  --dark-card-hover: #1e1e1e;
   --text: #141414;
   --text-light: #fafaf7;
   --text-muted: #7a7a72;
@@ -12,6 +13,7 @@
   --accent: #ff4d00;
   --border: #ddd8cf;
   --border-dark: #282828;
+  --whatsapp: #25d366;
 }
 
 @theme inline {
@@ -19,6 +21,7 @@
   --color-bg-warm: var(--bg-warm);
   --color-dark: var(--dark);
   --color-dark-card: var(--dark-card);
+  --color-dark-card-hover: var(--dark-card-hover);
   --color-text: var(--text);
   --color-text-light: var(--text-light);
   --color-text-muted: var(--text-muted);
@@ -26,10 +29,9 @@
   --color-accent: var(--accent);
   --color-border: var(--border);
   --color-border-dark: var(--border-dark);
+  --color-whatsapp: var(--whatsapp);
 
   --font-sans: var(--font-montserrat);
-
-  --radius-none: 0;
 }
 
 *,
@@ -54,24 +56,55 @@ body {
   outline-offset: 2px;
 }
 
-/* Initial hidden states for the GSAP entrance, set here to prevent a flash
-   of unstyled content before the timeline runs. */
-.entrance {
+/* Inner content shell. Sections stay full width so their grounds and rules
+   run edge to edge, while the content inside them caps and centers. */
+.shell {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+}
+
+/* Hidden start state for scroll reveals, set here rather than by GSAP so
+   nothing flashes before the timeline runs. */
+.reveal {
   opacity: 0;
 }
 
-.entrance-logo {
-  transform: scale(0.9);
+/* Hero headline lines start below their mask and slide up on load. */
+.hero-line-mask {
+  overflow: hidden;
 }
 
-.entrance-headline {
-  transform: translateY(20px);
+.hero-line {
+  display: block;
+  transform: translateY(110%);
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 30s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .entrance {
+  .reveal,
+  .hero-line {
     opacity: 1;
     transform: none;
+  }
+
+  .marquee-track {
+    animation: none;
   }
 
   *,
@@ -80,29 +113,6 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
-}
-
-/* Coming soon background: a slow, barely perceptible gradient drift. */
-@keyframes drift {
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-.bg-drift {
-  background-image: linear-gradient(
-    120deg,
-    #0c0c0c 0%,
-    #14101a 35%,
-    #0c0c0c 70%,
-    #16111c 100%
-  );
-  background-size: 300% 300%;
-  animation: drift 40s ease-in-out infinite;
 }
