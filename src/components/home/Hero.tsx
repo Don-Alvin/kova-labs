@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { parallax, prefersReducedMotion } from "@/lib/animations";
-import { SectionEyebrow } from "@/components/shared/SectionEyebrow";
 import { calTrigger } from "@/lib/cal";
 
 const HEADLINE_LINES = [
@@ -26,12 +25,13 @@ export const Hero = () => {
 
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-      tl.to(".hero-eyebrow", { opacity: 1, duration: 0.6, delay: 0.2 })
-        .to(
-          ".hero-line",
-          { y: 0, duration: 1.1, stagger: 0.1, ease: "power4.out" },
-          "-=0.3"
-        )
+      tl.to(".hero-line", {
+        y: 0,
+        duration: 1.1,
+        stagger: 0.1,
+        delay: 0.2,
+        ease: "power4.out",
+      })
         .to(".hero-description", { opacity: 1, duration: 0.8 }, "-=0.7")
         .to(".hero-ctas", { opacity: 1, duration: 0.6 }, "-=0.5")
         .to(".hero-image", { opacity: 1, duration: 1 }, "-=0.6");
@@ -45,11 +45,7 @@ export const Hero = () => {
     <section ref={container} className="border-b border-border">
       <div className="shell grid grid-cols-1 items-center gap-12 px-6 py-16 md:px-12 md:py-24 lg:grid-cols-[55fr_45fr] lg:gap-16">
         <div>
-          <SectionEyebrow className="hero-fade hero-eyebrow opacity-0">
-            Software studio, Nairobi
-          </SectionEyebrow>
-
-          <h1 className="mt-8 text-4xl font-extrabold leading-[0.95] tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl">
+          <h1 className="text-4xl font-extrabold leading-[0.95] tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl">
             {HEADLINE_LINES.map((line, index) => (
               <span key={index} className="hero-line-mask block">
                 <span className="hero-line">
@@ -76,13 +72,13 @@ export const Hero = () => {
             <button
               type="button"
               {...calTrigger()}
-              className="w-full bg-accent px-8 py-4 text-sm font-medium text-text-light transition-colors hover:bg-text sm:w-auto"
+              className="w-full bg-accent px-8 py-4 text-sm font-medium text-dark transition-colors hover:bg-text sm:w-auto"
             >
               Book a free call
             </button>
             <a
               href="#work"
-              className="group inline-flex items-center gap-2 text-sm font-medium text-text transition-colors hover:text-accent"
+              className="group inline-flex items-center gap-2 text-sm font-medium text-text transition-colors hover:text-accent-text"
             >
               See our work
               <span

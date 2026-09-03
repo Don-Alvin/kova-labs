@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { CookieConsent } from "@/components/layout/CookieConsent";
 import { CalPopup } from "@/components/layout/CalPopup";
+import { Analytics } from "@/components/layout/Analytics";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -25,7 +26,13 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "KovaLab" }],
   metadataBase: new URL(SITE_URL),
-  icons: { icon: "/favicon.svg" },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.png", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     title: "KovaLab | Software Solutions Studio",
     description:
@@ -63,6 +70,7 @@ export default function RootLayout({
         <WhatsAppButton />
         <CookieConsent />
         <CalPopup />
+        <Analytics />
       </body>
     </html>
   );

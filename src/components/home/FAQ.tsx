@@ -2,7 +2,6 @@
 
 import { useRef, useState } from "react";
 import { gsap } from "gsap";
-import { SectionEyebrow } from "@/components/shared/SectionEyebrow";
 import { prefersReducedMotion } from "@/lib/animations";
 
 const QUESTIONS = [
@@ -65,8 +64,7 @@ export const FAQ = () => {
   return (
     <section className="border-b border-border">
       <div className="shell px-6 py-16 md:px-12 md:py-24">
-        <SectionEyebrow>Common questions</SectionEyebrow>
-        <h2 className="mt-6 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
           Everything you need to know
         </h2>
 
@@ -82,12 +80,12 @@ export const FAQ = () => {
                     aria-expanded={open}
                     aria-controls={`faq-panel-${index}`}
                     id={`faq-trigger-${index}`}
-                    className="flex w-full items-center justify-between gap-6 py-6 text-left text-lg font-semibold transition-colors hover:text-accent md:text-xl"
+                    className="flex w-full items-center justify-between gap-6 py-6 text-left text-lg font-semibold transition-colors hover:text-accent-text md:text-xl"
                   >
                     {item.question}
                     <span
                       aria-hidden="true"
-                      className={`shrink-0 text-2xl font-light text-accent transition-transform duration-400 ${
+                      className={`shrink-0 text-2xl font-light text-accent-text transition-transform duration-400 ${
                         open ? "rotate-[135deg]" : ""
                       }`}
                     >

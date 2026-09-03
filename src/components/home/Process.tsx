@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { revealOnScroll } from "@/lib/animations";
-import { SectionEyebrow } from "@/components/shared/SectionEyebrow";
 
 const STEPS = [
   {
@@ -42,8 +41,7 @@ export const Process = () => {
   return (
     <section ref={container} className="border-b border-border">
       <div className="shell px-6 py-16 md:px-12 md:py-24">
-        <SectionEyebrow>How we work</SectionEyebrow>
-        <h2 className="mt-6 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
           Simple process, <em className="text-accent">real</em> results
         </h2>
 
@@ -57,7 +55,7 @@ export const Process = () => {
                   : ""
               } ${index === 0 ? "md:border-r md:border-border" : ""}`}
             >
-              <p className="text-4xl font-extrabold tracking-tight text-accent opacity-20 lg:text-5xl">
+              <p aria-hidden="true" className="text-4xl font-extrabold tracking-tight text-accent opacity-20 lg:text-5xl">
                 {step.number}
               </p>
               <h3 className="mt-6 text-xl font-semibold">{step.title}</h3>

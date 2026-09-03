@@ -42,9 +42,9 @@ yarn-error.log*
 next-env.d.ts
 
 # project docs (solo project, local only)
-CLAUDE.md
-AGENTS.md
-implementation.md
+/CLAUDE.md
+/AGENTS.md
+/implementation.*md
 
 # ai agent harness config
 /.claude/
@@ -60,6 +60,6 @@ implementation.md
 /.vscode/
 
 # impeccable
-PRODUCT.md
-DESIGN.md
+/PRODUCT.md
+/DESIGN.md
 /.impeccable/

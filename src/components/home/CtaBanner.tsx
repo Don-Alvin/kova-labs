@@ -18,7 +18,7 @@ export const CtaBanner = () => (
       <button
         type="button"
         {...calTrigger()}
-        className="w-full shrink-0 bg-accent px-8 py-4 text-sm font-medium text-text-light transition-colors hover:bg-text-light hover:text-dark lg:w-auto"
+        className="w-full shrink-0 bg-accent px-8 py-4 text-sm font-medium text-dark transition-colors hover:bg-text-light hover:text-dark lg:w-auto"
       >
         Book a free call
       </button>

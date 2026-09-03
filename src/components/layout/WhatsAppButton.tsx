@@ -43,7 +43,7 @@ export const WhatsAppButton = () => {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp"
-      className="fixed bottom-6 right-6 z-40 flex h-14 w-14 translate-y-6 items-center justify-center bg-whatsapp text-text-light opacity-0"
+      className="fixed bottom-6 right-6 z-40 flex h-14 w-14 translate-y-6 items-center justify-center bg-whatsapp text-dark opacity-0"
     >
       <svg
         width="26"

@@ -34,9 +34,18 @@ export const revealOnScroll = (
     return;
   }
 
+  // Below the tablet breakpoint the layout is a single column, so a sideways
+  // reveal has nothing to reveal from and its 60px offset pushes the element
+  // past the right edge while it animates. Fall back to the vertical reveal.
+  const stacked = window.innerWidth < 768;
+  const resolved: RevealDirection =
+    stacked && (direction === "left" || direction === "right")
+      ? "up"
+      : direction;
+
   gsap.fromTo(
     target,
-    { opacity: 0, ...OFFSETS[direction] },
+    { opacity: 0, ...OFFSETS[resolved] },
     {
       opacity: 1,
       x: 0,

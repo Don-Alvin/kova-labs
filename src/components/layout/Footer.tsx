@@ -12,6 +12,9 @@ export const Footer = () => (
     <div className="shell grid grid-cols-1 gap-12 px-6 py-16 md:grid-cols-2 md:px-12 md:py-24 lg:grid-cols-4">
       <div className="flex flex-col gap-4">
         <Logo variant="light" />
+        <p className="text-xs font-light tracking-wide text-text-muted">
+          Software solutions studio
+        </p>
         <p className="max-w-[280px] text-sm leading-relaxed text-text-muted">
           Helping businesses across East Africa get online with websites that
           actually work.
@@ -27,7 +30,7 @@ export const Footer = () => (
             <li key={item.label}>
               <Link
                 href={item.href}
-                className="text-sm text-text transition-colors hover:text-accent"
+                className="text-sm text-text transition-colors hover:text-accent-text"
               >
                 {item.label}
               </Link>
@@ -45,7 +48,7 @@ export const Footer = () => (
             <li key={item.label}>
               <Link
                 href={item.href}
-                className="text-sm text-text transition-colors hover:text-accent"
+                className="text-sm text-text transition-colors hover:text-accent-text"
               >
                 {item.label}
               </Link>
@@ -60,7 +63,7 @@ export const Footer = () => (
         </h2>
         <a
           href={`mailto:${EMAIL}`}
-          className="mt-6 block text-sm text-text transition-colors hover:text-accent"
+          className="mt-6 block text-sm text-text transition-colors hover:text-accent-text"
         >
           {EMAIL}
         </a>

@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { parallax, revealOnScroll } from "@/lib/animations";
-import { SectionEyebrow } from "@/components/shared/SectionEyebrow";
 
 const POINTS = [
   {
@@ -57,9 +56,8 @@ export const Why = () => {
       />
 
       <div className="why-copy reveal px-6 py-16 md:px-12 md:py-20 lg:p-20">
-        <SectionEyebrow>Why it matters</SectionEyebrow>
 
-        <h2 className="mt-6 max-w-[560px] text-3xl font-bold tracking-tight sm:text-4xl">
+        <h2 className="max-w-[560px] text-3xl font-bold tracking-tight sm:text-4xl">
           Your customers are <em className="text-accent">searching</em> for you
           online
         </h2>
@@ -78,7 +76,7 @@ export const Why = () => {
             >
               <span
                 aria-hidden="true"
-                className="flex h-9 w-9 shrink-0 items-center justify-center border border-border text-accent"
+                className="flex h-9 w-9 shrink-0 items-center justify-center border border-border text-accent-text"
               >
                 {point.icon}
               </span>

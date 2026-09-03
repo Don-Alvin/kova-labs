@@ -4,7 +4,6 @@ import { useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { prefersReducedMotion } from "@/lib/animations";
-import { SectionEyebrow } from "@/components/shared/SectionEyebrow";
 import { calTrigger } from "@/lib/cal";
 import {
   ANALYTICS,
@@ -17,14 +16,31 @@ import {
 } from "@/lib/quote";
 
 const optionClass = (selected: boolean) =>
-  `flex w-full cursor-pointer items-center justify-between gap-4 border border-l-4 bg-bg p-4 text-left transition-colors ${
-    selected
-      ? "border-border border-l-accent"
-      : "border-border border-l-transparent hover:border-text hover:border-l-transparent"
+  `flex w-full cursor-pointer items-center justify-between gap-4 border bg-bg p-4 text-left transition-colors focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-accent ${
+    selected ? "border-accent" : "border-border hover:border-text"
   }`;
 
-export const QuoteEstimator = () => {
-  const [websiteType, setWebsiteType] = useState<string>(WEBSITE_TYPES[0].id);
+/** Square marker: the system's smallest unit of the logo geometry. */
+const Mark = ({ selected }: { selected: boolean }) => (
+  <span
+    aria-hidden="true"
+    className={`h-[9px] w-[9px] shrink-0 border transition-colors ${
+      selected ? "border-accent bg-accent" : "border-border"
+    }`}
+  />
+);
+
+type QuoteEstimatorProps = {
+  /** Preselects a website type, e.g. from a service page link. */
+  initialType?: string;
+};
+
+export const QuoteEstimator = ({ initialType }: QuoteEstimatorProps = {}) => {
+  const [websiteType, setWebsiteType] = useState<string>(
+    WEBSITE_TYPES.some((option) => option.id === initialType) && initialType
+      ? initialType
+      : WEBSITE_TYPES[0].id
+  );
   const [extraPages, setExtraPages] = useState(0);
   const [features, setFeatures] = useState<string[]>([]);
   const [analytics, setAnalytics] = useState<string[]>([]);
@@ -96,8 +112,7 @@ export const QuoteEstimator = () => {
   return (
     <section className="border-b border-border bg-bg-warm">
       <div className="shell px-6 py-16 md:px-12 md:py-24">
-        <SectionEyebrow>Get a quote</SectionEyebrow>
-        <h2 className="mt-6 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
           See what your project will cost
         </h2>
 
@@ -121,7 +136,10 @@ export const QuoteEstimator = () => {
                       onChange={() => setWebsiteType(option.id)}
                       className="sr-only"
                     />
-                    <span className="text-sm">{option.label}</span>
+                    <span className="flex items-center gap-3 text-sm">
+                      <Mark selected={websiteType === option.id} />
+                      {option.label}
+                    </span>
                     <span className="shrink-0 text-sm font-medium">
                       {formatKES(option.price)}
                       {option.id === "custom" ? "+" : ""}
@@ -150,7 +168,7 @@ export const QuoteEstimator = () => {
                         setExtraPages((count) => Math.max(0, count - 1))
                       }
                       aria-label="Remove a page"
-                      className="flex h-8 w-8 items-center justify-center border border-border text-text transition-colors hover:border-accent hover:text-accent"
+                      className="flex h-11 w-11 items-center justify-center border border-border text-text transition-colors hover:border-accent hover:text-accent-text"
                     >
                       &minus;
                     </button>
@@ -164,7 +182,7 @@ export const QuoteEstimator = () => {
                       type="button"
                       onClick={() => setExtraPages((count) => count + 1)}
                       aria-label="Add a page"
-                      className="flex h-8 w-8 items-center justify-center border border-border text-text transition-colors hover:border-accent hover:text-accent"
+                      className="flex h-11 w-11 items-center justify-center border border-border text-text transition-colors hover:border-accent hover:text-accent-text"
                     >
                       +
                     </button>
@@ -182,7 +200,10 @@ export const QuoteEstimator = () => {
                       onChange={() => toggle(features, setFeatures, option.id)}
                       className="sr-only"
                     />
-                    <span className="text-sm">{option.label}</span>
+                    <span className="flex items-center gap-3 text-sm">
+                      <Mark selected={features.includes(option.id)} />
+                      {option.label}
+                    </span>
                     <span className="shrink-0 text-sm font-medium">
                       {formatKES(option.price)}
                     </span>
@@ -209,7 +230,10 @@ export const QuoteEstimator = () => {
                       }
                       className="sr-only"
                     />
-                    <span className="text-sm">{option.label}</span>
+                    <span className="flex items-center gap-3 text-sm">
+                      <Mark selected={analytics.includes(option.id)} />
+                      {option.label}
+                    </span>
                     <span className="shrink-0 text-sm font-medium">
                       {formatKES(option.price)}
                     </span>
@@ -236,7 +260,10 @@ export const QuoteEstimator = () => {
                       onChange={() => setSupport(option.id)}
                       className="sr-only"
                     />
-                    <span className="text-sm">{option.label}</span>
+                    <span className="flex items-center gap-3 text-sm">
+                      <Mark selected={support === option.id} />
+                      {option.label}
+                    </span>
                     <span className="shrink-0 text-sm font-medium">
                       {option.price === 0
                         ? formatKES(0)
@@ -269,7 +296,7 @@ export const QuoteEstimator = () => {
             <button
               type="button"
               {...calTrigger()}
-              className="mt-6 w-full bg-accent px-6 py-4 text-sm font-medium text-text-light transition-colors hover:bg-text"
+              className="mt-6 w-full bg-accent px-6 py-4 text-sm font-medium text-dark transition-colors hover:bg-text"
             >
               Discuss your quote
             </button>

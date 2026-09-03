@@ -29,7 +29,7 @@ export const Navbar = () => {
       >
         <div className="shell flex items-center justify-between gap-8 px-6 py-4 md:px-12">
           <Link href="/" aria-label="KovaLab home" className="shrink-0">
-            <Logo variant="light" />
+            <Logo variant="light" priority />
           </Link>
 
           <nav className="hidden items-center gap-8 md:flex">

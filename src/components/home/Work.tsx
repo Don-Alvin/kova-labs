@@ -5,7 +5,6 @@ import Link from "next/link";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { parallax, revealOnScroll } from "@/lib/animations";
-import { SectionEyebrow } from "@/components/shared/SectionEyebrow";
 
 const GRID_PROJECTS = [
   { name: "Raicha Electrical", tag: "Business website", slug: "raicha-electrical" },
@@ -36,7 +35,7 @@ const MORE_WORK = [
 const Arrow = () => (
   <span
     aria-hidden="true"
-    className="flex h-12 w-12 shrink-0 items-center justify-center border border-border text-text transition-colors group-hover:border-accent group-hover:bg-accent group-hover:text-text-light"
+    className="flex h-12 w-12 shrink-0 items-center justify-center border border-border text-text transition-colors group-hover:border-accent group-hover:bg-accent group-hover:text-dark"
   >
     &#8594;
   </span>
@@ -66,8 +65,7 @@ export const Work = () => {
       <div className="shell px-6 py-16 md:px-12 md:py-24">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <SectionEyebrow>Selected work</SectionEyebrow>
-            <h2 className="mt-6 max-w-[640px] text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+            <h2 className="max-w-[640px] text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
               Real results for <em className="text-accent">real</em> businesses
             </h2>
           </div>
@@ -137,7 +135,7 @@ export const Work = () => {
               key={item.title}
               className="work-reveal border border-border p-6 md:p-8"
             >
-              <p className="text-xs font-light tracking-wide text-accent">
+              <p className="text-xs font-light tracking-wide text-accent-text">
                 {item.category}
               </p>
               <h3 className="mt-4 text-lg font-semibold">{item.title}</h3>

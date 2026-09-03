@@ -8,9 +8,11 @@
   --dark-card-hover: #1e1e1e;
   --text: #141414;
   --text-light: #fafaf7;
-  --text-muted: #7a7a72;
+  --text-muted: #696963;
   --text-muted-dark: #888888;
   --accent: #ff4d00;
+  /* Small accent text on light grounds; #ff4d00 is only 3.18:1 there. */
+  --accent-text: #c23b00;
   --border: #ddd8cf;
   --border-dark: #282828;
   --whatsapp: #25d366;
@@ -27,6 +29,7 @@
   --color-text-muted: var(--text-muted);
   --color-text-muted-dark: var(--text-muted-dark);
   --color-accent: var(--accent);
+  --color-accent-text: var(--accent-text);
   --color-border: var(--border);
   --color-border-dark: var(--border-dark);
   --color-whatsapp: var(--whatsapp);
@@ -38,6 +41,15 @@
 *::before,
 *::after {
   border-radius: 0;
+}
+
+/* Reveals translate on the x axis (revealOnScroll "left" and "right" start at
+   60px), which pushes content past the right edge mid-animation and can flash a
+   horizontal scrollbar on narrow screens. `clip` stops that without creating a
+   scroll container, so the sticky navbar keeps working; `hidden` would break it. */
+html,
+body {
+  overflow-x: clip;
 }
 
 body {
@@ -57,11 +69,16 @@ body {
 }
 
 /* Inner content shell. Sections stay full width so their grounds and rules
-   run edge to edge, while the content inside them caps and centers. */
-.shell {
-  width: 100%;
-  max-width: 1280px;
-  margin-inline: auto;
+   run edge to edge, while the content inside them caps and centers.
+   It lives in the components layer so a narrower max-w-* utility on the same
+   element still wins; unlayered, .shell would override it and silently widen
+   reading measures that were meant to cap at 720px. */
+@layer components {
+  .shell {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+  }
 }
 
 /* Hidden start state for scroll reveals, set here rather than by GSAP so
@@ -80,31 +97,12 @@ body {
   transform: translateY(110%);
 }
 
-@keyframes marquee-scroll {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marquee-scroll 30s linear infinite;
-}
 
 @media (prefers-reduced-motion: reduce) {
   .reveal,
   .hero-line {
     opacity: 1;
     transform: none;
-  }
-
-  .marquee-track {
-    animation: none;
   }
 
   *,

@@ -5,7 +5,6 @@ import Link from "next/link";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { revealOnScroll } from "@/lib/animations";
-import { SectionEyebrow } from "@/components/shared/SectionEyebrow";
 
 const SERVICES = [
   { number: "01", title: "Web development", href: "/services/web-development" },
@@ -28,8 +27,7 @@ export const Services = () => {
   return (
     <section ref={container} className="bg-dark">
       <div className="shell px-6 py-16 md:px-12 md:py-24">
-        <SectionEyebrow>What we do</SectionEyebrow>
-        <h2 className="mt-6 max-w-[720px] text-3xl font-bold tracking-tight text-text-light sm:text-4xl lg:text-5xl">
+        <h2 className="max-w-[720px] text-3xl font-bold tracking-tight text-text-light sm:text-4xl lg:text-5xl">
           Everything you need to get <em className="text-accent">online</em> and
           grow
         </h2>

@@ -86,7 +86,7 @@ export const CookieConsent = () => {
           <button
             type="button"
             onClick={() => decide("accepted")}
-            className="bg-accent px-6 py-3 text-sm font-medium text-text-light transition-colors hover:bg-text-light hover:text-dark"
+            className="bg-accent px-6 py-3 text-sm font-medium text-dark transition-colors hover:bg-text-light hover:text-dark"
           >
             Accept
           </button>
