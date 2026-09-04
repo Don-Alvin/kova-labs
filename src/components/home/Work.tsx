@@ -19,7 +19,7 @@ const FEATURED = {
   slug: "gedo-holdings",
   url: "https://gedoholdings.co.ke",
   domain: "gedoholdings.co.ke",
-  image: "/work/gedo-holdings.png",
+  image: "/work/gedoholdings.png",
 };
 
 const GRID_PROJECTS = [
@@ -29,7 +29,7 @@ const GRID_PROJECTS = [
     slug: "lamona-realtors",
     url: "https://lamonarealtors.co.ke",
     domain: "lamonarealtors.co.ke",
-    image: "/work/lamona-realtors.png",
+    image: "/work/lamonarealtors.png",
   },
   {
     name: "Wekaniweke",
@@ -45,7 +45,7 @@ const GRID_PROJECTS = [
     slug: "three-mice-computers",
     url: "https://threemice.co.ke",
     domain: "threemice.co.ke",
-    image: "/work/three-mice-computers.png",
+    image: "/work/threemicecomputers.png",
   },
 ];
 
