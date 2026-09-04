@@ -15,7 +15,7 @@ export const Footer = () => (
         <p className="text-xs font-light tracking-wide text-text-muted">
           Software solutions studio
         </p>
-        <p className="max-w-[280px] text-sm leading-relaxed text-text-muted">
+        <p className="max-w-[280px] text-sm font-light leading-relaxed text-text-muted">
           Helping businesses across East Africa get online with websites that
           actually work.
         </p>

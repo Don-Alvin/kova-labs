@@ -106,7 +106,7 @@ export const BlogGrid = ({ posts, categories }: BlogGridProps) => {
             <button
               type="button"
               onClick={() => setVisible((count) => count + PAGE_SIZE)}
-              className="mt-12 border border-border px-8 py-4 text-sm font-medium transition-colors hover:border-text hover:bg-text hover:text-text-light"
+              className="mt-12 border border-border px-8 py-4 text-sm font-medium transition-all duration-300 hover:scale-105 hover:border-text hover:bg-text hover:text-text-light"
             >
               Load more
             </button>

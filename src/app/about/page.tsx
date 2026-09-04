@@ -47,10 +47,10 @@ export default function AboutPage() {
       <section className="border-b border-border">
         <div className="shell grid grid-cols-1 items-center gap-12 px-6 py-16 md:px-12 md:py-24 lg:grid-cols-2 lg:gap-16">
           <div>
-            <h1 className="text-4xl font-extrabold leading-[0.95] tracking-tight sm:text-5xl lg:text-6xl">
+            <h1 className="text-4xl font-extrabold leading-[1.05] tracking-[-0.04em] sm:text-5xl lg:text-6xl">
               The studio behind the work
             </h1>
-            <p className="mt-8 max-w-[580px] leading-relaxed text-text-muted">
+            <p className="mt-8 max-w-[58ch] font-light leading-relaxed text-text-muted">
               KovaLab is a small studio in Nairobi building websites, web
               applications, and data tools for businesses across East Africa.
             </p>
@@ -65,10 +65,10 @@ export default function AboutPage() {
       <section className="border-b border-border">
         <div className="shell px-6 py-16 md:px-12 md:py-24">
           <AnimateOnScroll>
-            <h2 className="max-w-[720px] text-3xl font-bold tracking-tight sm:text-4xl">
+            <h2 className="max-w-[720px] text-3xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-4xl">
               Analytical thinking, applied to the web
             </h2>
-            <div className="mt-8 flex max-w-[580px] flex-col gap-5 leading-relaxed text-text-muted">
+            <div className="mt-8 flex max-w-[58ch] flex-col gap-5 font-light leading-relaxed text-text-muted">
               <p>
                 KovaLab started with a background in industrial chemistry at
                 JKUAT, then data science at ExploreAI Academy, then development
@@ -94,7 +94,7 @@ export default function AboutPage() {
 
       <section className="border-b border-border bg-bg-warm">
         <div className="shell px-6 py-16 md:px-12 md:py-24">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+          <h2 className="text-3xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-4xl">
             How we work with you
           </h2>
 
@@ -110,7 +110,7 @@ export default function AboutPage() {
                 }`}
               >
                 <h3 className="text-xl font-semibold">{value.title}</h3>
-                <p className="mt-4 text-sm leading-relaxed text-text-muted">
+                <p className="mt-4 text-sm font-light leading-relaxed text-text-muted">
                   {value.description}
                 </p>
               </AnimateOnScroll>
@@ -121,7 +121,7 @@ export default function AboutPage() {
 
       <section className="border-b border-border">
         <div className="shell px-6 py-16 md:px-12 md:py-24">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+          <h2 className="text-3xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-4xl">
             The tools behind the work
           </h2>
 

@@ -26,12 +26,12 @@ export default async function WorkPage() {
     <>
       <section className="border-b border-border">
         <div className="shell px-6 py-16 md:px-12 md:py-24">
-          <h1 className="text-4xl font-extrabold leading-[0.95] tracking-tight sm:text-5xl">
+          <h1 className="text-4xl font-extrabold leading-[1.05] tracking-[-0.04em] sm:text-5xl">
             Real results for <em className="text-accent">real</em> businesses
           </h1>
 
           {projects.length === 0 ? (
-            <p className="mt-12 max-w-[580px] leading-relaxed text-text-muted">
+            <p className="mt-12 max-w-[58ch] font-light leading-relaxed text-text-muted">
               Case studies are being written up. In the meantime, get in touch
               and we will walk you through the work directly.
             </p>

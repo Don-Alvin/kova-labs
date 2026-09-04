@@ -3,21 +3,22 @@
 import { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+import { Zap, PenLine, Settings } from "lucide-react";
 import { parallax, revealOnScroll } from "@/lib/animations";
 
 const POINTS = [
   {
-    icon: "⚡",
+    Icon: Zap,
     title: "Built for speed",
     description: "loads in under 2 seconds",
   },
   {
-    icon: "✎",
+    Icon: PenLine,
     title: "Designed to convert",
     description: "turns browsers into buyers",
   },
   {
-    icon: "⚙",
+    Icon: Settings,
     title: "Easy to manage",
     description: "update without a developer",
   },
@@ -57,12 +58,12 @@ export const Why = () => {
 
       <div className="why-copy reveal px-6 py-16 md:px-12 md:py-20 lg:p-20">
 
-        <h2 className="max-w-[560px] text-3xl font-bold tracking-tight sm:text-4xl">
+        <h2 className="max-w-[42ch] text-3xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-4xl">
           Your customers are <em className="text-accent">searching</em> for you
           online
         </h2>
 
-        <p className="mt-6 max-w-[580px] leading-relaxed text-text-muted">
+        <p className="mt-6 max-w-[58ch] font-light leading-relaxed text-text-muted">
           8 out of 10 customers look up a business online before calling,
           visiting, or buying. If your website is slow, outdated, or missing
           entirely, you&apos;re losing them to competitors who showed up first.
@@ -78,7 +79,7 @@ export const Why = () => {
                 aria-hidden="true"
                 className="flex h-9 w-9 shrink-0 items-center justify-center border border-border text-accent-text"
               >
-                {point.icon}
+                <point.Icon size={16} strokeWidth={1.5} />
               </span>
               <p className="text-sm">
                 <span className="font-semibold">{point.title}</span>

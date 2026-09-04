@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { prefersReducedMotion } from "@/lib/animations";
 import { calTrigger } from "@/lib/cal";
+import { Minus, Plus } from "lucide-react";
 import {
   ANALYTICS,
   EXTRA_PAGE_PRICE,
@@ -112,7 +113,7 @@ export const QuoteEstimator = ({ initialType }: QuoteEstimatorProps = {}) => {
   return (
     <section className="border-b border-border bg-bg-warm">
       <div className="shell px-6 py-16 md:px-12 md:py-24">
-        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+        <h2 className="text-3xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-4xl lg:text-5xl">
           See what your project will cost
         </h2>
 
@@ -170,7 +171,7 @@ export const QuoteEstimator = ({ initialType }: QuoteEstimatorProps = {}) => {
                       aria-label="Remove a page"
                       className="flex h-11 w-11 items-center justify-center border border-border text-text transition-colors hover:border-accent hover:text-accent-text"
                     >
-                      &minus;
+                      <Minus size={16} strokeWidth={1.5} />
                     </button>
                     <span
                       aria-live="polite"
@@ -184,7 +185,7 @@ export const QuoteEstimator = ({ initialType }: QuoteEstimatorProps = {}) => {
                       aria-label="Add a page"
                       className="flex h-11 w-11 items-center justify-center border border-border text-text transition-colors hover:border-accent hover:text-accent-text"
                     >
-                      +
+                      <Plus size={16} strokeWidth={1.5} />
                     </button>
                   </span>
                 </div>
@@ -288,15 +289,22 @@ export const QuoteEstimator = ({ initialType }: QuoteEstimatorProps = {}) => {
               </p>
             ) : null}
 
-            <p className="mt-6 hidden text-xs leading-relaxed text-text-muted lg:block">
-              Domain registration and hosting fees are handled separately. We
-              can help you choose the right provider.
-            </p>
+            <div className="mt-6 flex flex-col gap-3 border-t border-border pt-6">
+              <p className="max-w-[62ch] text-xs font-light leading-relaxed text-text-muted">
+                This is an estimate, not a quote. The final cost depends on the
+                scope and needs of your project, and we will confirm it with you
+                before any work starts.
+              </p>
+              <p className="hidden max-w-[62ch] text-xs font-light leading-relaxed text-text-muted lg:block">
+                Domain registration and hosting fees are handled separately. We
+                can help you choose the right provider.
+              </p>
+            </div>
 
             <button
               type="button"
               {...calTrigger()}
-              className="mt-6 w-full bg-accent px-6 py-4 text-sm font-medium text-dark transition-colors hover:bg-text"
+              className="mt-6 w-full bg-accent px-6 py-4 text-sm font-medium text-dark transition-transform duration-300 hover:scale-105"
             >
               Discuss your quote
             </button>

@@ -12,8 +12,8 @@ export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURICo
   WHATSAPP_MESSAGE
 )}`;
 
-export const CAL_LINK = process.env.NEXT_PUBLIC_CALCOM_LINK ??
-  "don-alvin-joa3vc/kovaconsultation";
+/** Set NEXT_PUBLIC_CALCOM_LINK in .env.local and in the Vercel project. */
+export const CAL_LINK = process.env.NEXT_PUBLIC_CALCOM_LINK ?? "";
 
 export const NAV_LINKS = [
   { label: "Work", href: "/work" },

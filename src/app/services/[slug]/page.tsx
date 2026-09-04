@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { AnimateOnScroll } from "@/components/shared/AnimateOnScroll";
 import { CtaBanner } from "@/components/home/CtaBanner";
 import { SERVICES, SERVICE_SLUGS } from "@/lib/services";
+import { ArrowRight } from "lucide-react";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -35,10 +36,10 @@ export default async function ServicePage({ params }: Params) {
       <section className="border-b border-border">
         <div className="shell grid grid-cols-1 items-center gap-12 px-6 py-16 md:px-12 md:py-24 lg:grid-cols-[55fr_45fr] lg:gap-16">
           <div>
-            <h1 className="text-4xl font-extrabold leading-[0.95] tracking-tight sm:text-5xl lg:text-6xl">
+            <h1 className="text-4xl font-extrabold leading-[1.05] tracking-[-0.04em] sm:text-5xl lg:text-6xl">
               {service.title}
             </h1>
-            <p className="mt-8 max-w-[520px] leading-relaxed text-text-muted">
+            <p className="mt-8 max-w-[42ch] font-light leading-relaxed text-text-muted">
               {service.description}
             </p>
           </div>
@@ -51,7 +52,7 @@ export default async function ServicePage({ params }: Params) {
 
       <section className="border-b border-border">
         <div className="shell px-6 py-16 md:px-12 md:py-24">
-          <h2 className="max-w-[720px] text-3xl font-bold tracking-tight sm:text-4xl">
+          <h2 className="max-w-[720px] text-3xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-4xl">
             What you get
           </h2>
 
@@ -63,7 +64,7 @@ export default async function ServicePage({ params }: Params) {
                 className="bg-bg p-8 md:p-10"
               >
                 <h3 className="text-xl font-semibold">{item.heading}</h3>
-                <p className="mt-4 max-w-[520px] text-sm leading-relaxed text-text-muted">
+                <p className="mt-4 max-w-[42ch] text-sm font-light leading-relaxed text-text-muted">
                   {item.body}
                 </p>
               </AnimateOnScroll>
@@ -74,7 +75,7 @@ export default async function ServicePage({ params }: Params) {
 
       <section className="border-b border-border bg-bg-warm">
         <div className="shell px-6 py-16 md:px-12 md:py-24">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+          <h2 className="text-3xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-4xl">
             The process for this service
           </h2>
 
@@ -92,7 +93,7 @@ export default async function ServicePage({ params }: Params) {
                   {step.number}
                 </p>
                 <h3 className="mt-6 text-lg font-semibold">{step.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-text-muted">
+                <p className="mt-3 text-sm font-light leading-relaxed text-text-muted">
                   {step.description}
                 </p>
               </li>
@@ -103,16 +104,18 @@ export default async function ServicePage({ params }: Params) {
 
       <section className="border-b border-border">
         <div className="shell px-6 py-16 md:px-12 md:py-24">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+          <h2 className="text-3xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-4xl">
             Projects like this
           </h2>
 
           <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2">
             {service.relatedWork.map((project) => (
-              <Link
-                key={project.slug}
-                href={`/work/${project.slug}`}
-                className="group border border-border transition-colors hover:border-accent"
+              <a
+                key={project.domain}
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group border border-border bg-bg transition-all duration-300 hover:scale-[1.02] hover:border-accent hover:shadow-[var(--shadow-lift)]"
               >
                 <div
                   className="h-[220px] bg-bg-warm lg:h-[300px]"
@@ -122,23 +125,23 @@ export default async function ServicePage({ params }: Params) {
                   <div>
                     <p className="text-lg font-semibold">{project.name}</p>
                     <p className="mt-1 text-xs font-light tracking-wide text-text-muted">
-                      {project.tag}
+                      {project.domain}
                     </p>
                   </div>
                   <span
                     aria-hidden="true"
                     className="flex h-12 w-12 shrink-0 items-center justify-center border border-border transition-colors group-hover:border-accent group-hover:bg-accent group-hover:text-dark"
                   >
-                    &#8594;
+                    <ArrowRight size={18} strokeWidth={1.5} />
                   </span>
                 </div>
-              </Link>
+              </a>
             ))}
           </div>
 
           <Link
             href={`/quote?type=${service.quoteHint}`}
-            className="mt-12 inline-block border border-border px-8 py-4 text-sm font-medium transition-colors hover:border-text hover:bg-text hover:text-text-light"
+            className="mt-12 inline-block border border-border px-8 py-4 text-sm font-medium transition-all duration-300 hover:scale-105 hover:border-text hover:bg-text hover:text-text-light"
           >
             Estimate your project cost
           </Link>

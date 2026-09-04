@@ -18,7 +18,7 @@ type BlogCardProps = {
 export const BlogCard = ({ post, featured = false }: BlogCardProps) => (
   <Link
     href={`/blog/${post.slug}`}
-    className="group flex flex-col border border-border transition-colors hover:border-accent"
+    className="group flex flex-col border border-border bg-bg transition-all duration-300 hover:scale-[1.02] hover:border-accent hover:shadow-[var(--shadow-lift)]"
   >
     <div
       className={`relative w-full overflow-hidden bg-bg-warm ${
@@ -51,7 +51,7 @@ export const BlogCard = ({ post, featured = false }: BlogCardProps) => (
         {post.title}
       </h3>
 
-      <p className="mt-3 max-w-[580px] flex-1 text-sm leading-relaxed text-text-muted">
+      <p className="mt-3 max-w-[58ch] flex-1 text-sm font-light leading-relaxed text-text-muted">
         {post.excerpt}
       </p>
 

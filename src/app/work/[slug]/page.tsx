@@ -11,6 +11,7 @@ import {
   PROJECT_SLUGS_QUERY,
 } from "@/lib/sanity/queries";
 import type { Project } from "@/lib/sanity/types";
+import { ArrowRight } from "lucide-react";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -79,10 +80,10 @@ export default async function ProjectPage({ params }: Params) {
 
       <section className="border-b border-border">
         <div className="shell px-6 py-16 md:px-12 md:py-24">
-          <h1 className="text-4xl font-extrabold leading-[0.95] tracking-tight sm:text-5xl">
+          <h1 className="text-4xl font-extrabold leading-[1.05] tracking-[-0.04em] sm:text-5xl">
             {project.title}
           </h1>
-          <p className="mt-8 max-w-[580px] leading-relaxed text-text-muted">
+          <p className="mt-8 max-w-[58ch] font-light leading-relaxed text-text-muted">
             {project.excerpt}
           </p>
 
@@ -192,7 +193,7 @@ export default async function ProjectPage({ params }: Params) {
                 aria-hidden="true"
                 className="flex h-12 w-12 shrink-0 items-center justify-center border border-border transition-colors group-hover:border-accent group-hover:bg-accent group-hover:text-dark"
               >
-                &#8594;
+                <ArrowRight size={18} strokeWidth={1.5} />
               </span>
             </div>
           </Link>

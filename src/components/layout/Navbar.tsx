@@ -22,17 +22,20 @@ export const Navbar = () => {
 
   return (
     <>
-      <header
-        className={`sticky top-0 z-40 w-full border-b border-border transition-colors ${
-          scrolled ? "bg-bg/80 backdrop-blur-md" : "bg-bg"
-        }`}
-      >
-        <div className="shell flex items-center justify-between gap-8 px-6 py-4 md:px-12">
+      {/* Floats over the content rather than sitting in the flow, so the hero
+          reads full height behind it. The bar stays dark on every ground: it is
+          one navbar, not a different one per page. */}
+      <header className="pointer-events-none fixed inset-x-0 top-0 z-40 px-4 pt-4 md:px-8 md:pt-6">
+        <div
+          className={`glass-nav shell pointer-events-auto flex items-center justify-between gap-8 px-4 py-3 transition-shadow duration-300 md:px-6 ${
+            scrolled ? "glass-nav-raised" : ""
+          }`}
+        >
           <Link href="/" aria-label="KovaLab home" className="shrink-0">
-            <Logo variant="light" priority />
+            <Logo variant="dark" priority />
           </Link>
 
-          <nav className="hidden items-center gap-8 md:flex">
+          <nav className="hidden items-center gap-1 md:flex">
             {NAV_LINKS.map((link) => {
               const active = pathname.startsWith(link.href);
               return (
@@ -40,10 +43,10 @@ export const Navbar = () => {
                   key={link.label}
                   href={link.href}
                   aria-current={active ? "page" : undefined}
-                  className={`text-sm transition-colors ${
+                  className={`px-4 py-2 text-sm transition-colors duration-300 ${
                     active
-                      ? "font-medium text-text"
-                      : "font-normal text-text-muted hover:text-text"
+                      ? "bg-text-light/15 font-medium text-text-light"
+                      : "font-normal text-text-light/80 hover:bg-text-light/10 hover:text-text-light"
                   }`}
                 >
                   {link.label}
@@ -55,7 +58,7 @@ export const Navbar = () => {
           <button
             type="button"
             {...calTrigger()}
-            className="hidden bg-text px-6 py-3 text-sm font-medium text-text-light transition-colors hover:bg-accent md:block"
+            className="hidden bg-text-light px-6 py-3 text-sm font-medium text-dark transition-all duration-300 hover:scale-105 hover:bg-accent md:block"
           >
             Start a project
           </button>
@@ -65,7 +68,7 @@ export const Navbar = () => {
             onClick={() => setMenuOpen(true)}
             aria-label="Open menu"
             aria-expanded={menuOpen}
-            className="p-2 text-text md:hidden"
+            className="p-2 text-text-light md:hidden"
           >
             <svg
               width="22"

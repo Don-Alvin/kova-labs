@@ -10,15 +10,15 @@ export default function NotFound() {
         >
           404
         </p>
-        <h1 className="mt-8 text-3xl font-bold tracking-tight sm:text-4xl">
+        <h1 className="mt-8 text-3xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-4xl">
           This page doesn&apos;t exist
         </h1>
-        <p className="mt-4 max-w-[480px] leading-relaxed text-text-muted">
+        <p className="mt-4 max-w-[42ch] font-light leading-relaxed text-text-muted">
           The page you&apos;re looking for may have been moved or removed.
         </p>
         <Link
           href="/"
-          className="mt-10 bg-accent px-8 py-4 text-sm font-medium text-dark transition-colors hover:bg-text"
+          className="mt-10 bg-accent px-8 py-4 text-sm font-medium text-dark transition-transform duration-300 hover:scale-105"
         >
           Back to homepage
         </Link>

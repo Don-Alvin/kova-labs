@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { gsap } from "gsap";
+import { Plus } from "lucide-react";
 import { prefersReducedMotion } from "@/lib/animations";
 
 const QUESTIONS = [
@@ -64,7 +65,7 @@ export const FAQ = () => {
   return (
     <section className="border-b border-border">
       <div className="shell px-6 py-16 md:px-12 md:py-24">
-        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+        <h2 className="text-3xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-4xl lg:text-5xl">
           Everything you need to know
         </h2>
 
@@ -85,11 +86,11 @@ export const FAQ = () => {
                     {item.question}
                     <span
                       aria-hidden="true"
-                      className={`shrink-0 text-2xl font-light text-accent-text transition-transform duration-400 ${
+                      className={`shrink-0 text-accent-text transition-transform duration-300 ${
                         open ? "rotate-[135deg]" : ""
                       }`}
                     >
-                      +
+                      <Plus size={22} strokeWidth={1.5} />
                     </span>
                   </button>
                 </h3>
@@ -103,7 +104,7 @@ export const FAQ = () => {
                   }}
                   className="h-0 overflow-hidden"
                 >
-                  <p className="max-w-[580px] pb-6 leading-relaxed text-text-muted">
+                  <p className="max-w-[58ch] pb-6 font-light leading-relaxed text-text-muted">
                     {item.answer}
                   </p>
                 </div>

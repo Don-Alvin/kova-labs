@@ -5,6 +5,7 @@ import Link from "next/link";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { revealOnScroll } from "@/lib/animations";
+import { ArrowRight } from "lucide-react";
 
 const SERVICES = [
   { number: "01", title: "Web development", href: "/services/web-development" },
@@ -19,25 +20,29 @@ export const Services = () => {
     () => {
       gsap.utils
         .toArray<HTMLElement>(".service-card")
-        .forEach((el, index) => revealOnScroll(el, "up", index * 0.15));
+        .forEach((el, index) =>
+          revealOnScroll(el, "up", index * 0.15, () =>
+            el.classList.add("glass-blurred")
+          )
+        );
     },
     { scope: container }
   );
 
   return (
-    <section ref={container} className="bg-dark">
-      <div className="shell px-6 py-16 md:px-12 md:py-24">
-        <h2 className="max-w-[720px] text-3xl font-bold tracking-tight text-text-light sm:text-4xl lg:text-5xl">
+    <section ref={container} className="ground-dark relative">
+      <div className="shell relative z-10 px-6 py-20 md:px-12 md:py-28">
+        <h2 className="max-w-[720px] text-3xl font-bold leading-[1.05] tracking-[-0.04em] text-text-light sm:text-4xl lg:text-5xl">
           Everything you need to get <em className="text-accent">online</em> and
           grow
         </h2>
 
-        <div className="mt-12 grid grid-cols-1 gap-px bg-border-dark md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((service) => (
             <Link
               key={service.number}
               href={service.href}
-              className="service-card reveal group flex min-h-[240px] flex-col justify-between bg-dark-card p-8 transition-colors hover:bg-dark-card-hover"
+              className="glass-defer service-card reveal group flex min-h-[260px] flex-col justify-between p-8 transition-transform duration-300 hover:scale-[1.03]"
             >
               <span className="text-xs font-light tracking-wide text-accent">
                 {service.number}
@@ -48,7 +53,7 @@ export const Services = () => {
                 </h3>
                 <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-text-muted-dark transition-all group-hover:gap-4 group-hover:text-accent">
                   Learn more
-                  <span aria-hidden="true">&#8594;</span>
+                  <ArrowRight size={16} strokeWidth={1.5} aria-hidden="true" />
                 </span>
               </div>
             </Link>

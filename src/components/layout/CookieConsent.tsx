@@ -74,10 +74,10 @@ export const CookieConsent = () => {
       ref={banner}
       role="region"
       aria-label="Cookie consent"
-      className="fixed bottom-0 left-0 z-50 w-full translate-y-full border-t border-border-dark bg-dark px-6 py-5 md:px-12"
+      className="ground-dark fixed bottom-0 left-0 z-50 w-full translate-y-full border-t border-border-dark px-6 py-5 md:px-12"
     >
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <p className="max-w-[560px] text-sm leading-relaxed text-text-muted-dark">
+      <div className="relative z-10 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <p className="max-w-[42ch] text-sm leading-relaxed text-text-light">
           We use cookies to understand how you use our site and improve your
           experience.
         </p>

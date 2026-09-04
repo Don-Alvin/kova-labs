@@ -6,7 +6,7 @@ export type ServiceContent = {
   quoteHint: string;
   included: { heading: string; body: string }[];
   process: { number: string; title: string; description: string }[];
-  relatedWork: { name: string; tag: string; slug: string }[];
+  relatedWork: { name: string; tag: string; url: string; domain: string }[];
 };
 
 export const SERVICES: Record<string, ServiceContent> = {
@@ -56,11 +56,17 @@ export const SERVICES: Record<string, ServiceContent> = {
       },
     ],
     relatedWork: [
-      { name: "Gedo Holdings", tag: "Corporate website", slug: "gedo-holdings" },
       {
-        name: "Raicha Electrical",
+        name: "Gedo Holdings",
+        tag: "Corporate website",
+        url: "https://gedoholdings.co.ke",
+        domain: "gedoholdings.co.ke",
+      },
+      {
+        name: "Lamona Realtors",
         tag: "Business website",
-        slug: "raicha-electrical",
+        url: "https://lamonarealtors.co.ke",
+        domain: "lamonarealtors.co.ke",
       },
     ],
   },
@@ -110,11 +116,17 @@ export const SERVICES: Record<string, ServiceContent> = {
       },
     ],
     relatedWork: [
-      { name: "Gedo Holdings", tag: "Corporate website", slug: "gedo-holdings" },
       {
-        name: "Online retail store",
+        name: "Wekaniweke",
+        tag: "Business website",
+        url: "https://wekaniweke.com",
+        domain: "wekaniweke.com",
+      },
+      {
+        name: "Three Mice Computers",
         tag: "E-commerce",
-        slug: "online-retail-store",
+        url: "https://threemice.co.ke",
+        domain: "threemice.co.ke",
       },
     ],
   },
@@ -164,8 +176,18 @@ export const SERVICES: Record<string, ServiceContent> = {
       },
     ],
     relatedWork: [
-      { name: "Sales dashboard", tag: "Analytics", slug: "sales-dashboard" },
-      { name: "Traffic growth", tag: "SEO & content", slug: "traffic-growth" },
+      {
+        name: "Three Mice Computers",
+        tag: "E-commerce",
+        url: "https://threemice.co.ke",
+        domain: "threemice.co.ke",
+      },
+      {
+        name: "Gedo Holdings",
+        tag: "Corporate website",
+        url: "https://gedoholdings.co.ke",
+        domain: "gedoholdings.co.ke",
+      },
     ],
   },
 };

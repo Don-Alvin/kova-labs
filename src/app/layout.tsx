@@ -26,13 +26,6 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "KovaLab" }],
   metadataBase: new URL(SITE_URL),
-  icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon.png", type: "image/png" },
-    ],
-    apple: "/apple-touch-icon.png",
-  },
   openGraph: {
     title: "KovaLab | Software Solutions Studio",
     description:
@@ -51,6 +44,15 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${montserrat.variable} h-full antialiased`}>
+      <head>
+        {/* Runs before paint. Entry animations only hide content once this
+            confirms JS is alive, so a script failure cannot blank the page. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('js')",
+          }}
+        />
+      </head>
       <body className="flex min-h-full flex-col">
         <a
           href="#main"
@@ -61,7 +63,7 @@ export default function RootLayout({
 
         <Navbar />
 
-        <main id="main" className="flex-1">
+        <main id="main" className="flex-1 pt-24 md:pt-28">
           {children}
         </main>
 

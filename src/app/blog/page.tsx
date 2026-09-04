@@ -23,10 +23,10 @@ export default async function BlogPage() {
     <>
       <section className="border-b border-border">
         <div className="shell px-6 py-16 md:px-12 md:py-24">
-          <h1 className="text-4xl font-extrabold leading-[0.95] tracking-tight sm:text-5xl">
+          <h1 className="text-4xl font-extrabold leading-[1.05] tracking-[-0.04em] sm:text-5xl">
             Notes from the studio
           </h1>
-          <p className="mt-8 max-w-[580px] leading-relaxed text-text-muted">
+          <p className="mt-8 max-w-[58ch] font-light leading-relaxed text-text-muted">
             Practical writing on getting a business online: what to build, what
             it costs, and what actually moves the needle.
           </p>

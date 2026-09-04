@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/lib/sanity/client";
 import type { ProjectCard as ProjectCardType } from "@/lib/sanity/types";
+import { ArrowRight } from "lucide-react";
 
 type ProjectCardProps = {
   project: ProjectCardType;
@@ -14,7 +15,7 @@ export const ProjectCard = ({
 }: ProjectCardProps) => (
   <Link
     href={`/work/${project.slug}`}
-    className="group flex flex-col border border-border transition-colors hover:border-accent"
+    className="group flex flex-col border border-border bg-bg transition-all duration-300 hover:scale-[1.02] hover:border-accent hover:shadow-[var(--shadow-lift)]"
   >
     <div
       className={`relative w-full overflow-hidden bg-bg-warm ${
@@ -45,7 +46,7 @@ export const ProjectCard = ({
         aria-hidden="true"
         className="flex h-12 w-12 shrink-0 items-center justify-center border border-border transition-colors group-hover:border-accent group-hover:bg-accent group-hover:text-dark"
       >
-        &#8594;
+        <ArrowRight size={18} strokeWidth={1.5} />
       </span>
     </div>
   </Link>

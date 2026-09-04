@@ -6,7 +6,7 @@ import { urlFor } from "@/lib/sanity/client";
 const components: PortableTextComponents = {
   block: {
     normal: ({ children }) => (
-      <p className="leading-relaxed text-text-muted">{children}</p>
+      <p className="font-light leading-relaxed text-text-muted">{children}</p>
     ),
     h2: ({ children }) => (
       <h2 className="mt-12 text-2xl font-bold tracking-tight text-text">

@@ -13,7 +13,7 @@ export default function PrivacyPage() {
   return (
     <section>
       <div className="shell max-w-[720px] px-6 py-16 md:px-12 md:py-24">
-        <h1 className="text-4xl font-extrabold leading-[0.95] tracking-tight sm:text-5xl">
+        <h1 className="text-4xl font-extrabold leading-[1.05] tracking-[-0.04em] sm:text-5xl">
           Privacy policy
         </h1>
         <p className="mt-4 text-sm text-text-muted">

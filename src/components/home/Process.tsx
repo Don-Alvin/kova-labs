@@ -41,7 +41,7 @@ export const Process = () => {
   return (
     <section ref={container} className="border-b border-border">
       <div className="shell px-6 py-16 md:px-12 md:py-24">
-        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+        <h2 className="text-3xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-4xl lg:text-5xl">
           Simple process, <em className="text-accent">real</em> results
         </h2>
 
@@ -59,7 +59,7 @@ export const Process = () => {
                 {step.number}
               </p>
               <h3 className="mt-6 text-xl font-semibold">{step.title}</h3>
-              <p className="mt-3 max-w-[380px] text-sm leading-relaxed text-text-muted">
+              <p className="mt-3 max-w-[42ch] text-sm font-light leading-relaxed text-text-muted">
                 {step.description}
               </p>
             </li>

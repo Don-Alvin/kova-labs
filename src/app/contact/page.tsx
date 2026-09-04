@@ -12,10 +12,10 @@ export default function ContactPage() {
   return (
     <section>
       <div className="shell px-6 py-16 md:px-12 md:py-24">
-        <h1 className="text-4xl font-extrabold leading-[0.95] tracking-tight sm:text-5xl">
+        <h1 className="text-4xl font-extrabold leading-[1.05] tracking-[-0.04em] sm:text-5xl">
           Let&apos;s talk about your project
         </h1>
-        <p className="mt-8 max-w-[580px] leading-relaxed text-text-muted">
+        <p className="mt-8 max-w-[58ch] font-light leading-relaxed text-text-muted">
           Book a time below, or reach out however suits you. The first call is
           free and there is no commitment attached to it.
         </p>

@@ -41,13 +41,13 @@ export const NewsletterSignup = () => {
   };
 
   return (
-    <section className="bg-dark">
-      <div className="shell flex flex-col gap-8 px-6 py-16 md:px-12 md:py-20 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
+    <section className="ground-dark relative">
+      <div className="shell relative z-10 flex flex-col gap-8 px-6 py-20 md:px-12 md:py-24 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
         <div>
-          <h2 className="max-w-[480px] text-2xl font-bold tracking-tight text-text-light sm:text-3xl">
+          <h2 className="max-w-[42ch] text-2xl font-bold leading-[1.05] tracking-[-0.04em] text-text-light sm:text-3xl">
             Practical notes on getting your business online
           </h2>
-          <p className="mt-4 max-w-[480px] leading-relaxed text-text-muted-dark">
+          <p className="mt-4 max-w-[42ch] font-light leading-relaxed text-text-muted-dark">
             Occasional posts on websites, payments, and analytics for East
             African businesses. No spam, unsubscribe anytime.
           </p>
@@ -68,12 +68,12 @@ export const NewsletterSignup = () => {
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               placeholder="you@example.com"
-              className="w-full border border-border-dark bg-dark-card px-4 py-4 text-sm text-text-light placeholder:text-text-muted-dark"
+              className="glass-dark w-full px-4 py-4 text-sm text-text-light placeholder:text-text-light/40"
             />
             <button
               type="submit"
               disabled={status === "loading"}
-              className="shrink-0 bg-accent px-6 py-4 text-sm font-medium text-dark transition-colors hover:bg-text-light hover:text-dark disabled:opacity-60"
+              className="shrink-0 bg-accent px-6 py-4 text-sm font-medium text-dark transition-transform duration-300 hover:scale-105-light hover:text-dark disabled:opacity-60"
             >
               {status === "loading" ? "Sending" : "Subscribe"}
             </button>

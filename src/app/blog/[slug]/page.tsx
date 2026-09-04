@@ -117,7 +117,7 @@ export default async function BlogPostPage({ params }: Params) {
             {post.title}
           </h1>
 
-          <p className="mt-6 text-lg leading-relaxed text-text-muted">
+          <p className="mt-6 text-lg font-light leading-relaxed text-text-muted">
             {post.excerpt}
           </p>
 
@@ -152,7 +152,7 @@ export default async function BlogPostPage({ params }: Params) {
       {related.length > 0 ? (
         <section className="border-t border-border">
           <div className="shell px-6 py-16 md:px-12 md:py-24">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            <h2 className="text-3xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-4xl">
               Related posts
             </h2>
             <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
