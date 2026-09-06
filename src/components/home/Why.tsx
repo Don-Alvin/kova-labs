@@ -1,10 +1,4 @@
-"use client";
-
-import { useRef } from "react";
-import { gsap } from "gsap";
-import { useGSAP } from "@gsap/react";
 import { Zap, PenLine, Settings } from "lucide-react";
-import { parallax, revealOnScroll } from "@/lib/animations";
 
 const POINTS = [
   {
@@ -25,39 +19,22 @@ const POINTS = [
 ];
 
 export const Why = () => {
-  const container = useRef<HTMLElement>(null);
-  const image = useRef<HTMLDivElement>(null);
-
-  useGSAP(
-    () => {
-      if (image.current) {
-        parallax(image.current, 18, 1.5);
-        revealOnScroll(image.current, "left");
-      }
-
-      const copy = container.current?.querySelector<HTMLElement>(".why-copy");
-      if (copy) revealOnScroll(copy, "right");
-
-      gsap.utils
-        .toArray<HTMLElement>(".why-point")
-        .forEach((el, index) => revealOnScroll(el, "up", 0.2 + index * 0.12));
-    },
-    { scope: container }
-  );
-
   return (
-    <section
-      ref={container}
-      className="grid grid-cols-1 border-b border-border lg:grid-cols-2"
-    >
-      <div
-        ref={image}
-        className="reveal min-h-[280px] bg-bg-warm lg:min-h-[480px]"
-        aria-hidden="true"
-      />
+    <section className="grid grid-cols-1 border-b border-border lg:grid-cols-2">
+      <div className="relative min-h-[280px] overflow-hidden bg-bg-warm lg:min-h-[480px]">
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          src="/media/why.mp4"
+          poster="/media/why-poster.jpg"
+          autoPlay
+          muted
+          loop
+          playsInline
+          aria-hidden="true"
+        />
+      </div>
 
-      <div className="why-copy reveal px-6 py-16 md:px-12 md:py-20 lg:p-20">
-
+      <div className="px-6 py-16 md:px-12 md:py-20 lg:p-20">
         <h2 className="max-w-[42ch] text-3xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-4xl">
           Your customers are <em className="text-accent">searching</em> for you
           online
@@ -73,7 +50,7 @@ export const Why = () => {
           {POINTS.map((point) => (
             <li
               key={point.title}
-              className="why-point reveal flex items-center gap-4 border-b border-border py-5"
+              className="flex items-center gap-4 border-b border-border py-5"
             >
               <span
                 aria-hidden="true"

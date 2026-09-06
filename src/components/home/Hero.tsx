@@ -62,7 +62,8 @@ export const Hero = () => {
             },
           },
           "-=0.6"
-        );
+        )
+        .to(".hero-badge", { opacity: 1, duration: 0.8 }, "-=0.4");
 
       counters.forEach((cell) => {
         const target = Number(cell.dataset.value ?? 0);
@@ -95,59 +96,57 @@ export const Hero = () => {
         kova
       </span>
 
-      <div className="shell relative z-10 grid w-full grid-cols-1 gap-16 px-6 pb-20 pt-36 md:px-12 lg:grid-cols-[1fr_360px] lg:items-center lg:gap-20">
-        <div>
-          <h1 className="text-4xl font-extrabold leading-[1.05] tracking-[-0.04em] text-text-light sm:text-5xl lg:text-6xl xl:text-7xl">
-            {HEADLINE_LINES.map((line, index) => (
-              <span key={index} className="hero-line-mask block">
-                <span className="hero-line">
-                  {line.map((part) =>
-                    part === "impossible" ? (
-                      <em key={part} className="text-accent">
-                        {part}
-                      </em>
-                    ) : (
-                      part
-                    )
-                  )}
-                </span>
+      <div className="shell relative z-10 flex w-full flex-col items-center px-6 pb-24 pt-36 text-center md:px-12">
+        <h1 className="mx-auto max-w-4xl text-4xl font-extrabold leading-[1.05] tracking-[-0.04em] text-text-light sm:text-5xl lg:text-6xl xl:text-7xl">
+          {HEADLINE_LINES.map((line, index) => (
+            <span key={index} className="hero-line-mask block">
+              <span className="hero-line">
+                {line.map((part) =>
+                  part === "impossible" ? (
+                    <em key={part} className="text-accent">
+                      {part}
+                    </em>
+                  ) : (
+                    part
+                  )
+                )}
               </span>
-            ))}
-          </h1>
+            </span>
+          ))}
+        </h1>
 
-          <p className="hero-fade hero-description mt-8 max-w-[40ch] font-light leading-relaxed text-text-light/70">
-            We help small businesses across East Africa get online with fast,
-            professional websites that bring in customers and build trust.
-          </p>
+        <p className="hero-fade hero-description mx-auto mt-8 max-w-[40ch] font-light leading-relaxed text-text-light/70">
+          We help small businesses across East Africa get online with fast,
+          professional websites that bring in customers and build trust.
+        </p>
 
-          <div className="hero-fade hero-ctas mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6">
-            <button
-              type="button"
-              {...calTrigger()}
-              className="w-full bg-accent px-8 py-4 text-sm font-medium text-dark transition-transform duration-300 hover:scale-105 sm:w-auto"
+        <div className="hero-fade hero-ctas mt-10 flex w-full flex-col items-center gap-4 sm:w-auto sm:flex-row sm:gap-6">
+          <button
+            type="button"
+            {...calTrigger()}
+            className="w-full bg-accent px-8 py-4 text-sm font-medium text-dark transition-transform duration-300 hover:scale-105 sm:w-auto"
+          >
+            Book a free call
+          </button>
+          <a
+            href="#work"
+            className="glass-dark group inline-flex w-full items-center justify-center gap-2 px-8 py-4 text-sm font-medium text-text-light transition-transform duration-300 hover:scale-105 sm:w-auto"
+          >
+            See our work
+            <span
+              aria-hidden="true"
+              className="transition-transform duration-300 group-hover:translate-y-1"
             >
-              Book a free call
-            </button>
-            <a
-              href="#work"
-              className="glass-dark group inline-flex w-full items-center justify-center gap-2 px-8 py-4 text-sm font-medium text-text-light transition-transform duration-300 hover:scale-105 sm:w-auto"
-            >
-              See our work
-              <span
-                aria-hidden="true"
-                className="transition-transform duration-300 group-hover:translate-y-1"
-              >
-                <ArrowDown size={16} strokeWidth={1.5} />
-              </span>
-            </a>
-          </div>
+              <ArrowDown size={16} strokeWidth={1.5} />
+            </span>
+          </a>
         </div>
 
-        <dl className="flex flex-col gap-3">
+        <dl className="mt-16 grid w-full grid-cols-2 gap-3 lg:grid-cols-4">
           {STATS.map((stat) => (
             <div
               key={stat.label}
-              className="glass-defer hero-stat flex items-baseline justify-between gap-4 p-5"
+              className="glass-defer hero-stat flex flex-col items-center gap-1 p-5 text-center"
             >
               <dd className="text-3xl font-semibold tracking-[-0.04em] text-text-light">
                 <span className="stat-value" data-value={stat.value}>
@@ -161,6 +160,31 @@ export const Hero = () => {
             </div>
           ))}
         </dl>
+
+        <a
+          href="#work"
+          aria-label="Scroll to see our work"
+          className="hero-badge relative mt-16 hidden h-24 w-24 items-center justify-center text-text-light/70 transition-colors duration-300 hover:text-text-light lg:flex"
+        >
+          <svg
+            viewBox="0 0 100 100"
+            aria-hidden="true"
+            className="hero-badge-ring absolute inset-0 h-full w-full"
+          >
+            <defs>
+              <path
+                id="hero-badge-path"
+                d="M50,50 m-42,0 a42,42 0 1,1 84,0 a42,42 0 1,1 -84,0"
+              />
+            </defs>
+            <text fontSize="7.6" letterSpacing="0.3" fill="currentColor">
+              <textPath href="#hero-badge-path">
+                Scroll to explore &middot; Scroll to explore &middot;
+              </textPath>
+            </text>
+          </svg>
+          <ArrowDown size={18} strokeWidth={1.5} aria-hidden="true" />
+        </a>
       </div>
     </section>
   );

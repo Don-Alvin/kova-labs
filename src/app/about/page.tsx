@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { AnimateOnScroll } from "@/components/shared/AnimateOnScroll";
 import { CtaBanner } from "@/components/home/CtaBanner";
 
 export const metadata: Metadata = {
@@ -64,7 +63,7 @@ export default function AboutPage() {
 
       <section className="border-b border-border">
         <div className="shell px-6 py-16 md:px-12 md:py-24">
-          <AnimateOnScroll>
+          <div>
             <h2 className="max-w-[720px] text-3xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-4xl">
               Analytical thinking, applied to the web
             </h2>
@@ -88,7 +87,7 @@ export default function AboutPage() {
                 it well.
               </p>
             </div>
-          </AnimateOnScroll>
+          </div>
         </div>
       </section>
 
@@ -100,9 +99,8 @@ export default function AboutPage() {
 
           <div className="mt-12 grid grid-cols-1 border border-border md:grid-cols-3">
             {VALUES.map((value, index) => (
-              <AnimateOnScroll
+              <div
                 key={value.title}
-                delay={index * 0.15}
                 className={`bg-bg p-8 md:p-10 ${
                   index < VALUES.length - 1
                     ? "border-b border-border md:border-b-0 md:border-r"
@@ -113,7 +111,7 @@ export default function AboutPage() {
                 <p className="mt-4 text-sm font-light leading-relaxed text-text-muted">
                   {value.description}
                 </p>
-              </AnimateOnScroll>
+              </div>
             ))}
           </div>
         </div>

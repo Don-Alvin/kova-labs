@@ -1,10 +1,4 @@
-"use client";
-
-import { useRef } from "react";
 import Link from "next/link";
-import { gsap } from "gsap";
-import { useGSAP } from "@gsap/react";
-import { revealOnScroll } from "@/lib/animations";
 import { ArrowRight } from "lucide-react";
 
 const SERVICES = [
@@ -14,23 +8,8 @@ const SERVICES = [
 ];
 
 export const Services = () => {
-  const container = useRef<HTMLElement>(null);
-
-  useGSAP(
-    () => {
-      gsap.utils
-        .toArray<HTMLElement>(".service-card")
-        .forEach((el, index) =>
-          revealOnScroll(el, "up", index * 0.15, () =>
-            el.classList.add("glass-blurred")
-          )
-        );
-    },
-    { scope: container }
-  );
-
   return (
-    <section ref={container} className="ground-dark relative">
+    <section className="ground-dark relative">
       <div className="shell relative z-10 px-6 py-20 md:px-12 md:py-28">
         <h2 className="max-w-[720px] text-3xl font-bold leading-[1.05] tracking-[-0.04em] text-text-light sm:text-4xl lg:text-5xl">
           Everything you need to get <em className="text-accent">online</em> and
@@ -42,7 +21,7 @@ export const Services = () => {
             <Link
               key={service.number}
               href={service.href}
-              className="glass-defer service-card reveal group flex min-h-[260px] flex-col justify-between p-8 transition-transform duration-300 hover:scale-[1.03]"
+              className="glass-dark group flex min-h-[260px] flex-col justify-between p-8 transition-transform duration-300 hover:scale-[1.03]"
             >
               <span className="text-xs font-light tracking-wide text-accent">
                 {service.number}

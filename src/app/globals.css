@@ -183,7 +183,8 @@ body {
    the document head sets before first paint. Without JS, or if GSAP fails to
    load, nothing is hidden and the page reads as plain static content. */
 .js .reveal,
-.js .hero-fade {
+.js .hero-fade,
+.js .hero-badge {
   opacity: 0;
 }
 
@@ -204,11 +205,23 @@ body {
   transform: translateY(110%);
 }
 
+/* The "scroll to explore" badge: circular text spins slowly, the arrow at
+   its centre stays still. */
+.hero-badge-ring {
+  animation: hero-badge-spin 16s linear infinite;
+}
+
+@keyframes hero-badge-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .js .reveal,
   .js .hero-fade,
-  .js .hero-line {
+  .js .hero-line,
+  .js .hero-badge {
     opacity: 1;
     transform: none;
   }

@@ -1,11 +1,5 @@
-"use client";
-
-import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { gsap } from "gsap";
-import { useGSAP } from "@gsap/react";
-import { parallax, revealOnScroll } from "@/lib/animations";
 import { ArrowRight } from "lucide-react";
 
 /**
@@ -49,7 +43,6 @@ const GRID_PROJECTS = [
   },
 ];
 
-
 const Arrow = () => (
   <span
     aria-hidden="true"
@@ -60,26 +53,8 @@ const Arrow = () => (
 );
 
 export const Work = () => {
-  const container = useRef<HTMLElement>(null);
-  const featuredImage = useRef<HTMLDivElement>(null);
-
-  useGSAP(
-    () => {
-      if (featuredImage.current) parallax(featuredImage.current, 15, 1);
-
-      gsap.utils
-        .toArray<HTMLElement>(".work-card-image")
-        .forEach((el) => parallax(el, 20, 1.2));
-
-      gsap.utils
-        .toArray<HTMLElement>(".work-reveal")
-        .forEach((el, index) => revealOnScroll(el, "up", index * 0.1));
-    },
-    { scope: container }
-  );
-
   return (
-    <section id="work" ref={container} className="border-b border-border">
+    <section id="work" className="border-b border-border">
       <div className="shell px-6 py-16 md:px-12 md:py-24">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
@@ -99,9 +74,9 @@ export const Work = () => {
           href={FEATURED.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="work-reveal group relative mt-12 block h-[300px] overflow-hidden border border-border lg:h-[520px]"
+          className="group relative mt-12 block h-[300px] overflow-hidden border border-border lg:h-[520px]"
         >
-          <div ref={featuredImage} className="absolute inset-0 scale-110 bg-bg-warm">
+          <div className="absolute inset-0 scale-110 bg-bg-warm">
             {FEATURED.image ? (
               <Image
                 src={FEATURED.image}
@@ -116,7 +91,10 @@ export const Work = () => {
             aria-hidden="true"
             className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-dark/85 to-transparent"
           />
-          <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-6 p-6 md:p-8">
+          {/* bg-dark/70 is a real background-color on the text's own ancestor,
+              not just the sibling gradient above, so the light label stays
+              legible even against a very bright screenshot underneath. */}
+          <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-6 bg-dark/70 p-6 md:p-8">
             <div>
               <p className="text-xl font-bold text-text-light md:text-2xl">
                 {FEATURED.name}
@@ -136,10 +114,10 @@ export const Work = () => {
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="work-reveal group border border-border bg-bg transition-all duration-300 hover:scale-[1.02] hover:border-accent hover:shadow-[var(--shadow-lift)]"
+              className="group border border-border bg-bg transition-all duration-300 hover:scale-[1.02] hover:border-accent hover:shadow-[var(--shadow-lift)]"
             >
               <div className="relative h-[240px] overflow-hidden lg:h-[300px]">
-                <div className="work-card-image absolute inset-0 scale-110 bg-bg-warm transition-transform duration-500 group-hover:scale-[1.15]">
+                <div className="absolute inset-0 scale-110 bg-bg-warm transition-transform duration-500 group-hover:scale-[1.15]">
                   {project.image ? (
                     <Image
                       src={project.image}
@@ -163,7 +141,6 @@ export const Work = () => {
             </a>
           ))}
         </div>
-
       </div>
     </section>
   );

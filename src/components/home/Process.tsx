@@ -1,10 +1,3 @@
-"use client";
-
-import { useRef } from "react";
-import { gsap } from "gsap";
-import { useGSAP } from "@gsap/react";
-import { revealOnScroll } from "@/lib/animations";
-
 const STEPS = [
   {
     number: "01",
@@ -27,19 +20,8 @@ const STEPS = [
 ];
 
 export const Process = () => {
-  const container = useRef<HTMLElement>(null);
-
-  useGSAP(
-    () => {
-      gsap.utils
-        .toArray<HTMLElement>(".process-step")
-        .forEach((el, index) => revealOnScroll(el, "up", index * 0.2));
-    },
-    { scope: container }
-  );
-
   return (
-    <section ref={container} className="border-b border-border">
+    <section className="border-b border-border">
       <div className="shell px-6 py-16 md:px-12 md:py-24">
         <h2 className="text-3xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-4xl lg:text-5xl">
           Simple process, <em className="text-accent">real</em> results
@@ -49,7 +31,7 @@ export const Process = () => {
           {STEPS.map((step, index) => (
             <li
               key={step.number}
-              className={`process-step reveal p-8 md:p-10 ${
+              className={`p-8 md:p-10 ${
                 index < STEPS.length - 1
                   ? "border-b border-border lg:border-b-0 lg:border-r"
                   : ""

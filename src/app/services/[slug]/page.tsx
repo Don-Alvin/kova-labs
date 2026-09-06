@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { AnimateOnScroll } from "@/components/shared/AnimateOnScroll";
 import { CtaBanner } from "@/components/home/CtaBanner";
 import { SERVICES, SERVICE_SLUGS } from "@/lib/services";
 import { ArrowRight } from "lucide-react";
@@ -57,17 +56,13 @@ export default async function ServicePage({ params }: Params) {
           </h2>
 
           <div className="mt-12 grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2">
-            {service.included.map((item, index) => (
-              <AnimateOnScroll
-                key={item.heading}
-                delay={index * 0.1}
-                className="bg-bg p-8 md:p-10"
-              >
+            {service.included.map((item) => (
+              <div key={item.heading} className="bg-bg p-8 md:p-10">
                 <h3 className="text-xl font-semibold">{item.heading}</h3>
                 <p className="mt-4 max-w-[42ch] text-sm font-light leading-relaxed text-text-muted">
                   {item.body}
                 </p>
-              </AnimateOnScroll>
+              </div>
             ))}
           </div>
         </div>

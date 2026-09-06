@@ -1,9 +1,8 @@
-import { AnimateOnScroll } from "@/components/shared/AnimateOnScroll";
 import { calTrigger } from "@/lib/cal";
 
 export const CtaBanner = () => (
   <section className="ground-dark relative">
-    <AnimateOnScroll className="shell relative z-10 flex flex-col gap-8 px-6 py-20 md:px-12 md:py-24 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
+    <div className="shell relative z-10 flex flex-col gap-8 px-6 py-20 md:px-12 md:py-24 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
       <div>
         <h2 className="max-w-[42ch] text-3xl font-bold leading-[1.05] tracking-[-0.04em] text-text-light sm:text-4xl">
           Let&apos;s put your business{" "}
@@ -22,6 +21,6 @@ export const CtaBanner = () => (
       >
         Book a free call
       </button>
-    </AnimateOnScroll>
+    </div>
   </section>
 );
