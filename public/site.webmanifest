@@ -1,0 +1,16 @@
+{
+  "name": "KovaLab",
+  "short_name": "KovaLab",
+  "description": "Software solutions studio in Nairobi, building fast websites and web apps for businesses across East Africa.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#0C0C0C",
+  "background_color": "#FAFAF7",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

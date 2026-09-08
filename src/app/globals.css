@@ -5,13 +5,34 @@
   --bg-warm: #f0ebe3;
   --dark: #0c0c0c;
   --dark-card: #161616;
+  --dark-card-hover: #1e1e1e;
   --text: #141414;
   --text-light: #fafaf7;
-  --text-muted: #7a7a72;
+  --text-muted: #33332e;
   --text-muted-dark: #888888;
   --accent: #ff4d00;
+  /* Small accent text on light grounds; #ff4d00 is only 3.18:1 there. */
+  --accent-text: #c23b00;
   --border: #ddd8cf;
   --border-dark: #282828;
+  --whatsapp: #25d366;
+
+  /* Glass. Sharp-edged: the translucency and blur carry the depth, the corners
+     stay square. Light glass sits on paper, dark glass on ink. */
+  --glass-dark: rgba(250, 250, 247, 0.05);
+  --glass-dark-strong: rgba(250, 250, 247, 0.09);
+  --glass-dark-border: rgba(250, 250, 247, 0.1);
+  --glass-light: rgba(250, 250, 247, 0.55);
+  --glass-light-border: rgba(20, 20, 20, 0.08);
+  --blur-glass: 12px;
+  --blur-nav: 20px;
+
+  /* Depth. The flat doctrine is retired: shadows now carry elevation, always
+     with an offset and a soft blur, never a zero-offset halo. */
+  --shadow-glass: 0 24px 60px -20px rgba(12, 12, 12, 0.45);
+  --shadow-lift: 0 16px 40px -16px rgba(12, 12, 12, 0.3);
+
+  --ease-entry: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @theme inline {
@@ -19,23 +40,38 @@
   --color-bg-warm: var(--bg-warm);
   --color-dark: var(--dark);
   --color-dark-card: var(--dark-card);
+  --color-dark-card-hover: var(--dark-card-hover);
   --color-text: var(--text);
   --color-text-light: var(--text-light);
   --color-text-muted: var(--text-muted);
   --color-text-muted-dark: var(--text-muted-dark);
   --color-accent: var(--accent);
+  --color-accent-text: var(--accent-text);
   --color-border: var(--border);
   --color-border-dark: var(--border-dark);
+  --color-whatsapp: var(--whatsapp);
+  --color-glass-dark: var(--glass-dark);
+  --color-glass-dark-border: var(--glass-dark-border);
+  --color-glass-light: var(--glass-light);
+  --color-glass-light-border: var(--glass-light-border);
 
   --font-sans: var(--font-montserrat);
-
-  --radius-none: 0;
 }
 
+/* The one rule the glass rework does not touch. */
 *,
 *::before,
 *::after {
   border-radius: 0;
+}
+
+/* Reveals translate on the x axis (revealOnScroll "left" and "right" start at
+   60px), which pushes content past the right edge mid-animation and can flash a
+   horizontal scrollbar on narrow screens. `clip` stops that without creating a
+   scroll container, so the sticky navbar keeps working; `hidden` would break it. */
+html,
+body {
+  overflow-x: clip;
 }
 
 body {
@@ -54,22 +90,138 @@ body {
   outline-offset: 2px;
 }
 
-/* Initial hidden states for the GSAP entrance, set here to prevent a flash
-   of unstyled content before the timeline runs. */
-.entrance {
+@layer components {
+  /* Glass panels. Square corners, translucent fill, 1px edge for definition. */
+  .glass-dark {
+    background: var(--glass-dark);
+    backdrop-filter: blur(var(--blur-glass));
+    -webkit-backdrop-filter: blur(var(--blur-glass));
+    border: 1px solid var(--glass-dark-border);
+  }
+
+  /* Compositing a blurred layer while it transforms is markedly more expensive
+     than either alone. Panels that animate in start unblurred and gain the
+     filter on completion, which is invisible to the eye and much cheaper on a
+     mid-range phone. */
+  .glass-defer {
+    background: var(--glass-dark-strong);
+    border: 1px solid var(--glass-dark-border);
+  }
+
+  .glass-defer.glass-blurred {
+    background: var(--glass-dark);
+    backdrop-filter: blur(var(--blur-glass));
+    -webkit-backdrop-filter: blur(var(--blur-glass));
+  }
+
+  .glass-dark-strong {
+    background: var(--glass-dark-strong);
+    backdrop-filter: blur(var(--blur-glass));
+    -webkit-backdrop-filter: blur(var(--blur-glass));
+    border: 1px solid var(--glass-dark-border);
+  }
+
+  .glass-light {
+    background: var(--glass-light);
+    backdrop-filter: blur(var(--blur-glass));
+    -webkit-backdrop-filter: blur(var(--blur-glass));
+    border: 1px solid var(--glass-light-border);
+  }
+
+  /* The floating bar is always dark, on every ground. Light glass over paper
+     left it near invisible, and a bar that changes identity per page reads as
+     two different navbars. 0.8 alpha keeps links at 6.6:1 even over paper. */
+  .glass-nav {
+    background: rgba(12, 12, 12, 0.8);
+    backdrop-filter: blur(var(--blur-nav)) saturate(1.4);
+    -webkit-backdrop-filter: blur(var(--blur-nav)) saturate(1.4);
+    border: 1px solid var(--glass-dark-border);
+  }
+
+  .glass-nav-raised {
+    box-shadow: var(--shadow-glass);
+  }
+
+  /* Dark grounds are never flat: a bottom-heavy gradient plus grain prevents
+     banding and gives the ink some analog depth. */
+  .ground-dark {
+    position: relative;
+    background:
+      radial-gradient(120% 80% at 50% 0%, #1a1a1a 0%, var(--dark) 55%),
+      var(--dark);
+  }
+
+  .ground-dark::after,
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.15;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  }
+
+  .grain {
+    position: relative;
+  }
+}
+
+/* Inner content shell. Sections stay full width so their grounds and rules
+   run edge to edge, while the content inside them caps and centers.
+   It lives in the components layer so a narrower max-w-* utility on the same
+   element still wins; unlayered, .shell would override it and silently widen
+   reading measures that were meant to cap at 720px. */
+@layer components {
+  .shell {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+  }
+}
+
+/* Hidden start states are gated on the `js` class, which an inline script in
+   the document head sets before first paint. Without JS, or if GSAP fails to
+   load, nothing is hidden and the page reads as plain static content. */
+.js .reveal,
+.js .hero-fade,
+.js .hero-badge {
   opacity: 0;
 }
 
-.entrance-logo {
-  transform: scale(0.9);
-}
-
-.entrance-headline {
+.js .hero-fade {
   transform: translateY(20px);
 }
 
+/* Hero headline lines start below their mask and slide up on load. */
+.hero-line-mask {
+  overflow: hidden;
+}
+
+.hero-line {
+  display: block;
+}
+
+.js .hero-line {
+  transform: translateY(110%);
+}
+
+/* The "scroll to explore" badge: circular text spins slowly, the arrow at
+   its centre stays still. */
+.hero-badge-ring {
+  animation: hero-badge-spin 16s linear infinite;
+}
+
+@keyframes hero-badge-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .entrance {
+  .js .reveal,
+  .js .hero-fade,
+  .js .hero-line,
+  .js .hero-badge {
     opacity: 1;
     transform: none;
   }
@@ -80,29 +232,6 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
-}
-
-/* Coming soon background: a slow, barely perceptible gradient drift. */
-@keyframes drift {
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-.bg-drift {
-  background-image: linear-gradient(
-    120deg,
-    #0c0c0c 0%,
-    #14101a 35%,
-    #0c0c0c 70%,
-    #16111c 100%
-  );
-  background-size: 300% 300%;
-  animation: drift 40s ease-in-out infinite;
 }

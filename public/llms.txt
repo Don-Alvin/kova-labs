@@ -1,0 +1,17 @@
+# KovaLab
+
+> A software solutions studio in Nairobi, Kenya, building fast websites and web apps for businesses across East Africa. Websites are built for how East African customers actually transact: M-Pesa, Paystack, and WhatsApp checkout are first-class options, not afterthoughts.
+
+## Services
+- [Web development](https://kovalab.co.ke/services/web-development): fast, professional websites and web applications
+- [UI/UX design](https://kovalab.co.ke/services/ui-ux-design): interfaces built for how customers actually decide
+- [Data and analytics](https://kovalab.co.ke/services/data-analytics): tracking, dashboards, and reporting that answer real questions
+
+## Key pages
+- [About](https://kovalab.co.ke/about): the studio and how it works
+- [Work / portfolio](https://kovalab.co.ke/work): case studies from real clients
+- [Get a quote](https://kovalab.co.ke/quote): published pricing in Kenyan shillings, no sales call required to see cost
+- [Contact](https://kovalab.co.ke/contact): book a free call or reach out directly
+
+## Blog
+- [Notes from the studio](https://kovalab.co.ke/blog): practical writing on websites, payments, and analytics for East African businesses

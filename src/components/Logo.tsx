@@ -1,41 +1,36 @@
+import Image from "next/image";
+
 type LogoProps = {
   variant?: "light" | "dark";
+  /** Rendered height in pixels. The navbar lockup is 32. */
+  height?: number;
+  priority?: boolean;
   className?: string;
 };
 
-/**
- * KovaLab lockup: the Concept H interlocking blocks mark plus the wordmark.
- * "light" is for light backgrounds, "dark" is for dark backgrounds.
- * Hex values are part of the logo asset, so they stay literal here.
- */
-export const Logo = ({ variant = "light", className }: LogoProps) => {
-  const blockFill = variant === "light" ? "#141414" : "#FAFAF7";
-  const textFill = variant === "light" ? "#141414" : "#FAFAF7";
+/** Source lockups are 2172x724, so the aspect ratio is exactly 3:1. */
+const ASPECT_RATIO = 2172 / 724;
 
-  return (
-    <svg
-      width="200"
-      height="32"
-      viewBox="0 0 200 32"
-      className={className}
-      role="img"
-      aria-label="KovaLab"
-    >
-      <rect x="0" y="1" width="12" height="30" fill="#FF4D00" />
-      <rect x="14" y="1" width="12" height="14" fill={blockFill} />
-      <rect x="14" y="17" width="12" height="14" fill={blockFill} />
-      <rect x="28" y="8" width="5" height="16" fill="#FF4D00" />
-      <text
-        x="42"
-        y="21"
-        fontFamily="Montserrat, sans-serif"
-        fontWeight="500"
-        fontSize="15"
-        fill={textFill}
-        letterSpacing="-0.3"
-      >
-        kovalab
-      </text>
-    </svg>
-  );
-};
+const SOURCES = {
+  light: "/logos/kovalab-light-bg.png",
+  dark: "/logos/kovalab-dark-bg.png",
+} as const;
+
+/**
+ * KovaLab lockup. "light" sits on light backgrounds, "dark" on dark ones.
+ */
+export const Logo = ({
+  variant = "light",
+  height = 32,
+  priority = false,
+  className,
+}: LogoProps) => (
+  <Image
+    src={SOURCES[variant]}
+    alt="KovaLab"
+    width={Math.round(height * ASPECT_RATIO)}
+    height={height}
+    priority={priority}
+    className={className}
+  />
+);
