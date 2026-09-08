@@ -78,6 +78,7 @@ export default async function BlogPostPage({ params }: Params) {
             excerpt: post.excerpt,
             path: `/blog/${post.slug}`,
             publishedAt: post.publishedAt,
+            dateModified: post._updatedAt,
             image: post.coverImage
               ? urlFor(post.coverImage).width(1200).height(630).url()
               : undefined,

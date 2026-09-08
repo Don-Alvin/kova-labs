@@ -7,6 +7,7 @@ const POST_CARD_FIELDS = groq`
   excerpt,
   coverImage,
   publishedAt,
+  _updatedAt,
   readTime,
   "category": category->{name, "slug": slug.current},
   "author": author->{name, role}

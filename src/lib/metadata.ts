@@ -37,7 +37,7 @@ export const pageMetadata = ({
   return {
     title,
     description,
-    alternates: { canonical: path || "/" },
+    alternates: { canonical: url },
     openGraph: {
       title,
       description,
