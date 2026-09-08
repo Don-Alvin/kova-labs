@@ -12,9 +12,9 @@ import { CAL_LINK, EMAIL } from "@/lib/site";
 export const CalInline = () => {
   if (!CAL_LINK) {
     return (
-      <div className="flex min-h-[320px] flex-col items-start justify-center gap-4 p-8">
+      <div className="flex min-h-[320px] flex-col items-start justify-center gap-4 p-8 text-text-light">
         <p className="text-lg font-semibold">Booking is not available here</p>
-        <p className="max-w-[42ch] font-light leading-relaxed text-text-muted">
+        <p className="max-w-[42ch] font-light leading-relaxed text-text-light/70">
           Email us and we will find a time that works.
         </p>
         <a

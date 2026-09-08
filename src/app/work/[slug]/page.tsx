@@ -11,6 +11,7 @@ import {
   PROJECT_SLUGS_QUERY,
 } from "@/lib/sanity/queries";
 import type { Project } from "@/lib/sanity/types";
+import { pageMetadata } from "@/lib/metadata";
 import { ArrowRight } from "lucide-react";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -34,17 +35,14 @@ export const generateMetadata = async ({
 
   if (!project) return {};
 
-  return {
+  return pageMetadata({
+    path: `/work/${project.slug}`,
     title: project.title,
     description: project.excerpt,
-    openGraph: {
-      title: project.title,
-      description: project.excerpt,
-      images: project.coverImage
-        ? [urlFor(project.coverImage).width(1200).height(630).url()]
-        : undefined,
-    },
-  };
+    image: project.coverImage
+      ? urlFor(project.coverImage).width(1200).height(630).url()
+      : undefined,
+  });
 };
 
 export default async function ProjectPage({ params }: Params) {

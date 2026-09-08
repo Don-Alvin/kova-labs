@@ -1,6 +1,6 @@
 export const SITE_URL = "https://kovalab.co.ke";
 
-export const EMAIL = "hello@kovalab.co.ke";
+export const EMAIL = "info@kovalab.co.ke";
 
 export const WHATSAPP_NUMBER =
   process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "254700000000";
@@ -11,6 +11,19 @@ export const WHATSAPP_MESSAGE =
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
   WHATSAPP_MESSAGE
 )}`;
+
+/** Builds a WhatsApp deep link prefilled with a context-specific message. */
+export const waLink = (message: string) =>
+  `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+/** "254703287601" -> "+254 703 287 601", for display rather than dialing. */
+export const WHATSAPP_DISPLAY = `+${WHATSAPP_NUMBER.slice(
+  0,
+  3
+)} ${WHATSAPP_NUMBER.slice(3, 6)} ${WHATSAPP_NUMBER.slice(
+  6,
+  9
+)} ${WHATSAPP_NUMBER.slice(9)}`;
 
 /** Set NEXT_PUBLIC_CALCOM_LINK in .env.local and in the Vercel project. */
 export const CAL_LINK = process.env.NEXT_PUBLIC_CALCOM_LINK ?? "";

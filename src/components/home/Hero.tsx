@@ -3,9 +3,11 @@
 import { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+import Image from "next/image";
+import Link from "next/link";
 import { ENTRY_EASE, prefersReducedMotion } from "@/lib/animations";
-import { calTrigger } from "@/lib/cal";
-import { ArrowDown } from "lucide-react";
+import { EMAIL } from "@/lib/site";
+import { ArrowDown, ArrowRight } from "lucide-react";
 
 const HEADLINE_LINES = [
   ["Websites that make"],
@@ -63,6 +65,7 @@ export const Hero = () => {
           },
           "-=0.6"
         )
+        .to(".hero-contact-card", { opacity: 1, y: 0, duration: 0.8 }, "-=0.6")
         .to(".hero-badge", { opacity: 1, duration: 0.8 }, "-=0.4");
 
       counters.forEach((cell) => {
@@ -86,85 +89,124 @@ export const Hero = () => {
   return (
     <section
       ref={container}
-      className="ground-dark relative -mt-24 flex min-h-[92vh] items-center overflow-hidden md:-mt-28"
+      className="ground-dark relative -mt-24 flex items-center overflow-hidden lg:min-h-[680px]"
     >
-      {/* The wordmark blown up as texture. Lowercase, because the brand is. */}
-      <span
+      {/* The mark, blown up as texture behind the content, not a framed
+          object sitting on top of it. Same treatment as the wordmark used to
+          get: huge, faint, blurred, ignored by hit-testing. */}
+      <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none text-[22vw] font-extrabold leading-none tracking-tight text-text-light opacity-[0.03] blur-[2px]"
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[70vh] w-[70vh] max-w-none -translate-x-1/2 -translate-y-1/2 select-none opacity-[0.06] blur-[1px]"
       >
-        kova
-      </span>
+        <Image
+          src="/logos/kovalab-mark.png"
+          alt=""
+          fill
+          className="object-contain"
+        />
+      </div>
 
-      <div className="shell relative z-10 flex w-full flex-col items-center px-6 pb-24 pt-36 text-center md:px-12">
-        <h1 className="mx-auto max-w-4xl text-4xl font-extrabold leading-[1.05] tracking-[-0.04em] text-text-light sm:text-5xl lg:text-6xl xl:text-7xl">
-          {HEADLINE_LINES.map((line, index) => (
-            <span key={index} className="hero-line-mask block">
-              <span className="hero-line">
-                {line.map((part) =>
-                  part === "impossible" ? (
-                    <em key={part} className="text-accent">
-                      {part}
-                    </em>
-                  ) : (
-                    part
-                  )
-                )}
-              </span>
-            </span>
-          ))}
-        </h1>
-
-        <p className="hero-fade hero-description mx-auto mt-8 max-w-[40ch] font-light leading-relaxed text-text-light/70">
-          We help small businesses across East Africa get online with fast,
-          professional websites that bring in customers and build trust.
-        </p>
-
-        <div className="hero-fade hero-ctas mt-10 flex w-full flex-col items-center gap-4 sm:w-auto sm:flex-row sm:gap-6">
-          <button
-            type="button"
-            {...calTrigger()}
-            className="w-full bg-accent px-8 py-4 text-sm font-medium text-dark transition-transform duration-300 hover:scale-105 sm:w-auto"
-          >
-            Book a free call
-          </button>
-          <a
-            href="#work"
-            className="glass-dark group inline-flex w-full items-center justify-center gap-2 px-8 py-4 text-sm font-medium text-text-light transition-transform duration-300 hover:scale-105 sm:w-auto"
-          >
-            See our work
-            <span
-              aria-hidden="true"
-              className="transition-transform duration-300 group-hover:translate-y-1"
-            >
-              <ArrowDown size={16} strokeWidth={1.5} />
-            </span>
-          </a>
-        </div>
-
-        <dl className="mt-16 grid w-full grid-cols-2 gap-3 lg:grid-cols-4">
-          {STATS.map((stat) => (
-            <div
-              key={stat.label}
-              className="glass-defer hero-stat flex flex-col items-center gap-1 p-5 text-center"
-            >
-              <dd className="text-3xl font-semibold tracking-[-0.04em] text-text-light">
-                <span className="stat-value" data-value={stat.value}>
-                  0
+      <div className="shell relative z-10 flex w-full flex-col items-center gap-10 px-6 pb-16 pt-32 md:px-12 lg:pt-28">
+        <div className="grid w-full grid-cols-1 gap-10 lg:grid-cols-[1fr_300px] lg:items-start lg:gap-10">
+          {/* Left: the claim, the call to action, the numbers. Stretched to
+              cover the space that used to be a separate middle column. */}
+          <div className="flex flex-col items-start text-left">
+            <h1 className="text-3xl font-extrabold leading-[1.05] tracking-[-0.04em] text-text-light sm:text-4xl lg:text-5xl xl:text-6xl">
+              {HEADLINE_LINES.map((line, index) => (
+                <span key={index} className="hero-line-mask block">
+                  <span className="hero-line">
+                    {line.map((part) =>
+                      part === "impossible" ? (
+                        <em key={part} className="text-accent">
+                          {part}
+                        </em>
+                      ) : (
+                        part
+                      )
+                    )}
+                  </span>
                 </span>
-                <span className="text-accent">{stat.suffix}</span>
-              </dd>
-              <dt className="text-sm font-light text-text-light/60">
-                {stat.label}
-              </dt>
+              ))}
+            </h1>
+
+            <p className="hero-fade hero-description mt-6 max-w-[42ch] font-light leading-relaxed text-text-light/70">
+              We help small businesses across East Africa get online with
+              fast, professional websites that bring in customers and build
+              trust.
+            </p>
+
+            <div className="hero-fade hero-ctas mt-8">
+              <Link
+                href="#quote"
+                className="group inline-flex items-center gap-3 bg-accent py-4 pl-8 pr-4 text-sm font-medium text-dark transition-transform duration-300 hover:scale-105"
+              >
+                Get a quote
+                <span
+                  aria-hidden="true"
+                  className="flex h-7 w-7 shrink-0 items-center justify-center bg-dark text-text-light transition-transform duration-300 group-hover:translate-x-1"
+                >
+                  <ArrowRight size={14} strokeWidth={1.5} />
+                </span>
+              </Link>
             </div>
-          ))}
-        </dl>
+
+            <dl className="mt-10 grid w-full grid-cols-2 gap-3 sm:grid-cols-4">
+              {STATS.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="glass-defer hero-stat flex flex-col gap-1 p-4"
+                >
+                  <dd className="text-2xl font-semibold tracking-[-0.04em] text-text-light">
+                    <span className="stat-value" data-value={stat.value}>
+                      0
+                    </span>
+                    <span className="text-accent">{stat.suffix}</span>
+                  </dd>
+                  <dt className="text-xs font-light text-text-light/60">
+                    {stat.label}
+                  </dt>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          {/* Right: the contact card, untouched, pinned to the same 300px
+              column it always had. Paper on the dark ground, so it reads as a
+              distinct object rather than blending into the hero's material. */}
+          <div className="hero-fade hero-contact-card hidden w-full flex-col gap-4 bg-bg p-5 text-left shadow-[var(--shadow-lift)] lg:flex">
+            <div className="flex items-center gap-2">
+              <span
+                aria-hidden="true"
+                className="h-2 w-2 shrink-0 animate-pulse bg-accent"
+              />
+              <span className="text-xs font-light tracking-wide text-text-muted">
+                Available for new projects
+              </span>
+            </div>
+            <a
+              href={`mailto:${EMAIL}`}
+              className="text-sm text-text transition-colors duration-300 hover:text-accent-text"
+            >
+              {EMAIL}
+            </a>
+            <Link
+              href="/contact"
+              className="group inline-flex w-full items-center justify-between gap-2 self-start bg-dark px-4 py-3 text-xs font-medium text-text-light transition-all duration-300 hover:scale-105 hover:bg-accent hover:text-dark"
+            >
+              Get in touch
+              <ArrowRight
+                size={14}
+                strokeWidth={1.5}
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              />
+            </Link>
+          </div>
+        </div>
 
         <a
           href="#work"
           aria-label="Scroll to see our work"
-          className="hero-badge relative mt-16 hidden h-24 w-24 items-center justify-center text-text-light/70 transition-colors duration-300 hover:text-text-light lg:flex"
+          className="hero-badge relative hidden h-24 w-24 items-center justify-center text-text-light/70 transition-colors duration-300 hover:text-text-light lg:flex"
         >
           <svg
             viewBox="0 0 100 100"

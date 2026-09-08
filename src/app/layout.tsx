@@ -26,6 +26,10 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "KovaLab" }],
   metadataBase: new URL(SITE_URL),
+  manifest: "/site.webmanifest",
+  // Every other route sets its own via pageMetadata() in src/lib/metadata.ts.
+  // This one covers the homepage, which has no metadata export of its own.
+  alternates: { canonical: "/" },
   openGraph: {
     title: "KovaLab | Software Solutions Studio",
     description:
@@ -35,7 +39,12 @@ export const metadata: Metadata = {
     locale: "en_KE",
     type: "website",
   },
-  twitter: { card: "summary_large_image" },
+  twitter: {
+    card: "summary_large_image",
+    title: "KovaLab | Software Solutions Studio",
+    description:
+      "We help businesses across East Africa get online with fast, professional websites that bring in customers and build trust.",
+  },
   robots: { index: true, follow: true },
 };
 
@@ -63,7 +72,7 @@ export default function RootLayout({
 
         <Navbar />
 
-        <main id="main" className="flex-1 pt-24 md:pt-28">
+        <main id="main" className="flex-1 pt-24">
           {children}
         </main>
 

@@ -1,4 +1,4 @@
-import { calTrigger } from "@/lib/cal";
+import { WhatsAppCTA } from "@/components/layout/WhatsAppCTA";
 
 export const CtaBanner = () => (
   <section className="ground-dark relative">
@@ -14,13 +14,13 @@ export const CtaBanner = () => (
         </p>
       </div>
 
-      <button
-        type="button"
-        {...calTrigger()}
-        className="w-full shrink-0 bg-accent px-8 py-4 text-sm font-medium text-dark transition-transform duration-300 hover:scale-105 lg:w-auto"
+      <WhatsAppCTA
+        message="Hi KovaLab, I'd like to ask about a website for my business."
+        context="cta_banner"
+        className="block w-full shrink-0 bg-accent px-8 py-4 text-center text-sm font-medium text-dark transition-transform duration-300 hover:scale-105 lg:w-auto"
       >
-        Book a free call
-      </button>
+        Get a quote on WhatsApp
+      </WhatsAppCTA>
     </div>
   </section>
 );

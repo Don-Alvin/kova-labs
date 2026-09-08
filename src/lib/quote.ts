@@ -57,3 +57,65 @@ export const SUPPORT_PLANS: QuoteOption[] = [
 
 export const formatKES = (value: number): string =>
   `KES ${value.toLocaleString("en-KE")}`;
+
+/**
+ * Builds the WhatsApp message from the estimator's selections, so the
+ * visitor arrives in chat with their quote already spelled out instead of
+ * a back-and-forth over what they need.
+ */
+export const buildQuoteMessage = (input: {
+  websiteType: string;
+  extraPages: number;
+  features: string[];
+  analytics: string[];
+  support: string;
+  total: number;
+  monthly: number;
+}): string => {
+  const type = WEBSITE_TYPES.find((option) => option.id === input.websiteType);
+  const selectedFeatures = FEATURES.filter((option) =>
+    input.features.includes(option.id)
+  );
+  const selectedAnalytics = ANALYTICS.filter((option) =>
+    input.analytics.includes(option.id)
+  );
+  const support = SUPPORT_PLANS.find((option) => option.id === input.support);
+
+  const lines = ["Hi KovaLab, I'd like a quote for:"];
+
+  if (type) {
+    lines.push(`- Website type: ${type.label} (${formatKES(type.price)})`);
+  }
+  if (input.extraPages > 0) {
+    lines.push(
+      `- Extra pages: ${input.extraPages} (${formatKES(
+        input.extraPages * EXTRA_PAGE_PRICE
+      )})`
+    );
+  }
+  if (selectedFeatures.length > 0) {
+    lines.push(
+      `- Features: ${selectedFeatures
+        .map((option) => `${option.label} (${formatKES(option.price)})`)
+        .join(", ")}`
+    );
+  }
+  if (selectedAnalytics.length > 0) {
+    lines.push(
+      `- Analytics: ${selectedAnalytics
+        .map((option) => `${option.label} (${formatKES(option.price)})`)
+        .join(", ")}`
+    );
+  }
+  if (support && support.price > 0) {
+    lines.push(`- Support: ${support.label} (${formatKES(support.price)}/mo)`);
+  }
+
+  lines.push(
+    `Estimated total: ${formatKES(input.total)}${
+      input.monthly > 0 ? ` + ${formatKES(input.monthly)}/mo` : ""
+    }`
+  );
+
+  return lines.join("\n");
+};

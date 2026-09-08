@@ -23,13 +23,15 @@ export const ProjectCard = ({
       }`}
     >
       {project.coverImage ? (
-        <Image
-          src={urlFor(project.coverImage).width(1600).url()}
-          alt={project.coverImage.alt ?? project.title}
-          fill
-          sizes={featured ? "100vw" : "(max-width: 768px) 100vw, 50vw"}
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-        />
+        <div className="absolute inset-0 scale-110 transition-transform duration-500 group-hover:scale-[1.15]">
+          <Image
+            src={urlFor(project.coverImage).width(1600).url()}
+            alt={project.coverImage.alt ?? project.title}
+            fill
+            sizes={featured ? "100vw" : "(max-width: 768px) 100vw, 50vw"}
+            className="object-cover"
+          />
+        </div>
       ) : null}
     </div>
 

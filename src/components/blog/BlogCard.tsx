@@ -26,13 +26,15 @@ export const BlogCard = ({ post, featured = false }: BlogCardProps) => (
       }`}
     >
       {post.coverImage ? (
-        <Image
-          src={urlFor(post.coverImage).width(1600).url()}
-          alt={post.coverImage.alt ?? post.title}
-          fill
-          sizes={featured ? "100vw" : "(max-width: 768px) 100vw, 50vw"}
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-        />
+        <div className="absolute inset-0 scale-110 transition-transform duration-500 group-hover:scale-[1.15]">
+          <Image
+            src={urlFor(post.coverImage).width(1600).url()}
+            alt={post.coverImage.alt ?? post.title}
+            fill
+            sizes={featured ? "100vw" : "(max-width: 768px) 100vw, 50vw"}
+            className="object-cover"
+          />
+        </div>
       ) : null}
     </div>
 

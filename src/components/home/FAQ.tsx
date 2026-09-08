@@ -2,7 +2,8 @@
 
 import { useRef, useState } from "react";
 import { gsap } from "gsap";
-import { Plus } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, Plus } from "lucide-react";
 import { prefersReducedMotion } from "@/lib/animations";
 
 const QUESTIONS = [
@@ -63,54 +64,82 @@ export const FAQ = () => {
   };
 
   return (
-    <section className="border-b border-border">
-      <div className="shell px-6 py-16 md:px-12 md:py-24">
-        <h2 className="text-3xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-4xl lg:text-5xl">
+    <section className="ground-dark relative">
+      <div className="shell relative z-10 px-6 py-16 md:px-12 md:py-24">
+        <h2 className="max-w-3xl text-3xl font-bold leading-[1.05] tracking-[-0.04em] text-text-light sm:text-4xl lg:text-5xl">
           Everything you need to know
         </h2>
 
-        <div className="mt-12 max-w-[860px]">
-          {QUESTIONS.map((item, index) => {
-            const open = openIndex === index;
-            return (
-              <div key={item.question} className="border-b border-border">
-                <h3>
-                  <button
-                    type="button"
-                    onClick={() => setOpen(index)}
-                    aria-expanded={open}
-                    aria-controls={`faq-panel-${index}`}
-                    id={`faq-trigger-${index}`}
-                    className="flex w-full items-center justify-between gap-6 py-6 text-left text-lg font-semibold transition-colors hover:text-accent-text md:text-xl"
-                  >
-                    {item.question}
-                    <span
-                      aria-hidden="true"
-                      className={`shrink-0 text-accent-text transition-transform duration-300 ${
-                        open ? "rotate-[135deg]" : ""
-                      }`}
-                    >
-                      <Plus size={22} strokeWidth={1.5} />
-                    </span>
-                  </button>
-                </h3>
+        <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-[280px_1fr] lg:gap-16">
+          <div className="flex flex-col items-start gap-6 lg:sticky lg:top-32 lg:self-start">
+            <p className="max-w-[32ch] font-light leading-relaxed text-text-light/70">
+              We believe good partnerships start with clarity. Here are the
+              questions clients ask us most.
+            </p>
+            <Link
+              href="/contact"
+              className="group inline-flex items-center gap-2 border border-border-dark px-6 py-3 text-sm font-medium text-text-light transition-all duration-300 hover:scale-105 hover:border-text-light hover:bg-text-light hover:text-dark"
+            >
+              Contact us
+              <ArrowRight
+                size={16}
+                strokeWidth={1.5}
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              />
+            </Link>
+          </div>
 
+          <div>
+            {QUESTIONS.map((item, index) => {
+              const open = openIndex === index;
+              return (
                 <div
-                  id={`faq-panel-${index}`}
-                  role="region"
-                  aria-labelledby={`faq-trigger-${index}`}
-                  ref={(node) => {
-                    panels.current[index] = node;
-                  }}
-                  className="h-0 overflow-hidden"
+                  key={item.question}
+                  className="border-b border-border-dark"
                 >
-                  <p className="max-w-[58ch] pb-6 font-light leading-relaxed text-text-muted">
-                    {item.answer}
-                  </p>
+                  <h3>
+                    <button
+                      type="button"
+                      onClick={() => setOpen(index)}
+                      aria-expanded={open}
+                      aria-controls={`faq-panel-${index}`}
+                      id={`faq-trigger-${index}`}
+                      className="flex w-full items-start gap-4 py-6 text-left text-text-light transition-colors hover:text-accent"
+                    >
+                      <span className="shrink-0 pt-1 text-sm font-light text-accent">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span className="flex-1 text-lg font-semibold md:text-xl">
+                        {item.question}
+                      </span>
+                      <span
+                        aria-hidden="true"
+                        className={`shrink-0 text-accent transition-transform duration-300 ${
+                          open ? "rotate-[135deg]" : ""
+                        }`}
+                      >
+                        <Plus size={22} strokeWidth={1.5} />
+                      </span>
+                    </button>
+                  </h3>
+
+                  <div
+                    id={`faq-panel-${index}`}
+                    role="region"
+                    aria-labelledby={`faq-trigger-${index}`}
+                    ref={(node) => {
+                      panels.current[index] = node;
+                    }}
+                    className="h-0 overflow-hidden"
+                  >
+                    <p className="max-w-[58ch] pb-6 pl-9 font-light leading-relaxed text-text-light/70">
+                      {item.answer}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

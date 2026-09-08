@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { EMAIL } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/privacy",
   title: "Privacy policy",
   description:
     "What KovaLab collects, why, who else sees it, and how to ask us to delete it. In plain language.",
-};
+});
 
-const LAST_UPDATED = "2 September 2026";
+const LAST_UPDATED = "7 September 2026";
 
 export default function PrivacyPage() {
   return (
@@ -89,6 +91,14 @@ export default function PrivacyPage() {
                 <span>
                   <span className="text-text">Vercel</span> hosts the site and
                   processes requests to it.
+                </span>
+              </li>
+              <li className="flex gap-3">
+                <span aria-hidden="true" className="mt-2 h-[5px] w-[5px] shrink-0 bg-accent" />
+                <span>
+                  <span className="text-text">Sanity</span> stores the content
+                  on this site, such as blog posts and project write-ups. It
+                  does not hold any personal data about visitors.
                 </span>
               </li>
             </ul>

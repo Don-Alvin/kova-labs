@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createHash } from "node:crypto";
+import { getClientIp, rateLimit } from "@/lib/rateLimit";
 
 const API_KEY = process.env.MAILCHIMP_API_KEY;
 const AUDIENCE_ID = process.env.MAILCHIMP_AUDIENCE_ID;
@@ -17,16 +18,41 @@ export async function POST(request: Request) {
     );
   }
 
+  const { ok } = rateLimit(`newsletter:${getClientIp(request)}`, {
+    limit: 5,
+    windowMs: 60_000,
+  });
+
+  if (!ok) {
+    return NextResponse.json(
+      { message: "Too many attempts. Please try again in a minute." },
+      { status: 429 }
+    );
+  }
+
   let email: unknown;
+  let honeypot: unknown;
 
   try {
     const body: unknown = await request.json();
     email = (body as { email?: unknown })?.email;
+    // "company" reads as a normal field name to a form-filling bot; a real
+    // visitor never sees or fills it, since NewsletterSignup keeps it
+    // visually and semantically hidden.
+    honeypot = (body as { company?: unknown })?.company;
   } catch {
     return NextResponse.json(
       { message: "Please enter a valid email address." },
       { status: 400 }
     );
+  }
+
+  if (typeof honeypot === "string" && honeypot.trim() !== "") {
+    // Report success so the bot has no signal to adapt against; nothing is
+    // actually sent to Mailchimp.
+    return NextResponse.json({
+      message: "Almost there. Check your inbox to confirm.",
+    });
   }
 
   if (typeof email !== "string" || !EMAIL_PATTERN.test(email.trim())) {

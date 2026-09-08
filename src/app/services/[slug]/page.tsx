@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CtaBanner } from "@/components/home/CtaBanner";
+import { MarkPanel } from "@/components/shared/MarkPanel";
+import { pageMetadata } from "@/lib/metadata";
 import { SERVICES, SERVICE_SLUGS } from "@/lib/services";
+import { jsonLd, serviceSchema } from "@/lib/structuredData";
 import { ArrowRight } from "lucide-react";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -17,11 +21,11 @@ export const generateMetadata = async ({
   const service = SERVICES[slug];
   if (!service) return {};
 
-  return {
+  return pageMetadata({
+    path: `/services/${slug}`,
     title: service.name,
     description: service.description,
-    openGraph: { title: service.name, description: service.description },
-  };
+  });
 };
 
 export default async function ServicePage({ params }: Params) {
@@ -32,34 +36,44 @@ export default async function ServicePage({ params }: Params) {
 
   return (
     <>
-      <section className="border-b border-border">
-        <div className="shell grid grid-cols-1 items-center gap-12 px-6 py-16 md:px-12 md:py-24 lg:grid-cols-[55fr_45fr] lg:gap-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd(
+          serviceSchema({
+            name: service.name,
+            description: service.description,
+            path: `/services/${slug}`,
+          })
+        )}
+      />
+      <section className="ground-dark relative -mt-24">
+        <div className="shell relative z-10 grid grid-cols-1 items-center gap-12 px-6 pb-16 pt-40 md:px-12 md:pb-24 md:pt-48 lg:grid-cols-[55fr_45fr] lg:gap-16">
           <div>
-            <h1 className="text-4xl font-extrabold leading-[1.05] tracking-[-0.04em] sm:text-5xl lg:text-6xl">
+            <h1 className="text-4xl font-extrabold leading-[1.05] tracking-[-0.04em] text-text-light sm:text-5xl lg:text-6xl">
               {service.title}
             </h1>
-            <p className="mt-8 max-w-[42ch] font-light leading-relaxed text-text-muted">
+            <p className="mt-8 max-w-[42ch] font-light leading-relaxed text-text-light/70">
               {service.description}
             </p>
           </div>
-          <div
-            className="min-h-[280px] border-l border-border bg-bg-warm lg:min-h-[440px]"
-            aria-hidden="true"
-          />
+          <MarkPanel className="min-h-[280px] lg:min-h-[440px]" />
         </div>
       </section>
 
-      <section className="border-b border-border">
-        <div className="shell px-6 py-16 md:px-12 md:py-24">
-          <h2 className="max-w-[720px] text-3xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-4xl">
+      <section className="ground-dark relative">
+        <div className="shell relative z-10 px-6 py-16 md:px-12 md:py-24">
+          <h2 className="max-w-[720px] text-3xl font-bold leading-[1.05] tracking-[-0.04em] text-text-light sm:text-4xl">
             What you get
           </h2>
 
-          <div className="mt-12 grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2">
+          <div className="mt-12 grid grid-cols-1 gap-3 md:grid-cols-2">
             {service.included.map((item) => (
-              <div key={item.heading} className="bg-bg p-8 md:p-10">
+              <div
+                key={item.heading}
+                className="glass-dark p-8 text-text-light md:p-10"
+              >
                 <h3 className="text-xl font-semibold">{item.heading}</h3>
-                <p className="mt-4 max-w-[42ch] text-sm font-light leading-relaxed text-text-muted">
+                <p className="mt-4 max-w-[42ch] text-sm font-light leading-relaxed text-text-light/60">
                   {item.body}
                 </p>
               </div>
@@ -112,10 +126,17 @@ export default async function ServicePage({ params }: Params) {
                 rel="noopener noreferrer"
                 className="group border border-border bg-bg transition-all duration-300 hover:scale-[1.02] hover:border-accent hover:shadow-[var(--shadow-lift)]"
               >
-                <div
-                  className="h-[220px] bg-bg-warm lg:h-[300px]"
-                  aria-hidden="true"
-                />
+                <div className="relative h-[220px] overflow-hidden bg-bg-warm lg:h-[300px]">
+                  <div className="absolute inset-0 scale-110 transition-transform duration-500 group-hover:scale-[1.15]">
+                    <Image
+                      src={project.image}
+                      alt={`${project.name} website`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
                 <div className="flex items-center justify-between gap-4 p-6">
                   <div>
                     <p className="text-lg font-semibold">{project.name}</p>

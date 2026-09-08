@@ -5,8 +5,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import { NAV_LINKS, SOCIALS } from "@/lib/site";
-import { calTrigger } from "@/lib/cal";
+import { ArrowUpRight, X } from "lucide-react";
+import {
+  EMAIL,
+  FOOTER_COMPANY,
+  NAV_LINKS,
+  WHATSAPP_DISPLAY,
+  WHATSAPP_URL,
+} from "@/lib/site";
 
 type MobileNavProps = {
   open: boolean;
@@ -55,95 +61,101 @@ export const MobileNav = ({ open, onClose }: MobileNavProps) => {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 md:hidden">
-      <button
-        type="button"
-        aria-label="Close menu"
-        onClick={onClose}
-        className="absolute inset-0 h-full w-full bg-dark/40"
-      />
-
+    <div
+      ref={panel}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Site menu"
+      className="fixed inset-0 z-50 flex flex-col overflow-y-auto bg-accent text-dark md:hidden"
+    >
+      {/* The wordmark, blown up and rotated into a strip along the left
+          edge: background typography rather than a framed logo, echoing
+          the mark treatment used elsewhere on dark grounds. */}
       <div
-        ref={panel}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Site menu"
-        className="absolute right-0 top-0 flex h-full w-[85%] max-w-sm flex-col justify-between border-l border-border bg-bg p-6"
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 left-0 flex w-24 items-center justify-center overflow-hidden opacity-15 sm:w-32"
       >
-        <div>
-          <div className="flex justify-end">
-            <button
-              type="button"
-              onClick={onClose}
-              aria-label="Close menu"
-              className="mobile-nav-item p-2 text-text-muted transition-colors hover:text-text"
-            >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                aria-hidden="true"
-              >
-                <path d="M5 5l14 14M19 5L5 19" />
-              </svg>
-            </button>
-          </div>
+        <span className="origin-center -rotate-90 whitespace-nowrap text-[8rem] font-extrabold leading-none tracking-tight sm:text-[10rem]">
+          kovalab
+        </span>
+      </div>
 
-          <nav className="mt-8 flex flex-col">
-            {NAV_LINKS.map((link) => {
-              const active = pathname.startsWith(link.href);
-              return (
+      <div className="relative z-10 flex items-center justify-between px-6 pt-6 sm:px-10">
+        <p className="mobile-nav-item text-xs font-light tracking-wide">
+          Navigation
+        </p>
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close menu"
+          className="mobile-nav-item flex items-center gap-2 text-xs font-light tracking-wide"
+        >
+          Close
+          <X size={16} strokeWidth={1.5} />
+        </button>
+      </div>
+
+      <nav className="relative z-10 mt-10 flex flex-1 flex-col justify-center px-6 sm:px-10">
+        {NAV_LINKS.map((link) => {
+          const active = pathname.startsWith(link.href);
+          return (
+            <Link
+              key={link.label}
+              href={link.href}
+              onClick={onClose}
+              aria-current={active ? "page" : undefined}
+              className="mobile-nav-item group flex items-center justify-between border-b border-dark/15 py-5"
+            >
+              <span className="text-4xl font-bold leading-[1.05] tracking-[-0.02em] sm:text-5xl">
+                {link.label}
+              </span>
+              <ArrowUpRight
+                size={22}
+                strokeWidth={1.5}
+                className="shrink-0 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+              />
+            </Link>
+          );
+        })}
+      </nav>
+
+      <div className="relative z-10 flex flex-col gap-8 px-6 pb-8 sm:px-10">
+        <div className="mobile-nav-item">
+          <p className="text-xs font-light tracking-wide">Explore</p>
+          <ul className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2">
+            {FOOTER_COMPANY.map((link) => (
+              <li key={link.label}>
                 <Link
-                  key={link.label}
                   href={link.href}
                   onClick={onClose}
-                  className={`mobile-nav-item border-b border-border py-4 text-xl transition-colors ${
-                    active
-                      ? "font-medium text-text"
-                      : "font-normal text-text-muted hover:text-text"
-                  }`}
+                  className="text-sm underline underline-offset-4"
                 >
                   {link.label}
                 </Link>
-              );
-            })}
-          </nav>
-
-          <button
-            type="button"
-            {...calTrigger()}
-            className="mobile-nav-item mt-8 w-full bg-text px-6 py-4 text-sm font-medium text-text-light transition-colors hover:bg-accent"
-          >
-            Start a project
-          </button>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        <ul className="mobile-nav-item flex items-center gap-6 pt-8">
-          {SOCIALS.map((social) => (
-            <li key={social.label}>
-              <a
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.label}
-                className="block text-text-muted transition-colors hover:text-text"
-              >
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path d={social.path} />
-                </svg>
-              </a>
-            </li>
-          ))}
-        </ul>
+        <div className="mobile-nav-item">
+          <p className="text-xs font-light tracking-wide">Contact</p>
+          <a href={`mailto:${EMAIL}`} className="mt-3 block text-sm">
+            {EMAIL}
+          </a>
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-1 block text-sm"
+          >
+            {WHATSAPP_DISPLAY}
+          </a>
+        </div>
+
+        <div className="mobile-nav-item flex flex-col gap-1 border-t border-dark/15 pt-6 text-xs font-light sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+          <p>&copy; {new Date().getFullYear()} KovaLab. All rights reserved.</p>
+          <p>Nairobi, Kenya</p>
+        </div>
       </div>
     </div>
   );

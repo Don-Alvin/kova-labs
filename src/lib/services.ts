@@ -6,7 +6,7 @@ export type ServiceContent = {
   quoteHint: string;
   included: { heading: string; body: string }[];
   process: { number: string; title: string; description: string }[];
-  relatedWork: { name: string; tag: string; url: string; domain: string }[];
+  relatedWork: { name: string; tag: string; url: string; domain: string; image: string }[];
 };
 
 export const SERVICES: Record<string, ServiceContent> = {
@@ -61,12 +61,14 @@ export const SERVICES: Record<string, ServiceContent> = {
         tag: "Corporate website",
         url: "https://gedoholdings.co.ke",
         domain: "gedoholdings.co.ke",
+        image: "/work/gedoholdings.png",
       },
       {
         name: "Lamona Realtors",
         tag: "Business website",
         url: "https://lamonarealtors.co.ke",
         domain: "lamonarealtors.co.ke",
+        image: "/work/lamonarealtors.png",
       },
     ],
   },
@@ -121,12 +123,14 @@ export const SERVICES: Record<string, ServiceContent> = {
         tag: "Business website",
         url: "https://wekaniweke.com",
         domain: "wekaniweke.com",
+        image: "/work/wekaniweke.png",
       },
       {
         name: "Three Mice Computers",
         tag: "E-commerce",
         url: "https://threemice.co.ke",
         domain: "threemice.co.ke",
+        image: "/work/threemicecomputers.png",
       },
     ],
   },
@@ -181,12 +185,14 @@ export const SERVICES: Record<string, ServiceContent> = {
         tag: "E-commerce",
         url: "https://threemice.co.ke",
         domain: "threemice.co.ke",
+        image: "/work/threemicecomputers.png",
       },
       {
         name: "Gedo Holdings",
         tag: "Corporate website",
         url: "https://gedoholdings.co.ke",
         domain: "gedoholdings.co.ke",
+        image: "/work/gedoholdings.png",
       },
     ],
   },

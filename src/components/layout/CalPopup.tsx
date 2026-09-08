@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { getCalApi } from "@calcom/embed-react";
+import { trackEvent } from "@/lib/analytics";
 
 const SQUARE_MARKER = "data-kovalab-square";
 
@@ -64,7 +65,22 @@ export const CalPopup = () => {
     const observer = new MutationObserver(squareOffShadowRoots);
     observer.observe(document.body, { childList: true, subtree: true });
 
-    return () => observer.disconnect();
+    // Every CTA that opens the popup carries calTrigger()'s data-cal-link
+    // attribute, so one delegated listener covers all of them ("Book a free
+    // call", the navbar/mobile-nav CTA, "Discuss your quote") without
+    // instrumenting each button individually.
+    const onClick = (event: MouseEvent) => {
+      const trigger = (event.target as HTMLElement | null)?.closest(
+        "[data-cal-link]"
+      );
+      if (trigger) trackEvent("cal_open", { page_path: window.location.pathname });
+    };
+    document.addEventListener("click", onClick);
+
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("click", onClick);
+    };
   }, []);
 
   return null;

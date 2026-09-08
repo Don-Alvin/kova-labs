@@ -45,6 +45,7 @@ next-env.d.ts
 /CLAUDE.md
 /AGENTS.md
 /implementation.*md
+/launch-checklist.*md
 
 # ai agent harness config
 /.claude/

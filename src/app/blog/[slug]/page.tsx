@@ -12,7 +12,9 @@ import {
   RELATED_POSTS_QUERY,
 } from "@/lib/sanity/queries";
 import type { Post, PostCard as PostCardType } from "@/lib/sanity/types";
+import { pageMetadata } from "@/lib/metadata";
 import { SITE_URL } from "@/lib/site";
+import { articleSchema, jsonLd } from "@/lib/structuredData";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -35,19 +37,16 @@ export const generateMetadata = async ({
 
   if (!post) return {};
 
-  return {
+  return pageMetadata({
+    path: `/blog/${post.slug}`,
     title: post.title,
     description: post.excerpt,
-    openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      type: "article",
-      publishedTime: post.publishedAt,
-      images: post.coverImage
-        ? [urlFor(post.coverImage).width(1200).height(630).url()]
-        : undefined,
-    },
-  };
+    type: "article",
+    publishedTime: post.publishedAt,
+    image: post.coverImage
+      ? urlFor(post.coverImage).width(1200).height(630).url()
+      : undefined,
+  });
 };
 
 export default async function BlogPostPage({ params }: Params) {
@@ -71,6 +70,21 @@ export default async function BlogPostPage({ params }: Params) {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd(
+          articleSchema({
+            title: post.title,
+            excerpt: post.excerpt,
+            path: `/blog/${post.slug}`,
+            publishedAt: post.publishedAt,
+            image: post.coverImage
+              ? urlFor(post.coverImage).width(1200).height(630).url()
+              : undefined,
+            authorName: post.author?.name,
+          })
+        )}
+      />
       {post.coverImage ? (
         <div className="relative h-[240px] w-full overflow-hidden border-b border-border bg-bg-warm lg:h-[440px]">
           <Image

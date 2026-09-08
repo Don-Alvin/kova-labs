@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { CtaBanner } from "@/components/home/CtaBanner";
+import { MarkPanel } from "@/components/shared/MarkPanel";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/about",
   title: "About",
   description:
     "KovaLab is a software solutions studio in Nairobi. Analytical thinking and technical skill, applied to websites that bring in customers.",
-};
+});
 
 const VALUES = [
   {
@@ -43,21 +46,18 @@ const STACK = [
 export default function AboutPage() {
   return (
     <>
-      <section className="border-b border-border">
-        <div className="shell grid grid-cols-1 items-center gap-12 px-6 py-16 md:px-12 md:py-24 lg:grid-cols-2 lg:gap-16">
+      <section className="ground-dark relative -mt-24">
+        <div className="shell relative z-10 grid grid-cols-1 items-center gap-12 px-6 pb-16 pt-40 md:px-12 md:pb-24 md:pt-48 lg:grid-cols-2 lg:gap-16">
           <div>
-            <h1 className="text-4xl font-extrabold leading-[1.05] tracking-[-0.04em] sm:text-5xl lg:text-6xl">
+            <h1 className="text-4xl font-extrabold leading-[1.05] tracking-[-0.04em] text-text-light sm:text-5xl lg:text-6xl">
               The studio behind the work
             </h1>
-            <p className="mt-8 max-w-[58ch] font-light leading-relaxed text-text-muted">
+            <p className="mt-8 max-w-[58ch] font-light leading-relaxed text-text-light/70">
               KovaLab is a small studio in Nairobi building websites, web
               applications, and data tools for businesses across East Africa.
             </p>
           </div>
-          <div
-            className="min-h-[280px] border border-border bg-bg-warm lg:min-h-[440px]"
-            aria-hidden="true"
-          />
+          <MarkPanel className="min-h-[280px] lg:min-h-[440px]" />
         </div>
       </section>
 
@@ -91,24 +91,20 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="border-b border-border bg-bg-warm">
-        <div className="shell px-6 py-16 md:px-12 md:py-24">
-          <h2 className="text-3xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-4xl">
+      <section className="ground-dark relative">
+        <div className="shell relative z-10 px-6 py-16 md:px-12 md:py-24">
+          <h2 className="text-3xl font-bold leading-[1.05] tracking-[-0.04em] text-text-light sm:text-4xl">
             How we work with you
           </h2>
 
-          <div className="mt-12 grid grid-cols-1 border border-border md:grid-cols-3">
-            {VALUES.map((value, index) => (
+          <div className="mt-12 grid grid-cols-1 gap-3 md:grid-cols-3">
+            {VALUES.map((value) => (
               <div
                 key={value.title}
-                className={`bg-bg p-8 md:p-10 ${
-                  index < VALUES.length - 1
-                    ? "border-b border-border md:border-b-0 md:border-r"
-                    : ""
-                }`}
+                className="glass-dark p-8 text-text-light md:p-10"
               >
                 <h3 className="text-xl font-semibold">{value.title}</h3>
-                <p className="mt-4 text-sm font-light leading-relaxed text-text-muted">
+                <p className="mt-4 text-sm font-light leading-relaxed text-text-light/60">
                   {value.description}
                 </p>
               </div>

@@ -1,10 +1,11 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { prefersReducedMotion } from "@/lib/animations";
-import { calTrigger } from "@/lib/cal";
+import { WhatsAppCTA } from "@/components/layout/WhatsAppCTA";
+import { trackEvent } from "@/lib/analytics";
 import { Minus, Plus } from "lucide-react";
 import {
   ANALYTICS,
@@ -12,6 +13,7 @@ import {
   FEATURES,
   SUPPORT_PLANS,
   WEBSITE_TYPES,
+  buildQuoteMessage,
   formatKES,
   type QuoteOption,
 } from "@/lib/quote";
@@ -79,6 +81,27 @@ export const QuoteEstimator = ({ initialType }: QuoteEstimatorProps = {}) => {
   const monthly =
     SUPPORT_PLANS.find((plan) => plan.id === support)?.price ?? 0;
 
+  const whatsappMessage = buildQuoteMessage({
+    websiteType,
+    extraPages,
+    features,
+    analytics,
+    support,
+    total: oneOffTotal,
+    monthly,
+  });
+
+  // Fires once per real change to the estimate, not on the initial mount:
+  // the ref starts false and flips true only after this effect has run
+  // once, so the first render (nothing chosen yet) never counts as "use".
+  const hasInteracted = useRef(false);
+  useEffect(() => {
+    if (hasInteracted.current) {
+      trackEvent("quote_estimator_use", { estimate_kes: oneOffTotal });
+    }
+    hasInteracted.current = true;
+  }, [websiteType, extraPages, features, analytics, support, oneOffTotal]);
+
   useGSAP(
     () => {
       if (!totalRef.current) return;
@@ -111,7 +134,7 @@ export const QuoteEstimator = ({ initialType }: QuoteEstimatorProps = {}) => {
   );
 
   return (
-    <section className="border-b border-border bg-bg-warm">
+    <section id="quote" className="scroll-mt-24 border-b border-border bg-bg-warm">
       <div className="shell px-6 py-16 md:px-12 md:py-24">
         <h2 className="text-3xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-4xl lg:text-5xl">
           See what your project will cost
@@ -301,13 +324,13 @@ export const QuoteEstimator = ({ initialType }: QuoteEstimatorProps = {}) => {
               </p>
             </div>
 
-            <button
-              type="button"
-              {...calTrigger()}
-              className="mt-6 w-full bg-accent px-6 py-4 text-sm font-medium text-dark transition-transform duration-300 hover:scale-105"
+            <WhatsAppCTA
+              message={whatsappMessage}
+              context="quote_estimator"
+              className="mt-6 block w-full bg-accent px-6 py-4 text-center text-sm font-medium text-dark transition-transform duration-300 hover:scale-105"
             >
-              Discuss your quote
-            </button>
+              Send my quote on WhatsApp
+            </WhatsAppCTA>
           </aside>
         </div>
       </div>
