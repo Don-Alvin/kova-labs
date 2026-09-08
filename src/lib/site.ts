@@ -3,7 +3,7 @@ export const SITE_URL = "https://kovalab.co.ke";
 export const EMAIL = "info@kovalab.co.ke";
 
 export const WHATSAPP_NUMBER =
-  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "254700000000";
+  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "254785629612";
 
 export const WHATSAPP_MESSAGE =
   "Hi, I'm interested in a website for my business";
