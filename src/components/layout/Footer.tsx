@@ -5,6 +5,8 @@ import {
   FOOTER_COMPANY,
   FOOTER_SERVICES,
   SOCIALS,
+  WHATSAPP_DISPLAY,
+  WHATSAPP_URL,
 } from "@/lib/site";
 
 export const Footer = () => (
@@ -67,6 +69,14 @@ export const Footer = () => (
         >
           {EMAIL}
         </a>
+        <a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 block text-sm text-text transition-colors hover:text-accent-text"
+        >
+          {WHATSAPP_DISPLAY}
+        </a>
         <ul className="mt-6 flex items-center gap-5">
           {SOCIALS.map((social) => (
             <li key={social.label}>
@@ -94,7 +104,7 @@ export const Footer = () => (
     </div>
 
     <div className="shell flex flex-col gap-2 border-t border-border px-6 py-6 text-xs text-text-muted md:flex-row md:items-center md:justify-between md:px-12">
-      <p>&copy; 2026 KovaLab. All rights reserved.</p>
+      <p>&copy; {new Date().getFullYear()} KovaLab. All rights reserved.</p>
       <p>Nairobi, Kenya</p>
     </div>
   </footer>
