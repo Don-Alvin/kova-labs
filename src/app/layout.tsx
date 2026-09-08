@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
   // Every other route sets its own via pageMetadata() in src/lib/metadata.ts.
   // This one covers the homepage, which has no metadata export of its own.
-  alternates: { canonical: "/" },
+  alternates: { canonical: SITE_URL },
   openGraph: {
     title: "KovaLab | Software Solutions Studio",
     description:

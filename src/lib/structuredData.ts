@@ -17,14 +17,16 @@ const PHONE = `+${WHATSAPP_NUMBER}`;
 
 /**
  * Organization + LocalBusiness, combined into one node since KovaLab is a
- * single local business, not a multi-location chain. Only confirmed facts
- * from PRODUCT.md go in here: no street address exists to publish, so it is
- * omitted rather than invented. Homepage only, per the standard convention
- * for this schema.
+ * single local business, not a multi-location chain. ProfessionalService is
+ * the more specific LocalBusiness subtype schema.org defines for a services
+ * business like this one. Only confirmed facts from PRODUCT.md go in here:
+ * no street address exists to publish, so it is omitted rather than
+ * invented; priceRange comes from the real quote estimator tiers. Homepage
+ * only, per the standard convention for this schema.
  */
 export const organizationSchema = () => ({
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": "ProfessionalService",
   "@id": `${SITE_URL}/#organization`,
   name: "KovaLab",
   url: SITE_URL,
@@ -32,6 +34,7 @@ export const organizationSchema = () => ({
   image: `${SITE_URL}/opengraph-image`,
   email: EMAIL,
   telephone: PHONE,
+  priceRange: "KES 10,000 - KES 50,000+",
   description:
     "Software solutions studio in Nairobi, Kenya, building fast websites and web apps for businesses across East Africa.",
   address: {
@@ -69,6 +72,7 @@ export const articleSchema = (input: {
   excerpt: string;
   path: string;
   publishedAt: string;
+  dateModified?: string;
   image?: string;
   authorName?: string;
 }) => ({
@@ -78,6 +82,7 @@ export const articleSchema = (input: {
   description: input.excerpt,
   url: `${SITE_URL}${input.path}`,
   datePublished: input.publishedAt,
+  dateModified: input.dateModified ?? input.publishedAt,
   ...(input.image ? { image: [input.image] } : {}),
   author: {
     "@type": input.authorName ? "Person" : "Organization",

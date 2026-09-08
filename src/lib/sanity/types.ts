@@ -15,6 +15,7 @@ export type PostCard = {
   excerpt: string;
   coverImage?: SanityImageSource & { alt?: string };
   publishedAt: string;
+  _updatedAt: string;
   readTime?: number;
   category?: { name: string; slug: string };
   author?: { name: string; role?: string };

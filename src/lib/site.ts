@@ -1,4 +1,4 @@
-export const SITE_URL = "https://kovalab.co.ke";
+export const SITE_URL = "https://www.kovalab.co.ke";
 
 export const EMAIL = "info@kovalab.co.ke";
 
