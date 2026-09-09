@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
+import { SeoPreview } from "../components/SeoPreview";
 
 const richText = [
   defineArrayMember({
@@ -63,6 +64,14 @@ export const project = defineType({
       title: "Client",
       type: "string",
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "seoPreview",
+      title: "SEO preview",
+      description:
+        "How this project will look in a Google search result. Not a stored value, reads live from the fields above.",
+      type: "string",
+      components: { input: () => <SeoPreview basePath="/work/" /> },
     }),
     defineField({ name: "challenge", title: "The challenge", type: "array", of: richText }),
     defineField({ name: "solution", title: "The solution", type: "array", of: richText }),

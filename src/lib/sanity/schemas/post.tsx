@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
+import { SeoPreview } from "../components/SeoPreview";
 
 export const post = defineType({
   name: "post",
@@ -71,6 +72,14 @@ export const post = defineType({
       title: "Read time (minutes)",
       type: "number",
       validation: (rule) => rule.min(1),
+    }),
+    defineField({
+      name: "seoPreview",
+      title: "SEO preview",
+      description:
+        "How this post will look in a Google search result. Not a stored value, reads live from the fields above.",
+      type: "string",
+      components: { input: () => <SeoPreview basePath="/blog/" /> },
     }),
     defineField({
       name: "body",
