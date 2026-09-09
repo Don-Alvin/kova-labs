@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Logo } from "@/components/Logo";
@@ -14,6 +14,7 @@ const SOLID_NAV_PATHS = ["/privacy", "/quote"];
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const closeMenu = useCallback(() => setMenuOpen(false), []);
   const pathname = usePathname();
   const forceSolid = SOLID_NAV_PATHS.includes(pathname);
 
@@ -102,6 +103,7 @@ export const Navbar = () => {
             onClick={() => setMenuOpen(true)}
             aria-label="Open menu"
             aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
             className="p-2 text-text-light md:hidden"
           >
             <svg
@@ -119,7 +121,7 @@ export const Navbar = () => {
         </div>
       </header>
 
-      <MobileNav open={menuOpen} onClose={() => setMenuOpen(false)} />
+      <MobileNav open={menuOpen} onClose={closeMenu} />
     </>
   );
 };

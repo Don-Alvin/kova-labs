@@ -18,15 +18,22 @@ export async function POST(request: Request) {
     );
   }
 
-  const { ok } = rateLimit(`newsletter:${getClientIp(request)}`, {
-    limit: 5,
-    windowMs: 60_000,
-  });
-
-  if (!ok) {
+  try {
+    const { ok, retryAfter } = await rateLimit(`newsletter:${getClientIp(request)}`, {
+      limit: 5,
+      windowMs: 60_000,
+    });
+    if (!ok) {
+      return NextResponse.json(
+        { message: "Too many attempts. Please try again in a minute." },
+        { status: 429, headers: { "Retry-After": String(retryAfter) } }
+      );
+    }
+  } catch {
+    console.error("Newsletter rate-limit service is unavailable.");
     return NextResponse.json(
-      { message: "Too many attempts. Please try again in a minute." },
-      { status: 429 }
+      { message: "Subscriptions are temporarily unavailable. Please try again shortly." },
+      { status: 503, headers: { "Retry-After": "60" } }
     );
   }
 
@@ -55,7 +62,7 @@ export async function POST(request: Request) {
     });
   }
 
-  if (typeof email !== "string" || !EMAIL_PATTERN.test(email.trim())) {
+  if (typeof email !== "string" || email.trim().length > 254 || !EMAIL_PATTERN.test(email.trim())) {
     return NextResponse.json(
       { message: "Please enter a valid email address." },
       { status: 400 }
@@ -72,6 +79,7 @@ export async function POST(request: Request) {
       `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members/${subscriberHash}`,
       {
         method: "PUT",
+        signal: AbortSignal.timeout(10_000),
         headers: {
           "Content-Type": "application/json",
           Authorization: `Basic ${Buffer.from(`anystring:${API_KEY}`).toString(

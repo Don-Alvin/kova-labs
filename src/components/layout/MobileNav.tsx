@@ -3,8 +3,6 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { gsap } from "gsap";
-import { useGSAP } from "@gsap/react";
 import { ArrowUpRight, X } from "lucide-react";
 import {
   EMAIL,
@@ -20,53 +18,54 @@ type MobileNavProps = {
 };
 
 export const MobileNav = ({ open, onClose }: MobileNavProps) => {
-  const panel = useRef<HTMLDivElement>(null);
+  const panel = useRef<HTMLDialogElement>(null);
   const pathname = usePathname();
 
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    const dialog = panel.current;
+    if (!dialog || !open) return;
+    const desktop = window.matchMedia("(min-width: 768px)");
+    if (desktop.matches) {
+      onClose();
+      return;
+    }
+    const previousFocus = document.activeElement;
+    const previousOverflow = document.body.style.overflow;
+    dialog.showModal();
+    dialog.querySelector<HTMLButtonElement>("button")?.focus();
+    document.body.style.overflow = "hidden";
+    const onResize = () => { if (desktop.matches) onClose(); };
+    desktop.addEventListener("change", onResize);
     return () => {
-      document.body.style.overflow = "";
+      desktop.removeEventListener("change", onResize);
+      dialog.close();
+      document.body.style.overflow = previousOverflow;
+      if (previousFocus instanceof HTMLElement) previousFocus.focus();
     };
-  }, [open]);
-
-  useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
-    };
-
-    if (open) window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
   }, [open, onClose]);
 
-  useGSAP(
-    () => {
-      if (!open || !panel.current) return;
-
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-      tl.fromTo(
-        panel.current,
-        { xPercent: 100 },
-        { xPercent: 0, duration: 0.4 }
-      ).fromTo(
-        ".mobile-nav-item",
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.4, stagger: 0.05 },
-        "-=0.15"
-      );
-    },
-    { dependencies: [open], scope: panel }
-  );
-
-  if (!open) return null;
-
   return (
-    <div
+    <dialog
+      id="mobile-menu"
       ref={panel}
-      role="dialog"
-      aria-modal="true"
       aria-label="Site menu"
-      className="fixed inset-0 z-50 flex flex-col overflow-y-auto bg-accent text-dark md:hidden"
+      onCancel={(event) => { event.preventDefault(); onClose(); }}
+      onKeyDown={(event) => {
+        if (event.key !== "Tab") return;
+        const controls = Array.from(event.currentTarget.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )).filter((element) => element.getClientRects().length > 0);
+        const first = controls[0];
+        const last = controls.at(-1);
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last?.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first?.focus();
+        }
+      }}
+      className="mobile-menu fixed inset-0 m-0 h-dvh max-h-none w-full max-w-none flex-col overflow-y-auto border-0 bg-accent p-0 text-dark"
     >
       {/* The wordmark, blown up and rotated into a strip along the left
           edge: background typography rather than a framed logo, echoing
@@ -157,6 +156,6 @@ export const MobileNav = ({ open, onClose }: MobileNavProps) => {
           <p>Nairobi, Kenya</p>
         </div>
       </div>
-    </div>
+    </dialog>
   );
 };

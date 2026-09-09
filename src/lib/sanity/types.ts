@@ -35,7 +35,6 @@ export type ProjectCard = {
   category: string;
   client: string;
   tags?: string[];
-  featured?: boolean;
   publishedAt: string;
 };
 

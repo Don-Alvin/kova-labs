@@ -1,51 +1,17 @@
 "use client";
 
-import { useRef } from "react";
-import { gsap } from "gsap";
-import { useGSAP } from "@gsap/react";
-import { prefersReducedMotion } from "@/lib/animations";
 import { WHATSAPP_URL } from "@/lib/site";
 import { trackEvent } from "@/lib/analytics";
 
 export const WhatsAppButton = () => {
-  const link = useRef<HTMLAnchorElement>(null);
-
-  useGSAP(() => {
-    if (!link.current) return;
-
-    if (prefersReducedMotion()) {
-      gsap.set(link.current, { opacity: 1, y: 0 });
-      return;
-    }
-
-    gsap.to(link.current, {
-      opacity: 1,
-      y: 0,
-      duration: 0.5,
-      delay: 2,
-      ease: "power3.out",
-      onComplete: () => {
-        gsap.to(link.current, {
-          scale: 1.08,
-          duration: 0.35,
-          repeat: -1,
-          repeatDelay: 5,
-          yoyo: true,
-          ease: "power2.inOut",
-        });
-      },
-    });
-  }, []);
-
   return (
     <a
-      ref={link}
       href={WHATSAPP_URL}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp"
       onClick={() => trackEvent("whatsapp_click", { context: "floating_button" })}
-      className="fixed bottom-6 right-6 z-[60] flex h-14 w-14 translate-y-6 items-center justify-center bg-whatsapp text-dark opacity-0"
+      className="whatsapp-float fixed bottom-6 right-6 z-[60] flex h-14 w-14 items-center justify-center bg-whatsapp text-dark"
     >
       <svg
         width="26"

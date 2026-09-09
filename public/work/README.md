@@ -1,22 +1,17 @@
 # Project screenshots
 
-Website screenshots for the homepage work section and the service pages.
-Files are referenced by exact path from `src/components/home/Work.tsx`, so if
-you rename one, update it there too.
+The homepage's four project panels are curated in `src/components/home/Work.tsx`.
+Each project uses three WebP screenshots in proportional CSS device frames:
 
-Current files:
+- `<name>.webp`: desktop screenshot, up to 1400px wide.
+- `<name>-tablet.webp`: actual tablet layout at 820 x 1100.
+- `<name>-mobile.webp`: actual mobile layout at 390 x 844.
 
-    gedoholdings.png           featured, full width
-    lamonarealtors.png
-    wekaniweke.png
-    threemicecomputers.png
+Names: `gedoholdings`, `lamonarealtors`, `threemicecomputers`. The Wekaniweke
+assets are retained locally while that project is temporarily hidden.
+Capture the live page at the appropriate viewport; don't stretch a desktop image
+into a phone frame. Use WebP around quality 82-86, retain clear text, and check all
+three frames after changing an image. Next Image generates responsive delivery sizes.
 
-Guidelines:
-
-- Around 1400px wide, PNG or JPG. Next.js serves AVIF and WebP automatically.
-- Landscape, roughly 2:1. Cards crop with object-cover from the centre, so a
-  portrait or square image loses its sides.
-- Screenshot the live site at desktop width, no browser chrome.
-
-Case studies published through Sanity do not use this folder. Upload those
-images inside the Studio at /studio; they are served from cdn.sanity.io.
+Case studies on `/work` use separate images uploaded through Sanity Studio. Editing
+those case studies does not replace the curated homepage mockups.

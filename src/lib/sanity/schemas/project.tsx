@@ -101,12 +101,6 @@ export const project = defineType({
       ],
     }),
     defineField({
-      name: "featured",
-      title: "Featured on the homepage",
-      type: "boolean",
-      initialValue: false,
-    }),
-    defineField({
       name: "publishedAt",
       title: "Published at",
       type: "datetime",

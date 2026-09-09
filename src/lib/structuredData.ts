@@ -30,7 +30,7 @@ export const organizationSchema = () => ({
   "@id": `${SITE_URL}/#organization`,
   name: "KovaLab",
   url: SITE_URL,
-  logo: `${SITE_URL}/logos/kovalab-mark.png`,
+  logo: `${SITE_URL}/logos/kovalab-mark.webp`,
   image: `${SITE_URL}/opengraph-image`,
   email: EMAIL,
   telephone: PHONE,
