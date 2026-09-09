@@ -1,7 +1,7 @@
 "use client";
 
 import Script from "next/script";
-import { useConsent } from "./CookieConsent";
+import { useConsent } from "@/lib/consent";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 

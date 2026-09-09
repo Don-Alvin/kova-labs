@@ -8,12 +8,12 @@ type LogoProps = {
   className?: string;
 };
 
-/** Source lockups are 2172x724, so the aspect ratio is exactly 3:1. */
-const ASPECT_RATIO = 2172 / 724;
+/** Optimized lockups are 600 x 200, preserving the original 3:1 ratio. */
+const ASPECT_RATIO = 3;
 
 const SOURCES = {
-  light: "/logos/kovalab-light-bg.png",
-  dark: "/logos/kovalab-dark-bg.png",
+  light: "/logos/kovalab-light-bg.webp",
+  dark: "/logos/kovalab-dark-bg.webp",
 } as const;
 
 /**

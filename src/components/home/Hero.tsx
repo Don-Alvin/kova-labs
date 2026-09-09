@@ -42,19 +42,19 @@ export const Hero = () => {
 
       const tl = gsap.timeline({ defaults: { ease: ENTRY_EASE } });
 
-      tl.to(".hero-line", {
-        y: 0,
+      tl.from(".hero-line", {
+        yPercent: 110,
         duration: 1.1,
         stagger: 0.1,
         delay: 0.2,
       })
-        .to(".hero-description", { opacity: 1, y: 0, duration: 0.8 }, "-=0.7")
-        .to(".hero-ctas", { opacity: 1, y: 0, duration: 0.8 }, "-=0.6")
-        .to(
+        .from(".hero-description", { opacity: 0, y: 20, duration: 0.8 }, "-=0.7")
+        .from(".hero-ctas", { opacity: 0, y: 20, duration: 0.8 }, "-=0.6")
+        .from(
           ".hero-stat",
           {
-            opacity: 1,
-            y: 0,
+            opacity: 0,
+            y: 20,
             duration: 0.8,
             stagger: 0.08,
             onComplete: () => {
@@ -65,8 +65,8 @@ export const Hero = () => {
           },
           "-=0.6"
         )
-        .to(".hero-contact-card", { opacity: 1, y: 0, duration: 0.8 }, "-=0.6")
-        .to(".hero-badge", { opacity: 1, duration: 0.8 }, "-=0.4");
+        .from(".hero-contact-card", { opacity: 0, y: 20, duration: 0.8 }, "-=0.6")
+        .from(".hero-badge", { opacity: 0, duration: 0.8 }, "-=0.4");
 
       counters.forEach((cell) => {
         const target = Number(cell.dataset.value ?? 0);
@@ -99,7 +99,7 @@ export const Hero = () => {
         className="pointer-events-none absolute left-1/2 top-1/2 h-[70vh] w-[70vh] max-w-none -translate-x-1/2 -translate-y-1/2 select-none opacity-[0.06] blur-[1px]"
       >
         <Image
-          src="/logos/kovalab-mark.png"
+          src="/logos/kovalab-mark.webp"
           alt=""
           fill
           className="object-contain"
@@ -158,7 +158,7 @@ export const Hero = () => {
                 >
                   <dd className="text-2xl font-semibold tracking-[-0.04em] text-text-light">
                     <span className="stat-value" data-value={stat.value}>
-                      0
+                      {stat.value}
                     </span>
                     <span className="text-accent">{stat.suffix}</span>
                   </dd>

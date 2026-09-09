@@ -56,7 +56,6 @@ const PROJECT_CARD_FIELDS = groq`
   category,
   client,
   tags,
-  featured,
   publishedAt
 `;
 
@@ -86,4 +85,12 @@ export const NEXT_PROJECT_QUERY = groq`
 
 export const PROJECT_SLUGS_QUERY = groq`
   *[_type == "project" && defined(slug.current)].slug.current
+`;
+
+export const SITEMAP_CONTENT_QUERY = groq`
+  *[_type in ["post", "project"] && defined(slug.current)] {
+    _type,
+    "slug": slug.current,
+    _updatedAt
+  }
 `;

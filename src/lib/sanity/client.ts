@@ -1,5 +1,5 @@
 import { createClient, type SanityClient } from "next-sanity";
-import imageUrlBuilder from "@sanity/image-url";
+import { createImageUrlBuilder } from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url";
 
 export const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "";
@@ -15,7 +15,7 @@ export const sanityClient: SanityClient | null = projectId
   ? createClient({ projectId, dataset, apiVersion, useCdn: true })
   : null;
 
-const builder = sanityClient ? imageUrlBuilder(sanityClient) : null;
+const builder = sanityClient ? createImageUrlBuilder(sanityClient) : null;
 
 /**
  * Only reachable once content exists, which requires a configured client, so
@@ -31,8 +31,9 @@ export const urlFor = (source: SanityImageSource) => {
 };
 
 /**
- * Wraps a query so an unconfigured, unreachable, or empty dataset renders an
- * empty state instead of failing the page or the build.
+ * An unconfigured local setup may use the caller's empty state. A failed
+ * request must throw so ISR retains the last successful page instead of
+ * replacing it with empty content or a false 404.
  */
 export const sanityFetch = async <T>(
   query: string,
@@ -46,6 +47,7 @@ export const sanityFetch = async <T>(
       next: { revalidate: 60 },
     });
   } catch {
-    return fallback;
+    console.error("Sanity content request failed", { projectId, dataset });
+    throw new Error("Content is temporarily unavailable. Please try again.");
   }
 };

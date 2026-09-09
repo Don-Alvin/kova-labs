@@ -4,7 +4,6 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { CookieConsent } from "@/components/layout/CookieConsent";
-import { CalPopup } from "@/components/layout/CalPopup";
 import { Analytics } from "@/components/layout/Analytics";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
@@ -53,15 +52,6 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${montserrat.variable} h-full antialiased`}>
-      <head>
-        {/* Runs before paint. Entry animations only hide content once this
-            confirms JS is alive, so a script failure cannot blank the page. */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: "document.documentElement.classList.add('js')",
-          }}
-        />
-      </head>
       <body className="flex min-h-full flex-col">
         <a
           href="#main"
@@ -80,7 +70,6 @@ export default function RootLayout({
 
         <WhatsAppButton />
         <CookieConsent />
-        <CalPopup />
         <Analytics />
       </body>
     </html>

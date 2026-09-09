@@ -22,13 +22,10 @@
   --glass-dark: rgba(250, 250, 247, 0.05);
   --glass-dark-strong: rgba(250, 250, 247, 0.09);
   --glass-dark-border: rgba(250, 250, 247, 0.1);
-  --glass-light: rgba(250, 250, 247, 0.55);
-  --glass-light-border: rgba(20, 20, 20, 0.08);
   --blur-glass: 12px;
   --blur-nav: 20px;
 
-  /* Depth. The flat doctrine is retired: shadows now carry elevation, always
-     with an offset and a soft blur, never a zero-offset halo. */
+  /* Shared elevation tokens for existing navigation and cards. */
   --shadow-glass: 0 24px 60px -20px rgba(12, 12, 12, 0.45);
   --shadow-lift: 0 16px 40px -16px rgba(12, 12, 12, 0.3);
 
@@ -52,23 +49,18 @@
   --color-whatsapp: var(--whatsapp);
   --color-glass-dark: var(--glass-dark);
   --color-glass-dark-border: var(--glass-dark-border);
-  --color-glass-light: var(--glass-light);
-  --color-glass-light-border: var(--glass-light-border);
 
   --font-sans: var(--font-montserrat);
 }
 
-/* The one rule the glass rework does not touch. */
+/* Square corners throughout the interface. */
 *,
 *::before,
 *::after {
   border-radius: 0;
 }
 
-/* Reveals translate on the x axis (revealOnScroll "left" and "right" start at
-   60px), which pushes content past the right edge mid-animation and can flash a
-   horizontal scrollbar on narrow screens. `clip` stops that without creating a
-   scroll container, so the sticky navbar keeps working; `hidden` would break it. */
+/* Clip decorative overflow without creating a scroll container. */
 html,
 body {
   overflow-x: clip;
@@ -114,20 +106,6 @@ body {
     -webkit-backdrop-filter: blur(var(--blur-glass));
   }
 
-  .glass-dark-strong {
-    background: var(--glass-dark-strong);
-    backdrop-filter: blur(var(--blur-glass));
-    -webkit-backdrop-filter: blur(var(--blur-glass));
-    border: 1px solid var(--glass-dark-border);
-  }
-
-  .glass-light {
-    background: var(--glass-light);
-    backdrop-filter: blur(var(--blur-glass));
-    -webkit-backdrop-filter: blur(var(--blur-glass));
-    border: 1px solid var(--glass-light-border);
-  }
-
   /* The floating bar is always dark, on every ground. Light glass over paper
      left it near invisible, and a bar that changes identity per page reads as
      two different navbars. 0.8 alpha keeps links at 6.6:1 even over paper. */
@@ -151,18 +129,13 @@ body {
       var(--dark);
   }
 
-  .ground-dark::after,
-  .grain::after {
+  .ground-dark::after {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
     opacity: 0.15;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
-  }
-
-  .grain {
-    position: relative;
   }
 }
 
@@ -179,17 +152,82 @@ body {
   }
 }
 
-/* Hidden start states are gated on the `js` class, which an inline script in
-   the document head sets before first paint. Without JS, or if GSAP fails to
-   load, nothing is hidden and the page reads as plain static content. */
-.js .reveal,
-.js .hero-fade,
-.js .hero-badge {
-  opacity: 0;
+/* Proportional device frames keep every screen visible on narrow layouts. */
+.project-showcase {
+  display: grid;
+  align-items: center;
+  gap: 24px;
+  overflow: hidden;
+  padding: 32px 24px 20px;
+  background: var(--bg-warm);
+  border: 1px solid var(--border);
+  color: var(--text);
 }
-
-.js .hero-fade {
-  transform: translateY(20px);
+.project-showcase:nth-child(even) {
+  background: var(--dark);
+  border-color: var(--border-dark);
+  color: var(--text-light);
+}
+.project-eyebrow { color: var(--accent-text); }
+.project-description { color: var(--text-muted); }
+.project-link { border-color: currentColor; }
+.project-showcase:nth-child(even) .project-eyebrow { color: var(--accent); }
+.project-showcase:nth-child(even) .project-description { color: var(--text-muted-dark); }
+.project-showcase:nth-child(even) .project-tag { border-color: var(--border-dark); }
+.project-copy { min-width: 0; }
+.project-tag {
+  border: 1px solid var(--border);
+  padding: 5px 9px;
+  font-size: 9px;
+  line-height: 1.3;
+}
+.project-devices {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.48;
+  min-width: 0;
+  isolation: isolate;
+}
+.project-laptop { position: absolute; width: 89%; left: 7%; top: 9%; }
+.project-laptop-lid {
+  position: relative;
+  background: var(--dark-card);
+  border: 2px solid var(--text-muted-dark);
+  padding: 3.2% 1.5% 1.5%;
+}
+.project-camera {
+  position: absolute; width: 3px; height: 3px;
+  background: var(--text-muted-dark); left: 50%; top: 2.5%;
+}
+.project-desktop-screen { position: relative; aspect-ratio: 1.9; overflow: hidden; background: var(--bg); }
+.project-laptop-base {
+  position: relative; margin-left: -6%; width: 112%; height: 8px;
+  background: var(--text-muted-dark);
+}
+.project-laptop-base::after {
+  content: ""; position: absolute; left: 41%; top: 0; width: 18%; height: 3px;
+  background: var(--text-muted);
+}
+.project-tablet {
+  position: absolute; left: 0; bottom: 6%; width: 33%; padding: 1.1%;
+  background: var(--dark-card); border: 1px solid var(--text-muted-dark);
+}
+.project-tablet-screen { position: relative; aspect-ratio: 820 / 1100; overflow: hidden; background: var(--bg); }
+.project-phone {
+  position: absolute; right: 1%; bottom: 0; width: 19%; padding: 1%;
+  background: var(--dark-card); border: 1px solid var(--text-muted-dark);
+}
+.project-phone-screen { position: relative; aspect-ratio: 390 / 844; overflow: hidden; background: var(--bg); }
+.project-phone-speaker {
+  position: absolute; top: 3%; left: 35%; width: 30%; height: 3%; background: var(--dark-card); z-index: 1;
+}
+@media (min-width: 768px) {
+  .project-showcase { grid-template-columns: 1fr 1.45fr; gap: 32px; min-height: 390px; padding: 40px; }
+  .project-showcase:nth-child(even) { grid-template-columns: 1.45fr 1fr; }
+  .project-devices { align-self: center; }
+}
+@media (min-width: 1024px) {
+  .project-showcase { min-height: 440px; padding: 44px 48px; gap: 48px; }
 }
 
 /* Hero headline lines start below their mask and slide up on load. */
@@ -199,10 +237,6 @@ body {
 
 .hero-line {
   display: block;
-}
-
-.js .hero-line {
-  transform: translateY(110%);
 }
 
 /* The "scroll to explore" badge: circular text spins slowly, the arrow at
@@ -218,14 +252,6 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .js .reveal,
-  .js .hero-fade,
-  .js .hero-line,
-  .js .hero-badge {
-    opacity: 1;
-    transform: none;
-  }
-
   *,
   *::before,
   *::after {
@@ -235,3 +261,13 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* Native disclosure and modal behavior work without animation libraries. */
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item[open] .faq-icon { transform: rotate(135deg); }
+.mobile-menu[open] { display: flex; animation: menu-enter 0.25s ease-out; }
+.mobile-menu::backdrop { background: var(--dark); }
+.consent-banner, .whatsapp-float { animation: lift-in 0.35s var(--ease-entry); }
+@keyframes menu-enter { from { transform: translateX(100%); } to { transform: none; } }
+@keyframes lift-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+@media (min-width: 768px) { .mobile-menu[open] { display: none; } }

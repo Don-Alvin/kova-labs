@@ -18,7 +18,7 @@ export const MarkPanel = ({ className = "" }: MarkPanelProps) => (
     className={`relative flex items-center justify-center overflow-hidden border border-border-dark bg-dark-card ${className}`}
   >
     <Image
-      src="/logos/kovalab-mark.png"
+      src="/logos/kovalab-mark.webp"
       alt=""
       width={300}
       height={300}
