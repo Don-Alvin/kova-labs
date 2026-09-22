@@ -103,10 +103,8 @@ const components: PortableTextComponents = {
     table: ({ value }) => {
       const table = value as PortableTextTable;
       const rows = Array.isArray(table.rows) ? table.rows : [];
-      const headerRows = Math.max(
-        0,
-        Math.min(Number.isFinite(table.headerRows) ? table.headerRows : 0, rows.length)
-      );
+      const headerRowCount = typeof table.headerRows === "number" ? table.headerRows : 0;
+      const headerRows = Math.max(0, Math.min(headerRowCount, rows.length));
       const renderCells = (row: TableRow, header: boolean) =>
         (row.cells ?? []).map((cell, cellIndex) => {
           const content = cell.value?.length ? (
