@@ -1,7 +1,8 @@
 import { ImageResponse } from "next/og";
+import { OG_LOGO_SRC } from "@/lib/og";
 
 export const runtime = "nodejs";
-export const alt = "KovaLab, software solutions studio, Kisumu";
+export const alt = "KovaLab, software solutions studio, Nairobi";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -40,47 +41,13 @@ export default async function OpengraphImage() {
           position: "relative",
         }}
       >
-        {/* The wordmark blown up as texture, the same motif the real hero
-            uses, so a shared link still feels like this site before anyone
-            has clicked through. */}
-        <div
-          style={{
-            position: "absolute",
-            fontSize: 420,
-            fontWeight: 800,
-            color: "#FAFAF7",
-            opacity: 0.05,
-            letterSpacing: -8,
-          }}
-        >
-          kova
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 24,
-          }}
-        >
-          <div style={{ display: "flex", gap: 6 }}>
-            <div style={{ width: 22, height: 96, background: "#FF4D00" }} />
-            <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-              <div style={{ width: 22, height: 44, background: "#FAFAF7" }} />
-              <div style={{ width: 22, height: 44, background: "#FAFAF7" }} />
-            </div>
-          </div>
-          <div
-            style={{
-              fontSize: 88,
-              fontWeight: 800,
-              color: "#FAFAF7",
-              letterSpacing: -2,
-            }}
-          >
-            kovalab
-          </div>
-        </div>
+        <img
+          src={OG_LOGO_SRC}
+          alt="KovaLab"
+          width="600"
+          height="200"
+          style={{ width: 600, height: 200, objectFit: "contain" }}
+        />
 
         <div
           style={{
@@ -90,7 +57,7 @@ export default async function OpengraphImage() {
             color: "#888888",
           }}
         >
-          Software solutions studio, Kisumu
+          Software solutions studio, Nairobi
         </div>
       </div>
     ),
