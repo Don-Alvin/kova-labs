@@ -4,11 +4,13 @@
  * doesn't even render the script tag until consent is "accepted", so this
  * silently does nothing rather than throwing in every other case.
  */
+import { readConsent } from "./consent";
+
 export const trackEvent = (
   name: string,
   params?: Record<string, string | number | boolean>
 ): void => {
-  if (typeof window === "undefined") return;
+  if (typeof window === "undefined" || readConsent() !== "accepted") return;
 
   const gtag = (window as { gtag?: (...args: unknown[]) => void }).gtag;
   gtag?.("event", name, params);

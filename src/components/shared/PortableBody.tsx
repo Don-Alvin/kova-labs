@@ -3,6 +3,16 @@ import { PortableText, type PortableTextComponents } from "next-sanity";
 import type { PortableTextBlock } from "next-sanity";
 import { urlFor } from "@/lib/sanity/client";
 
+type TableCell = { _key?: string; value?: PortableTextBlock[] };
+type TableRow = { _key?: string; cells?: TableCell[] };
+type PortableTextTable = { headerRows?: number; rows?: TableRow[] };
+
+const tableCellComponents: PortableTextComponents = {
+  block: {
+    normal: ({ children }) => <>{children}</>,
+  },
+};
+
 const components: PortableTextComponents = {
   block: {
     normal: ({ children }) => (
@@ -44,8 +54,8 @@ const components: PortableTextComponents = {
     link: ({ children, value }) => (
       <a
         href={value?.href}
-        target="_blank"
-        rel="noopener noreferrer"
+        target={value?.href?.startsWith("/") ? undefined : "_blank"}
+        rel={value?.href?.startsWith("/") ? undefined : "noopener noreferrer"}
         className="text-text underline underline-offset-4 transition-colors hover:text-accent-text"
       >
         {children}
@@ -90,6 +100,58 @@ const components: PortableTextComponents = {
           Watch the video
         </a>
       ) : null,
+    table: ({ value }) => {
+      const table = value as PortableTextTable;
+      const rows = Array.isArray(table.rows) ? table.rows : [];
+      const headerRows = Math.max(
+        0,
+        Math.min(Number.isFinite(table.headerRows) ? table.headerRows : 0, rows.length)
+      );
+      const renderCells = (row: TableRow, header: boolean) =>
+        (row.cells ?? []).map((cell, cellIndex) => {
+          const content = cell.value?.length ? (
+            <PortableText value={cell.value} components={tableCellComponents} />
+          ) : null;
+
+          return header ? (
+            <th
+              key={cell._key ?? cellIndex}
+              scope="col"
+              className="border border-border bg-bg-warm px-4 py-3 text-left text-sm font-semibold text-text"
+            >
+              {content}
+            </th>
+          ) : (
+            <td
+              key={cell._key ?? cellIndex}
+              className="border border-border px-4 py-3 align-top text-sm text-text-muted"
+            >
+              {content}
+            </td>
+          );
+        });
+
+      if (!rows.length) return null;
+
+      return (
+        <div className="my-8 overflow-x-auto">
+          <table className="w-full min-w-max border-collapse text-left">
+            {headerRows > 0 ? (
+              <thead>
+                {rows.slice(0, headerRows).map((row, rowIndex) => (
+                  <tr key={row._key ?? rowIndex}>{renderCells(row, true)}</tr>
+                ))}
+              </thead>
+            ) : null}
+            <tbody>
+              {rows.slice(headerRows).map((row, rowIndex) => (
+                <tr key={row._key ?? headerRows + rowIndex}>{renderCells(row, false)}</tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    },
   },
 };
 

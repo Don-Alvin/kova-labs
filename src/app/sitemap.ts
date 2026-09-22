@@ -1,3 +1,4 @@
+import { launchPost } from "@/lib/launchPost";
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
 import { SERVICE_SLUGS } from "@/lib/services";
@@ -21,14 +22,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     _type: "post" | "project"; slug: string; _updatedAt: string;
   }[]>(SITEMAP_CONTENT_QUERY, {}, []);
 
+  if (!content.some(entry => entry._type === "post" && entry.slug === launchPost.slug)) content.push({ _type: "post", slug: launchPost.slug, _updatedAt: launchPost._updatedAt });
+
   return [
     ...STATIC_ROUTES.map((route) => ({
       url: `${SITE_URL}${route.path}`,
       priority: route.priority,
+      ...(route.path !== "/privacy" ? { lastModified: new Date("2026-09-22T06:00:00Z") } : {}),
     })),
     ...SERVICE_SLUGS.map((slug) => ({
       url: `${SITE_URL}/services/${slug}`,
       priority: 0.8,
+      lastModified: new Date("2026-09-22T06:00:00Z"),
     })),
     ...content.map((entry) => ({
       url: `${SITE_URL}/${entry._type === "post" ? "blog" : "work"}/${entry.slug}`,

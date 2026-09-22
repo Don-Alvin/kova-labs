@@ -16,7 +16,7 @@ export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURICo
 export const waLink = (message: string) =>
   `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
-/** "254703287601" -> "+254 703 287 601", for display rather than dialing. */
+/** "254785629612" -> "+254 785 629 612", for display rather than dialing. */
 export const WHATSAPP_DISPLAY = `+${WHATSAPP_NUMBER.slice(
   0,
   3
@@ -30,16 +30,16 @@ export const CAL_LINK = process.env.NEXT_PUBLIC_CALCOM_LINK ?? "";
 
 export const NAV_LINKS = [
   { label: "Work", href: "/work" },
-  { label: "Services", href: "/services/web-development" },
+  { label: "Services", href: "/services/website-design" },
   { label: "About", href: "/about" },
   { label: "Blog", href: "/blog" },
 ] as const;
 
 export const FOOTER_SERVICES = [
-  { label: "Web development", href: "/services/web-development" },
-  { label: "UI/UX design", href: "/services/ui-ux-design" },
-  { label: "Data & analytics", href: "/services/data-analytics" },
-  { label: "E-commerce", href: "/services/web-development" },
+  { label: "Website design", href: "/services/website-design" },
+  { label: "Web applications", href: "/services/web-applications" },
+  { label: "Custom software", href: "/services/custom-software" },
+  { label: "SEO setup", href: "/services/seo-setup" },
 ] as const;
 
 export const FOOTER_COMPANY = [

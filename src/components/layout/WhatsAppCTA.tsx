@@ -28,7 +28,7 @@ export const WhatsAppCTA = ({
     target="_blank"
     rel="noopener noreferrer"
     className={className}
-    onClick={() => trackEvent("whatsapp_click", { context })}
+    onClick={() => trackEvent(context === "quote_estimator" ? "quote_whatsapp_clicked" : "contact_whatsapp_clicked", { context })}
   >
     {children}
   </a>

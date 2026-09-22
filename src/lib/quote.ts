@@ -7,8 +7,8 @@ export type QuoteOption = {
 export const WEBSITE_TYPES: QuoteOption[] = [
   {
     id: "static",
-    label: "Static website (up to 4 pages, WhatsApp/email form)",
-    price: 10000,
+    label: "Static website (up to 3 pages, WhatsApp/email form)",
+    price: 15000,
   },
   {
     id: "business",
@@ -56,7 +56,7 @@ export const SUPPORT_PLANS: QuoteOption[] = [
 ];
 
 export const formatKES = (value: number): string =>
-  `KES ${value.toLocaleString("en-KE")}`;
+  `KSh ${value.toLocaleString("en-KE")}`;
 
 /**
  * Builds the WhatsApp message from the estimator's selections, so the

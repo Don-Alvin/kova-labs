@@ -7,7 +7,7 @@ export const metadata: Metadata = pageMetadata({
   path: "/contact",
   title: "Contact",
   description:
-    "Book a free call with KovaLab, or reach us on WhatsApp and email. Based in Nairobi, working across East Africa.",
+    "Book a free call with KovaLab, or reach us on WhatsApp and email. Based in Kisumu, working across East Africa.",
 });
 
 export default function ContactPage() {
@@ -60,7 +60,7 @@ export default function ContactPage() {
               <h2 className="text-xs font-light tracking-wide text-text-muted">
                 Location
               </h2>
-              <p className="mt-3 text-sm text-text">Nairobi, Kenya</p>
+              <p className="mt-3 text-sm text-text">Kisumu, Kenya</p>
               <p className="mt-1 text-sm text-text-muted">
                 Working with clients across East Africa, remotely.
               </p>

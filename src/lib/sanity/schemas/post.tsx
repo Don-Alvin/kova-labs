@@ -85,6 +85,18 @@ export const post = defineType({
       name: "body",
       title: "Body",
       type: "array",
+      components: {
+        portableText: {
+          plugins: (props) =>
+            props.renderDefault({
+              ...props,
+              plugins: {
+                ...props.plugins,
+                table: { enabled: true },
+              },
+            }),
+        },
+      },
       of: [
         defineArrayMember({
           type: "block",
@@ -103,6 +115,7 @@ export const post = defineType({
             defineField({ name: "caption", title: "Caption", type: "string" }),
           ],
         }),
+        defineArrayMember({ type: "table" }),
         defineArrayMember({
           type: "object",
           name: "codeBlock",

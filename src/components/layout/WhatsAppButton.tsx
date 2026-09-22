@@ -10,7 +10,7 @@ export const WhatsAppButton = () => {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp"
-      onClick={() => trackEvent("whatsapp_click", { context: "floating_button" })}
+      onClick={() => trackEvent("contact_whatsapp_clicked", { context: "floating_button" })}
       className="whatsapp-float fixed bottom-6 right-6 z-[60] flex h-14 w-14 items-center justify-center bg-whatsapp text-dark"
     >
       <svg

@@ -4,14 +4,14 @@ import { ArrowRight, PenLine, Settings, Zap } from "lucide-react";
 const SERVICES = [
   {
     number: "01",
-    title: "Web development",
-    href: "/services/web-development",
+    title: "Website design",
+    href: "/services/website-design",
   },
-  { number: "02", title: "UI/UX design", href: "/services/ui-ux-design" },
+  { number: "02", title: "Web applications", href: "/services/web-applications" },
   {
-    number: "03",
-    title: "Data & analytics",
-    href: "/services/data-analytics",
+    number: "04",
+    title: "SEO setup",
+    href: "/services/seo-setup",
   },
 ];
 
@@ -19,7 +19,7 @@ const POINTS = [
   {
     Icon: Zap,
     title: "Built for speed",
-    description: "Loads in under 2 seconds.",
+    description: "Lean pages built for mobile connections.",
   },
   {
     Icon: PenLine,
@@ -44,7 +44,7 @@ export const Capabilities = () => {
   const [webDevelopment, uiUxDesign, dataAnalytics] = SERVICES;
 
   return (
-    <section className="ground-dark relative">
+    <section id="services" className="ground-dark relative scroll-mt-24">
       <div className="shell relative z-10 px-6 py-20 md:px-12 md:py-28">
         <h2 className="max-w-[720px] text-3xl font-bold leading-[1.05] tracking-[-0.04em] text-text-light sm:text-4xl lg:text-5xl">
           Everything you need to get <em className="text-accent">online</em>{" "}
@@ -77,7 +77,7 @@ export const Capabilities = () => {
                 <em className="text-accent">searching</em> for you online
               </h3>
               <p className="max-w-[42ch] font-light leading-relaxed text-text-light/80">
-                8 out of 10 customers look up a business online before
+                Many customers check a business online before
                 calling, visiting, or buying. If your website is slow,
                 outdated, or missing entirely, you&apos;re losing them to
                 competitors who showed up first.
@@ -137,6 +137,8 @@ export const Capabilities = () => {
               />
             </span>
           </Link>
+
+          <Link href="/services/custom-software" className="glass-dark group flex min-h-[160px] flex-col justify-between p-8 text-text-light lg:col-span-3"><span className="text-xs text-accent">03</span><span className="inline-flex items-center gap-2 text-lg font-semibold">Custom software <ArrowRight size={16} /></span><span className="mt-3 text-sm text-text-light/60">Tools built around the way your business works.</span></Link>
 
           {/* Row 3: the three reasons the work matters, as equal cards. */}
           {[builtForSpeed, designedToConvert, easyToManage].map((point) => (

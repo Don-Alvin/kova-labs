@@ -69,7 +69,7 @@ export default async function ProjectPage({ params }: Params) {
             src={urlFor(project.coverImage).width(1920).url()}
             alt={project.coverImage.alt ?? project.title}
             fill
-            priority
+            preload
             sizes="100vw"
             className="object-cover"
           />

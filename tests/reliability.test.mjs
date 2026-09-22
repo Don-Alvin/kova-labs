@@ -66,10 +66,11 @@ test("CMS failure is not treated as missing content", async () => {
   assert.equal(await cms(undefined, false).sanityFetch("query", {}, fallback), fallback);
 });
 
-test("sitemap uses CMS modification dates and omits invented static dates", async () => {
+test("sitemap preserves CMS dates and adds the dated launch article", async () => {
   const { default: sitemap } = loadTs("src/app/sitemap.ts", {
     modules: {
       "@/lib/site": { SITE_URL: "https://example.test" },
+      "@/lib/launchPost": { launchPost: { slug: "website-cost", _updatedAt: "2026-09-22T06:00:00Z" } },
       "@/lib/services": { SERVICE_SLUGS: ["web-development"] },
       "@/lib/sanity/queries": { SITEMAP_CONTENT_QUERY: "query" },
       "@/lib/sanity/client": { sanityFetch: async () => [{ _type: "post", slug: "hello", _updatedAt: "2026-09-01T00:00:00Z" }] },
@@ -78,7 +79,8 @@ test("sitemap uses CMS modification dates and omits invented static dates", asyn
   const entries = await sitemap();
   const article = entries.find((item) => item.url.endsWith("/blog/hello"));
   assert.equal(article.lastModified.toISOString(), "2026-09-01T00:00:00.000Z");
-  assert.equal(entries.filter((item) => item !== article).some((item) => "lastModified" in item), false);
+  assert.equal(entries.find(item => item.url.endsWith("/blog/website-cost")).lastModified.toISOString(), "2026-09-22T06:00:00.000Z");
+  assert.equal("lastModified" in entries.find(item => item.url.endsWith("/privacy")), false);
 });
 
 function newsletter({ limit = async () => ({ ok: true }), fetch = async () => Response.json({}) } = {}) {
@@ -117,4 +119,36 @@ test("newsletter normalizes email and requests double opt-in with a timeout", as
   assert.equal((await post(request({ email: " Person@Example.test " }))).status, 200);
   assert.deepEqual(JSON.parse(sent.body), { email_address: "person@example.test", status_if_new: "pending" });
   assert.ok(sent.signal instanceof AbortSignal);
+});
+
+test("newsletter distinguishes confirmed, pending, and unsubscribed contacts", async () => {
+  for (const [status, message] of [["subscribed", "already subscribed"], ["pending", "Check your inbox"], ["unsubscribed", "not subscribed"]]) {
+    const response = await newsletter({ fetch: async () => Response.json({ status }) })(request({ email: "test@example.test" }));
+    const body = await response.json();
+    assert.ok(body.message.includes(message));
+    assert.equal(body.subscribed, status === "subscribed");
+  }
+});
+
+test("quote keeps the approved floor, separate feature costs, and matching WhatsApp total", () => {
+  const quote = loadTs("src/lib/quote.ts");
+  assert.equal(quote.WEBSITE_TYPES[0].price, 15000);
+  assert.equal(quote.FEATURES.find(option => option.id === "mpesa").price, 10000);
+  const message = quote.buildQuoteMessage({ websiteType: "static", extraPages: 1, features: ["mpesa"], analytics: [], support: "basic", total: 27000, monthly: 3000 });
+  assert.ok(message.includes("KSh 15,000"));
+  assert.ok(message.includes("Estimated total: KSh 27,000 + KSh 3,000/mo"));
+});
+
+test("newsletter tags through the dedicated endpoint without failing a successful signup", async () => {
+  let tagging;
+  const post = newsletter({ fetch: async (url, init) => {
+    if (init.method === "PUT") return Response.json({ status: "pending" });
+    tagging = { url, init };
+    return new Response("unavailable", { status: 503 });
+  } });
+  const response = await post(request({ email: "test@example.test" }));
+  assert.equal(response.status, 200);
+  assert.ok(tagging.url.endsWith("/tags"));
+  assert.equal(tagging.init.method, "POST");
+  assert.deepEqual(JSON.parse(tagging.init.body), { tags: [{ name: "website-newsletter", status: "active" }] });
 });

@@ -30,7 +30,7 @@ export const Logo = ({
     alt="KovaLab"
     width={Math.round(height * ASPECT_RATIO)}
     height={height}
-    priority={priority}
+    loading={priority ? "eager" : "lazy"}
     className={className}
   />
 );

@@ -10,193 +10,184 @@ export type ServiceContent = {
 };
 
 export const SERVICES: Record<string, ServiceContent> = {
-  "web-development": {
-    slug: "web-development",
-    name: "Web development",
-    title: "Websites built to bring in customers",
-    description:
-      "Fast, professional websites and web applications that load quickly, rank well, and turn visitors into enquiries.",
-    quoteHint: "business",
-    included: [
+  "website-design": {
+    "slug": "website-design",
+    "name": "Website design",
+    "title": "A clear website for your next customer",
+    "description": "Mobile-friendly business websites from KSh 15,000, designed in Kisumu for customers across Kenya and East Africa.",
+    "quoteHint": "static",
+    "included": [
       {
-        heading: "Sites that load in under two seconds",
-        body: "Most of your customers are on a phone using mobile data. We build lean, server-rendered pages so your site opens quickly even on a slow connection, because a visitor who waits is a visitor who leaves.",
+        "heading": "A clear first impression",
+        "body": "Pages that explain your offer, show your work, and make it easy to enquire."
       },
       {
-        heading: "Payments that work here",
-        body: "M-Pesa, Paystack, and WhatsApp checkout are first-class options rather than afterthoughts. Your customers pay the way they already pay, without being pushed through a checkout designed for somewhere else.",
+        "heading": "Designed for every screen",
+        "body": "Responsive layouts, readable text, accessible navigation, and lean images for mobile connections."
       },
       {
-        heading: "Content you can change yourself",
-        body: "We connect your site to a simple content system so updating text, swapping photos, or publishing a post does not require a developer. We train you on it before handover.",
+        "heading": "Content and enquiries",
+        "body": "We agree the page count, content editing needs, and WhatsApp or email enquiry route before work begins."
       },
       {
-        heading: "Found on Google",
-        body: "Technical SEO, structured data, sitemaps, and analytics are set up from the start, so the site is discoverable the day it launches rather than months later.",
-      },
+        "heading": "A practical launch foundation",
+        "body": "Page titles, descriptions, and crawlable pages, with domain and hosting setup guidance. Domain and hosting fees are separate."
+      }
     ],
-    process: [
+    "process": [
       {
-        number: "01",
-        title: "Scope the site",
-        description:
-          "We agree what pages you need, what each one has to achieve, and what content exists already.",
+        "number": "01",
+        "title": "Agree the scope",
+        "description": "We map the business need, content, features, budget, and acceptance criteria."
       },
       {
-        number: "02",
-        title: "Design and build",
-        description:
-          "You see the design before we build it, and working pages weekly after that.",
+        "number": "02",
+        "title": "Build and review",
+        "description": "Review the design and working features as we build, with time for feedback."
       },
       {
-        number: "03",
-        title: "Launch and train",
-        description:
-          "We deploy, connect your domain and analytics, and walk you through managing it.",
-      },
+        "number": "03",
+        "title": "Launch and hand over",
+        "description": "We test the agreed scope, launch, and explain how to manage your new tools."
+      }
     ],
-    relatedWork: [
-      {
-        name: "Gedo Holdings",
-        tag: "Corporate website",
-        url: "https://gedoholdings.co.ke",
-        domain: "gedoholdings.co.ke",
-        image: "/work/gedoholdings.webp",
-      },
-      {
-        name: "Lamona Realtors",
-        tag: "Business website",
-        url: "https://lamonarealtors.co.ke",
-        domain: "lamonarealtors.co.ke",
-        image: "/work/lamonarealtors.webp",
-      },
-    ],
+    "relatedWork": []
   },
-  "ui-ux-design": {
-    slug: "ui-ux-design",
-    name: "UI/UX design",
-    title: "Design that makes the next step obvious",
-    description:
-      "Interfaces shaped around what your customer is actually trying to do, so the path from landing to enquiry is short and clear.",
-    quoteHint: "static",
-    included: [
+  "web-applications": {
+    "slug": "web-applications",
+    "name": "Web applications",
+    "title": "Let customers do more online",
+    "description": "Booking systems, customer portals, and online stores that turn repeated manual steps into a clear online journey.",
+    "quoteHint": "custom",
+    "included": [
       {
-        heading: "Structure before decoration",
-        body: "We start with what a visitor needs to understand and in what order. Layout, hierarchy, and wording come first, because a beautiful page that buries the phone number still fails.",
+        "heading": "Customer journeys",
+        "body": "Map the steps from arrival to booking, order, or account access before building."
       },
       {
-        heading: "Designed on a phone first",
-        body: "Your buyers decide on mobile. We design at that width first and expand outward, rather than shrinking a desktop layout and hoping it holds together.",
+        "heading": "Accounts and permissions",
+        "body": "Give customers and staff access to the information and actions relevant to them."
       },
       {
-        heading: "A system, not a set of screens",
-        body: "Colors, type, spacing, and components are defined once and reused, so the site stays consistent as it grows and new pages take days rather than weeks.",
+        "heading": "Local integrations",
+        "body": "Scope M-Pesa, payment providers, notifications, and other connections around your business needs."
       },
       {
-        heading: "Accessible by default",
-        body: "Real contrast ratios, keyboard navigation, and sensible labels. This is both the right thing to do and the reason your site works for someone in bright sunlight on a cracked screen.",
-      },
+        "heading": "An interface you can operate",
+        "body": "Manage content and records with workflows your team can understand, supported by handover training."
+      }
     ],
-    process: [
+    "process": [
       {
-        number: "01",
-        title: "Understand the visitor",
-        description:
-          "Who arrives, what they want, and what currently stops them from getting it.",
+        "number": "01",
+        "title": "Agree the scope",
+        "description": "We map the business need, content, features, budget, and acceptance criteria."
       },
       {
-        number: "02",
-        title: "Structure and design",
-        description:
-          "Wireframes to agree the shape, then full design once the structure is right.",
+        "number": "02",
+        "title": "Build and review",
+        "description": "Review the design and working features as we build, with time for feedback."
       },
       {
-        number: "03",
-        title: "Hand off or build",
-        description:
-          "You get a documented design system, and we can build it or brief your team.",
-      },
+        "number": "03",
+        "title": "Launch and hand over",
+        "description": "We test the agreed scope, launch, and explain how to manage your new tools."
+      }
     ],
-    relatedWork: [
-      // Temporarily hidden; retain the related-work entry for restoration.
-      // {
-      //   name: "Wekaniweke",
-      //   tag: "Business website",
-      //   url: "https://wekaniweke.com",
-      //   domain: "wekaniweke.com",
-      //   image: "/work/wekaniweke.webp",
-      // },
-      {
-        name: "Three Mice Computers",
-        tag: "E-commerce",
-        url: "https://threemice.co.ke",
-        domain: "threemice.co.ke",
-        image: "/work/threemicecomputers.webp",
-      },
-    ],
+    "relatedWork": []
   },
-  "data-analytics": {
-    slug: "data-analytics",
-    name: "Data & analytics",
-    title: "Know what your business is actually doing",
-    description:
-      "Tracking, dashboards, and reporting that answer real questions: where customers come from, what they do, and what is working.",
-    quoteHint: "dashboard",
-    included: [
+  "custom-software": {
+    "slug": "custom-software",
+    "name": "Custom software",
+    "title": "Software that fits the way you work",
+    "description": "Internal tools, workflow automation, and business integrations shaped around your team and existing systems.",
+    "quoteHint": "custom",
+    "included": [
       {
-        heading: "Analytics set up properly",
-        body: "Not just a tracking snippet. We define the events that matter for your business, verify they fire, and make sure consent is respected so the numbers you see are numbers you can trust.",
+        "heading": "Start with the workflow",
+        "body": "Identify repeated tasks, bottlenecks, and where information is duplicated across tools."
       },
       {
-        heading: "Dashboards you will actually open",
-        body: "A custom dashboard showing the handful of figures that drive decisions, in plain language, rather than a wall of metrics nobody reads twice.",
+        "heading": "Tools for your team",
+        "body": "Scope dashboards, approval flows, and reporting around the decisions staff need to make."
       },
       {
-        heading: "Reporting across your tools",
-        body: "Sales, site traffic, and enquiries pulled into one place, so you are not reconciling three exports by hand every month.",
+        "heading": "Connect existing systems",
+        "body": "Agree data flows, access controls, and integration requirements before implementation."
       },
       {
-        heading: "Answers, not just charts",
-        body: "We tell you what the data suggests and what we would change because of it. A chart that nobody interprets has not earned its place.",
-      },
+        "heading": "A maintainable handover",
+        "body": "Document the agreed workflows, train users, and define ongoing support separately from the initial build."
+      }
     ],
-    process: [
+    "process": [
       {
-        number: "01",
-        title: "Agree the questions",
-        description:
-          "We start from the decisions you need to make, then work back to what must be measured.",
+        "number": "01",
+        "title": "Agree the scope",
+        "description": "We map the business need, content, features, budget, and acceptance criteria."
       },
       {
-        number: "02",
-        title: "Instrument and verify",
-        description:
-          "Tracking is implemented and tested, so the data is correct before anyone relies on it.",
+        "number": "02",
+        "title": "Build and review",
+        "description": "Review the design and working features as we build, with time for feedback."
       },
       {
-        number: "03",
-        title: "Report and review",
-        description:
-          "You get the dashboard, the training to read it, and a review of what it is telling you.",
-      },
+        "number": "03",
+        "title": "Launch and hand over",
+        "description": "We test the agreed scope, launch, and explain how to manage your new tools."
+      }
     ],
-    relatedWork: [
-      {
-        name: "Three Mice Computers",
-        tag: "E-commerce",
-        url: "https://threemice.co.ke",
-        domain: "threemice.co.ke",
-        image: "/work/threemicecomputers.webp",
-      },
-      {
-        name: "Gedo Holdings",
-        tag: "Corporate website",
-        url: "https://gedoholdings.co.ke",
-        domain: "gedoholdings.co.ke",
-        image: "/work/gedoholdings.webp",
-      },
-    ],
+    "relatedWork": []
   },
+  "seo-setup": {
+    "slug": "seo-setup",
+    "name": "SEO setup",
+    "title": "Give search engines a clear view of your business",
+    "description": "Technical and on-page SEO setup for businesses in Kisumu and across Kenya, with a foundation you can measure.",
+    "quoteHint": "",
+    "included": [
+      {
+        "heading": "Technical indexing checks",
+        "body": "Review canonical URLs, redirects, robots rules, sitemaps, and page accessibility to search crawlers."
+      },
+      {
+        "heading": "Pages with a clear purpose",
+        "body": "Align page titles, descriptions, headings, and internal links with your services and customer questions."
+      },
+      {
+        "heading": "Consistent business information",
+        "body": "Align your business name, location, and contact details across the website and agreed local listings."
+      },
+      {
+        "heading": "Measurement and handover",
+        "body": "Set up or review Search Console and consent-aware analytics, then explain what to monitor. Rankings and indexing are not guaranteed."
+      }
+    ],
+    "process": [
+      {
+        "number": "01",
+        "title": "Agree the scope",
+        "description": "We map the business need, content, features, budget, and acceptance criteria."
+      },
+      {
+        "number": "02",
+        "title": "Build and review",
+        "description": "Review the design and working features as we build, with time for feedback."
+      },
+      {
+        "number": "03",
+        "title": "Launch and hand over",
+        "description": "We test the agreed scope, launch, and explain how to manage your new tools."
+      }
+    ],
+    "relatedWork": []
+  }
 };
 
 export const SERVICE_SLUGS = Object.keys(SERVICES);
+
+SERVICES["website-design"].relatedWork = [
+  { name: "Gedo Holdings", tag: "Corporate website", url: "https://gedoholdings.co.ke", domain: "gedoholdings.co.ke", image: "/work/gedoholdings.webp" },
+  { name: "Lamona Realtors", tag: "Business website", url: "https://lamonarealtors.co.ke", domain: "lamonarealtors.co.ke", image: "/work/lamonarealtors.webp" },
+  { name: "Three Mice Computers", tag: "E-commerce", url: "https://threemice.co.ke", domain: "threemice.co.ke", image: "/work/threemicecomputers.webp" },
+];

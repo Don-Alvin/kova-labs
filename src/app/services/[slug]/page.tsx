@@ -113,9 +113,7 @@ export default async function ServicePage({ params }: Params) {
 
       <section className="border-b border-border">
         <div className="shell px-6 py-16 md:px-12 md:py-24">
-          <h2 className="text-3xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-4xl">
-            Projects like this
-          </h2>
+          {service.relatedWork.length > 0 ? <h2 className="text-3xl font-bold">Projects like this</h2> : <h2 className="text-3xl font-bold">Let’s scope your project</h2>}
 
           <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2">
             {service.relatedWork.map((project) => (
@@ -156,11 +154,16 @@ export default async function ServicePage({ params }: Params) {
           </div>
 
           <Link
-            href={`/quote?type=${service.quoteHint}`}
+            href={service.quoteHint ? `/quote?type=${service.quoteHint}` : "/contact"}
             className="mt-12 inline-block border border-border px-8 py-4 text-sm font-medium transition-all duration-300 hover:scale-105 hover:border-text hover:bg-text hover:text-text-light"
           >
-            Estimate your project cost
+            {service.quoteHint ? "Estimate your project cost" : "Discuss SEO setup"}
           </Link>
+          <nav aria-label="Other services" className="mt-10 flex flex-wrap gap-6 text-sm underline underline-offset-4">
+            {SERVICE_SLUGS.filter(item => item !== slug).map(item => (
+              <Link key={item} href={`/services/${item}`}>{SERVICES[item].name}</Link>
+            ))}
+          </nav>
         </div>
       </section>
 
