@@ -1,4 +1,3 @@
-import { launchPost } from "@/lib/launchPost";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -23,7 +22,7 @@ export const revalidate = 60;
 
 export const generateStaticParams = async () => {
   const slugs = await sanityFetch<string[]>(POST_SLUGS_QUERY, {}, []);
-  return [...new Set([...slugs, launchPost.slug])].map((slug) => ({ slug }));
+  return slugs.map((slug) => ({ slug }));
 };
 
 export const generateMetadata = async ({
@@ -34,7 +33,7 @@ export const generateMetadata = async ({
     POST_BY_SLUG_QUERY,
     { slug },
     null
-  )) ?? (slug === launchPost.slug ? launchPost : null);
+  ));
 
   if (!post) return {};
 
@@ -56,7 +55,7 @@ export default async function BlogPostPage({ params }: Params) {
     POST_BY_SLUG_QUERY,
     { slug },
     null
-  )) ?? (slug === launchPost.slug ? launchPost : null);
+  ));
 
   if (!post) notFound();
 
@@ -165,7 +164,7 @@ export default async function BlogPostPage({ params }: Params) {
         </div>
       </article>
 
-      {post.slug !== launchPost.slug && <NewsletterSignup />}
+      <NewsletterSignup />
 
       {related.length > 0 ? (
         <section className="border-t border-border">

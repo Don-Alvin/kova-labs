@@ -66,11 +66,10 @@ test("CMS failure is not treated as missing content", async () => {
   assert.equal(await cms(undefined, false).sanityFetch("query", {}, fallback), fallback);
 });
 
-test("sitemap preserves CMS dates and adds the dated launch article", async () => {
+test("sitemap preserves CMS dates", async () => {
   const { default: sitemap } = loadTs("src/app/sitemap.ts", {
     modules: {
       "@/lib/site": { SITE_URL: "https://example.test" },
-      "@/lib/launchPost": { launchPost: { slug: "website-cost", _updatedAt: "2026-09-22T06:00:00Z" } },
       "@/lib/services": { SERVICE_SLUGS: ["web-development"] },
       "@/lib/sanity/queries": { SITEMAP_CONTENT_QUERY: "query" },
       "@/lib/sanity/client": { sanityFetch: async () => [{ _type: "post", slug: "hello", _updatedAt: "2026-09-01T00:00:00Z" }] },
@@ -79,7 +78,7 @@ test("sitemap preserves CMS dates and adds the dated launch article", async () =
   const entries = await sitemap();
   const article = entries.find((item) => item.url.endsWith("/blog/hello"));
   assert.equal(article.lastModified.toISOString(), "2026-09-01T00:00:00.000Z");
-  assert.equal(entries.find(item => item.url.endsWith("/blog/website-cost")).lastModified.toISOString(), "2026-09-22T06:00:00.000Z");
+  assert.equal(entries.some(item => item.url.endsWith("/blog/website-cost")), false);
   assert.equal("lastModified" in entries.find(item => item.url.endsWith("/privacy")), false);
 });
 
