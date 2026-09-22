@@ -34,12 +34,12 @@ export const organizationSchema = () => ({
   image: `${SITE_URL}/opengraph-image`,
   email: EMAIL,
   telephone: PHONE,
-  priceRange: "KES 10,000 - KES 50,000+",
+  priceRange: "KSh 15,000 - KSh 50,000+",
   description:
-    "Software solutions studio in Nairobi, Kenya, building fast websites and web apps for businesses across East Africa.",
+    "Software solutions studio in Kisumu, Kenya, building fast websites and web apps for businesses across East Africa.",
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Nairobi",
+    addressLocality: "Kisumu",
     addressCountry: "KE",
   },
   areaServed: {
@@ -77,7 +77,7 @@ export const articleSchema = (input: {
   authorName?: string;
 }) => ({
   "@context": "https://schema.org",
-  "@type": "Article",
+  "@type": "BlogPosting",
   headline: input.title,
   description: input.excerpt,
   url: `${SITE_URL}${input.path}`,

@@ -36,14 +36,14 @@ const DeviceShowcase = ({ image, name }: { image: string; name: string }) => (
   </div>
 );
 
-export const Work = () => (
+export const Work = ({ detailed = false }: { detailed?: boolean } = {}) => (
   <section id="work" className="scroll-mt-24 border-b border-border">
     <div className="shell px-6 py-16 md:px-12 md:py-24">
       <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
         <h2 className="max-w-[560px] text-4xl font-bold leading-[0.98] tracking-[-0.05em] sm:text-5xl lg:text-6xl">Proof is in<br />the product.</h2>
         <div className="max-w-[340px]">
           <p className="text-sm font-light leading-relaxed text-text-muted">Real businesses. Thoughtful websites. Explore our work, from the big picture to the smallest screen.</p>
-          <Link href="/work" className="mt-4 inline-flex items-center gap-2 border-b border-text pb-1 text-sm font-medium">All projects <ArrowUpRight size={16} aria-hidden="true" /></Link>
+          {!detailed && <Link href="/work" className="mt-4 inline-flex items-center gap-2 border-b border-text pb-1 text-sm font-medium">All projects <ArrowUpRight size={16} aria-hidden="true" /></Link>}
         </div>
       </div>
       <div className="mt-10 flex flex-col gap-5 md:mt-12 md:gap-6">
@@ -53,6 +53,9 @@ export const Work = () => (
               <p className="text-[10px] font-medium uppercase tracking-[0.16em] project-eyebrow">{String(index + 1).padStart(2, "0")} / {project.category}</p>
               <h3 className="mt-4 text-3xl font-semibold leading-[1.02] tracking-[-0.05em] lg:text-[2.6rem]">{project.name}</h3>
               <p className="mt-4 max-w-[34ch] text-sm font-light leading-relaxed project-description">{project.description}</p>
+              <p className="mt-4 text-sm project-description"><strong>Challenge:</strong> {project.image === "gedoholdings" ? "Present a broad construction and infrastructure business clearly." : project.image === "lamonarealtors" ? "Help visitors explore a property business on mobile." : "Make a technology product catalogue easy to explore."}</p>
+              <p className="mt-2 text-sm project-description"><strong>Solution:</strong> {project.image === "gedoholdings" ? "A corporate website with a project showcase." : project.image === "lamonarealtors" ? "A responsive real estate website with a clear property presentation." : "An online storefront focused on product discovery."}</p>
+              {detailed && <details className="mt-5 text-sm project-description"><summary className="cursor-pointer font-semibold">Project overview</summary><p className="mt-3">KovaLab’s role: website design and development. The desktop, tablet, and mobile views show the delivered interface. Explore the live site below to see the project in context.</p></details>}
               <ul className="mt-5 flex flex-wrap gap-2" aria-label="Project services">{project.tags.map((tag) => <li key={tag} className="project-tag">{tag}</li>)}</ul>
               <a href={project.url} target="_blank" rel="noopener noreferrer" className="mt-7 inline-flex items-center gap-2 project-link border-b pb-1 text-xs font-semibold transition-opacity hover:opacity-60" aria-label={`Visit ${project.name} website (opens in a new tab)`}>View live project <ArrowUpRight size={15} aria-hidden="true" /></a>
             </div>

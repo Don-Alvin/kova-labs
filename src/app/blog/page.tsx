@@ -1,3 +1,4 @@
+import { mergeLaunchPost } from "@/lib/launchPost";
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/metadata";
 import { BlogGrid } from "@/components/blog/BlogGrid";
@@ -16,10 +17,16 @@ export const metadata: Metadata = pageMetadata({
 export const revalidate = 60;
 
 export default async function BlogPage() {
-  const [posts, categories] = await Promise.all([
+  const [cmsPosts, cmsCategories] = await Promise.all([
     sanityFetch<PostCard[]>(ALL_POSTS_QUERY, {}, []),
     sanityFetch<SanityCategory[]>(ALL_CATEGORIES_QUERY, {}, []),
   ]);
+
+  const posts = mergeLaunchPost(cmsPosts).sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+  const categories = [...cmsCategories];
+  for (const post of posts) {
+    if (post.category && !categories.some(category => category.slug === post.category?.slug)) categories.push({ _id: post.category.slug, ...post.category });
+  }
 
   return (
     <>

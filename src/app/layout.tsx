@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { CookieConsent } from "@/components/layout/CookieConsent";
 import { Analytics } from "@/components/layout/Analytics";
+import { ConversionEvents } from "@/components/layout/ConversionEvents";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -14,15 +15,7 @@ export const metadata: Metadata = {
     template: "%s | KovaLab",
   },
   description:
-    "We help businesses across East Africa get online with fast, professional websites that bring in customers and build trust.",
-  keywords: [
-    "web development",
-    "Kenya",
-    "Nairobi",
-    "website design",
-    "East Africa",
-    "small business",
-  ],
+    "Based in Kisumu, Kenya, we build websites, web applications, and custom software for businesses across East Africa. Websites from KSh 15,000.",
   authors: [{ name: "KovaLab" }],
   metadataBase: new URL(SITE_URL),
   manifest: "/site.webmanifest",
@@ -32,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "KovaLab | Software Solutions Studio",
     description:
-      "We help businesses across East Africa get online with fast, professional websites that bring in customers and build trust.",
+      "Based in Kisumu, Kenya, we build websites, web applications, and custom software for businesses across East Africa. Websites from KSh 15,000.",
     url: SITE_URL,
     siteName: "KovaLab",
     locale: "en_KE",
@@ -42,7 +35,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "KovaLab | Software Solutions Studio",
     description:
-      "We help businesses across East Africa get online with fast, professional websites that bring in customers and build trust.",
+      "Based in Kisumu, Kenya, we build websites, web applications, and custom software for businesses across East Africa. Websites from KSh 15,000.",
   },
   robots: { index: true, follow: true },
 };
@@ -71,6 +64,7 @@ export default function RootLayout({
         <WhatsAppButton />
         <CookieConsent />
         <Analytics />
+        <ConversionEvents />
       </body>
     </html>
   );

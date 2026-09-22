@@ -1,3 +1,4 @@
+import { Work } from "@/components/home/Work";
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/metadata";
 import { ProjectCard } from "@/components/work/ProjectCard";
@@ -10,7 +11,7 @@ export const metadata: Metadata = pageMetadata({
   path: "/work",
   title: "Work",
   description:
-    "Websites, web applications, and analytics work for businesses across East Africa.",
+    "Website design and development for businesses across East Africa.",
 });
 
 export const revalidate = 60;
@@ -34,15 +35,10 @@ export default async function WorkPage() {
         </div>
       </section>
 
-      <section className="border-b border-border">
+      <Work detailed />
+      {projects.length > 0 && <section className="border-b border-border">
         <div className="shell px-6 py-16 md:px-12 md:py-24">
-          {projects.length === 0 ? (
-            <p className="max-w-[58ch] font-light leading-relaxed text-text-muted">
-              Case studies are being written up. In the meantime, get in touch
-              and we will walk you through the work directly.
-            </p>
-          ) : (
-            <>
+          <h2 className="mb-8 text-3xl font-bold">Case studies</h2>
               <ProjectCard project={featured} featured />
               {rest.length > 0 ? (
                 <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -51,10 +47,8 @@ export default async function WorkPage() {
                   ))}
                 </div>
               ) : null}
-            </>
-          )}
         </div>
-      </section>
+      </section>}
 
       <CtaBanner />
     </>

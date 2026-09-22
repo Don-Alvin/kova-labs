@@ -12,6 +12,7 @@
 
 # testing
 /coverage
+/artifacts/
 
 # next.js
 /.next/
@@ -45,6 +46,7 @@ next-env.d.ts
 /CLAUDE.md
 /AGENTS.md
 /implementation.*md
+/audit-implementation/
 /launch-checklist.*md
 
 # ai agent harness config

@@ -1,5 +1,6 @@
 "use client";
 
+import { trackEvent } from "@/lib/analytics";
 import { useEffect } from "react";
 import Cal, { getCalApi } from "@calcom/embed-react";
 import { CAL_LINK, EMAIL } from "@/lib/site";
@@ -13,6 +14,7 @@ export const CalInline = () => {
   useEffect(() => {
     if (!CAL_LINK) return;
     let cancelled = false;
+    let removeListeners: (() => void) | undefined;
     void getCalApi().then((cal) => {
       if (cancelled) return;
       const brand = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim();
@@ -21,9 +23,17 @@ export const CalInline = () => {
         "cal-radius": "0px", "cal-radius-sm": "0px", "cal-radius-md": "0px",
         "cal-radius-lg": "0px", "cal-radius-xl": "0px", "cal-radius-full": "0px",
       };
+      const onStarted = () => trackEvent("booking_started");
+      const onCompleted = () => trackEvent("booking_completed");
+      cal("on", { action: "navigatedToBooker", callback: onStarted });
+      cal("on", { action: "bookingSuccessfulV2", callback: onCompleted });
+      removeListeners = () => {
+        cal("off", { action: "navigatedToBooker", callback: onStarted });
+        cal("off", { action: "bookingSuccessfulV2", callback: onCompleted });
+      };
       cal("ui", { layout: "month_view", cssVarsPerTheme: { light: tokens, dark: tokens } });
     }).catch(() => { console.error("Booking could not be initialized."); });
-    return () => { cancelled = true; };
+    return () => { cancelled = true; removeListeners?.(); };
   }, []);
   if (!CAL_LINK) {
     return (

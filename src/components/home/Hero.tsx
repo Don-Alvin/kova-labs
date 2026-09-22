@@ -102,6 +102,8 @@ export const Hero = () => {
           src="/logos/kovalab-mark.webp"
           alt=""
           fill
+          loading="eager"
+          sizes="70vh"
           className="object-contain"
         />
       </div>
@@ -135,6 +137,8 @@ export const Hero = () => {
               trust.
             </p>
 
+            <p className="mt-4 text-sm text-accent">Websites starting from KSh 15,000</p>
+            <nav aria-label="Explore this page" className="mt-4 flex flex-wrap gap-5 text-sm text-text-light/70"><a href="#work">Our work</a><a href="#services">Services</a><a href="#quote">Pricing</a><a href="#faq">FAQs</a></nav>
             <div className="hero-fade hero-ctas mt-8">
               <Link
                 href="#quote"

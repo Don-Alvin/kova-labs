@@ -91,16 +91,21 @@ export const QuoteEstimator = ({ initialType }: QuoteEstimatorProps = {}) => {
     monthly,
   });
 
-  // Fires once per real change to the estimate, not on the initial mount:
-  // the ref starts false and flips true only after this effect has run
-  // once, so the first render (nothing chosen yet) never counts as "use".
-  const hasInteracted = useRef(false);
+  // Compare selections so initial rendering (including Strict Mode effect
+  // replay) never counts as someone starting a quote.
+  const selection = JSON.stringify([websiteType, extraPages, features, analytics, support]);
+  const previousSelection = useRef(selection);
+  const quoteStarted = useRef(false);
   useEffect(() => {
-    if (hasInteracted.current) {
-      trackEvent("quote_estimator_use", { estimate_kes: oneOffTotal });
+    if (previousSelection.current !== selection) {
+      previousSelection.current = selection;
+      if (!quoteStarted.current) {
+        trackEvent("quote_started");
+        quoteStarted.current = true;
+      }
+      trackEvent("quote_option_selected", { website_type: websiteType, extra_pages: extraPages, features: features.join(","), analytics: analytics.join(","), support, estimate_kes: oneOffTotal });
     }
-    hasInteracted.current = true;
-  }, [websiteType, extraPages, features, analytics, support, oneOffTotal]);
+  }, [selection, websiteType, extraPages, features, analytics, support, oneOffTotal]);
 
   useGSAP(
     () => {

@@ -31,11 +31,12 @@ export const BlogCard = ({ post, featured = false }: BlogCardProps) => (
             src={urlFor(post.coverImage).width(1600).url()}
             alt={post.coverImage.alt ?? post.title}
             fill
+            loading={featured ? "eager" : "lazy"}
             sizes={featured ? "100vw" : "(max-width: 768px) 100vw, 50vw"}
             className="object-cover"
           />
         </div>
-      ) : null}
+      ) : <Image src={`/blog/${post.slug}/opengraph-image`} alt={post.title} fill unoptimized loading={featured ? "eager" : "lazy"} sizes={featured ? "100vw" : "(max-width: 768px) 100vw, 50vw"} className="object-cover" />}
     </div>
 
     <div className="flex flex-1 flex-col p-6 md:p-8">

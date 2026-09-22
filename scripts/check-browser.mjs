@@ -52,7 +52,7 @@ try {
   assert.equal(await page.evaluate(() => document.querySelectorAll('.faq-item[open]').length), 1);
   console.log("PASS: native FAQ disclosure");
 
-  for (const width of [1440, 768, 390, 320]) {
+  for (const width of [1440, 768, 390, 360, 320]) {
     await page.setViewport({ width, height: 1000 });
     await page.evaluate(() => document.querySelector('#work').scrollIntoView());
     await page.evaluate(async () => { await Promise.all(Array.from(document.querySelectorAll('#work img')).map((image) => image.decode())); });
@@ -62,7 +62,7 @@ try {
       images: Array.from(document.querySelectorAll('#work img')).every((image) => image.naturalWidth > 0),
     }));
     assert.equal(layout.overflow, false);
-    assert.equal(layout.cards, 4);
+    assert.equal(layout.cards, 3);
     assert.equal(layout.images, true);
   }
   assert.equal(bookings.length, 0, "Cal should not initialize on the homepage");

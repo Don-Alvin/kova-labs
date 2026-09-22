@@ -27,6 +27,13 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "cdn.sanity.io", pathname: "/images/**" },
     ],
   },
+  async redirects() {
+    return [
+      { source: "/services/data-analytics", destination: "/services/seo-setup", permanent: true },
+      { source: "/services/web-development", destination: "/services/website-design", permanent: true },
+      { source: "/services/ui-ux-design", destination: "/services/website-design", permanent: true },
+    ];
+  },
   async headers() {
     return [
       {

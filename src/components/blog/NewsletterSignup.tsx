@@ -26,7 +26,7 @@ export const NewsletterSignup = () => {
         }),
       });
 
-      const data: { message?: string } = await response.json();
+      const data: { message?: string; subscribed?: boolean } = await response.json();
 
       if (!response.ok) {
         setStatus("error");
@@ -39,7 +39,8 @@ export const NewsletterSignup = () => {
         data.message ?? "Almost there. Check your inbox to confirm."
       );
       setEmail("");
-      trackEvent("form_submit", { form: "newsletter" });
+      // A pending double opt-in is a request, not a confirmed subscriber.
+      trackEvent("newsletter_signup_requested", { already_subscribed: data.subscribed === true });
     } catch {
       setStatus("error");
       setMessage("We could not reach the server. Please try again.");

@@ -1,3 +1,4 @@
+import { jsonLd } from "@/lib/structuredData";
 import Link from "next/link";
 import { ArrowRight, Plus } from "lucide-react";
 
@@ -15,7 +16,7 @@ const QUESTIONS = [
   {
     question: "What about hosting and domain?",
     answer:
-      "You handle your own domain and hosting costs. We'll help you pick the right provider and set everything up. Typical cost: KES 1,000 to 5,000 per year.",
+      "You handle your own domain and hosting costs. We'll help you pick the right provider and set everything up. Costs depend on the domain, hosting provider, and features you choose; check both the initial and renewal prices.",
   },
   {
     question: "Can I update the website myself?",
@@ -28,14 +29,15 @@ const QUESTIONS = [
       "Our maintenance plans cover ongoing updates, bug fixes, and content changes. You can also reach out for one-off changes anytime.",
   },
   {
-    question: "Do you work with clients outside Nairobi?",
+    question: "Do you work with clients outside Kisumu?",
     answer:
       "Absolutely. We work with businesses across East Africa. Everything from the first call to launch can happen remotely.",
   },
 ];
 
 export const FAQ = () => (
-  <section className="ground-dark relative">
+  <section id="faq" className="ground-dark relative scroll-mt-24">
+    <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: QUESTIONS.map(item => ({ "@type": "Question", name: item.question, acceptedAnswer: { "@type": "Answer", text: item.answer } })) })} />
     <div className="shell relative z-10 px-6 py-16 md:px-12 md:py-24">
       <h2 className="max-w-3xl text-3xl font-bold leading-[1.05] tracking-[-0.04em] text-text-light sm:text-4xl lg:text-5xl">Everything you need to know</h2>
       <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-[280px_1fr] lg:gap-16">

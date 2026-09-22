@@ -1,3 +1,4 @@
+import { launchPost } from "@/lib/launchPost";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -22,18 +23,18 @@ export const revalidate = 60;
 
 export const generateStaticParams = async () => {
   const slugs = await sanityFetch<string[]>(POST_SLUGS_QUERY, {}, []);
-  return slugs.map((slug) => ({ slug }));
+  return [...new Set([...slugs, launchPost.slug])].map((slug) => ({ slug }));
 };
 
 export const generateMetadata = async ({
   params,
 }: Params): Promise<Metadata> => {
   const { slug } = await params;
-  const post = await sanityFetch<Post | null>(
+  const post = (await sanityFetch<Post | null>(
     POST_BY_SLUG_QUERY,
     { slug },
     null
-  );
+  )) ?? (slug === launchPost.slug ? launchPost : null);
 
   if (!post) return {};
 
@@ -45,17 +46,17 @@ export const generateMetadata = async ({
     publishedTime: post.publishedAt,
     image: post.coverImage
       ? urlFor(post.coverImage).width(1200).height(630).url()
-      : undefined,
+      : `${SITE_URL}/blog/${post.slug}/opengraph-image`,
   });
 };
 
 export default async function BlogPostPage({ params }: Params) {
   const { slug } = await params;
-  const post = await sanityFetch<Post | null>(
+  const post = (await sanityFetch<Post | null>(
     POST_BY_SLUG_QUERY,
     { slug },
     null
-  );
+  )) ?? (slug === launchPost.slug ? launchPost : null);
 
   if (!post) notFound();
 
@@ -81,18 +82,19 @@ export default async function BlogPostPage({ params }: Params) {
             dateModified: post._updatedAt,
             image: post.coverImage
               ? urlFor(post.coverImage).width(1200).height(630).url()
-              : undefined,
+              : `${SITE_URL}/blog/${post.slug}/opengraph-image`,
             authorName: post.author?.name,
           })
         )}
       />
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd({ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: SITE_URL }, { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` }, { "@type": "ListItem", position: 3, name: post.title, item: shareUrl }] })} />
       {post.coverImage ? (
         <div className="relative h-[240px] w-full overflow-hidden border-b border-border bg-bg-warm lg:h-[440px]">
           <Image
             src={urlFor(post.coverImage).width(1920).url()}
             alt={post.coverImage.alt ?? post.title}
             fill
-            priority
+            preload
             sizes="100vw"
             className="object-cover"
           />
@@ -128,6 +130,7 @@ export default async function BlogPostPage({ params }: Params) {
             ) : null}
           </div>
 
+          <p className="mt-4 text-xs text-text-muted">By {post.author?.name ?? "KovaLab"} · Updated <time dateTime={post._updatedAt}>{formatDate(post._updatedAt)}</time></p>
           <h1 className="mt-6 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
             {post.title}
           </h1>
@@ -162,7 +165,7 @@ export default async function BlogPostPage({ params }: Params) {
         </div>
       </article>
 
-      <NewsletterSignup />
+      {post.slug !== launchPost.slug && <NewsletterSignup />}
 
       {related.length > 0 ? (
         <section className="border-t border-border">

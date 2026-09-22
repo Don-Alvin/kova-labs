@@ -74,7 +74,7 @@ export async function POST(request: Request) {
 
   try {
     // PUT upserts, so a resubscribe after an unsubscribe does not 400.
-    // status_if_new is "pending" because the audience uses double opt-in.
+    // Explicitly request double opt-in regardless of the audience default.
     const response = await fetch(
       `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members/${subscriberHash}`,
       {
@@ -118,8 +118,35 @@ export async function POST(request: Request) {
       );
     }
 
+    const member: { status?: string } = await response.json();
+    // Member upserts do not accept tags. Use the dedicated endpoint, and
+    // never turn a successful opt-in request into an error if tagging fails.
+    if (member.status === "pending" || member.status === "subscribed") {
+      try {
+        const tagged = await fetch(
+          `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members/${subscriberHash}/tags`,
+          {
+            method: "POST",
+            signal: AbortSignal.timeout(5_000),
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Basic ${Buffer.from(`anystring:${API_KEY}`).toString("base64")}`,
+            },
+            body: JSON.stringify({ tags: [{ name: "website-newsletter", status: "active" }] }),
+          }
+        );
+        if (!tagged.ok) console.error("Newsletter source tagging failed.");
+      } catch {
+        console.error("Newsletter source tagging is unavailable.");
+      }
+    }
     return NextResponse.json({
-      message: "Almost there. Check your inbox to confirm.",
+      message: member.status === "subscribed"
+        ? "You are already subscribed."
+        : member.status === "unsubscribed" || member.status === "cleaned"
+          ? "This address is not subscribed. Please contact us for help rejoining."
+          : "Almost there. Check your inbox to confirm.",
+      subscribed: member.status === "subscribed",
     });
   } catch {
     return NextResponse.json(
