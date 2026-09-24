@@ -29,9 +29,9 @@ const QUESTIONS = [
       "Our maintenance plans cover ongoing updates, bug fixes, and content changes. You can also reach out for one-off changes anytime.",
   },
   {
-    question: "Do you work with clients outside Nairobi?",
+    question: "Do you work with clients outside Kisumu?",
     answer:
-      "Absolutely. We work with businesses across East Africa. Everything from the first call to launch can happen remotely.",
+      "Absolutely. We work remotely with businesses in Nairobi, Kisumu, Nakuru, and across Kenya. Everything from the first call to launch can happen remotely.",
   },
 ];
 

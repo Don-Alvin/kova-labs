@@ -153,7 +153,7 @@ export const MobileNav = ({ open, onClose }: MobileNavProps) => {
 
         <div className="mobile-nav-item flex flex-col gap-1 border-t border-dark/15 pt-6 text-xs font-light sm:flex-row sm:items-center sm:justify-between sm:gap-4">
           <p>&copy; {new Date().getFullYear()} KovaLab. All rights reserved.</p>
-          <p>Nairobi, Kenya</p>
+          <p>Kisumu, Kenya</p>
         </div>
       </div>
     </dialog>

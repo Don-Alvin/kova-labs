@@ -19,9 +19,9 @@ const PHONE = `+${WHATSAPP_NUMBER}`;
  * Organization + LocalBusiness, combined into one node since KovaLab is a
  * single local business, not a multi-location chain. ProfessionalService is
  * the more specific LocalBusiness subtype schema.org defines for a services
- * business like this one. Only confirmed facts from PRODUCT.md go in here:
- * no street address exists to publish, so it is omitted rather than
- * invented; priceRange comes from the real quote estimator tiers. Homepage
+ * business like this one. Only confirmed business facts go in here:
+ * the street address was supplied by the owner; priceRange comes from
+ * the real quote estimator tiers. Homepage
  * only, per the standard convention for this schema.
  */
 export const organizationSchema = () => ({
@@ -36,10 +36,11 @@ export const organizationSchema = () => ({
   telephone: PHONE,
   priceRange: "KSh 15,000 - KSh 50,000+",
   description:
-    "Software solutions studio in Nairobi, Kenya, building fast websites and web apps for businesses across Kenya and East Africa.",
+    "Software solutions studio in Kisumu, Kenya, building fast websites and web apps for businesses across Kenya and East Africa.",
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Nairobi",
+    streetAddress: "Oginga Odinga Street",
+    addressLocality: "Kisumu",
     addressCountry: "KE",
   },
   areaServed: [

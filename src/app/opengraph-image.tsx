@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { OG_LOGO_SRC } from "@/lib/og";
 
 export const runtime = "nodejs";
-export const alt = "KovaLab, software solutions studio, Nairobi";
+export const alt = "KovaLab, software solutions studio, Kisumu";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -57,7 +57,7 @@ export default async function OpengraphImage() {
             color: "#888888",
           }}
         >
-          Software solutions studio, Nairobi
+          Software solutions studio, Kisumu
         </div>
       </div>
     ),

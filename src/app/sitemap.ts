@@ -11,6 +11,10 @@ const STATIC_ROUTES: { path: string; priority: number }[] = [
   { path: "/quote", priority: 0.8 },
   { path: "/blog", priority: 0.7 },
   { path: "/work", priority: 0.7 },
+  { path: "/web-developers-kenya", priority: 0.8 },
+  { path: "/web-developers-kisumu", priority: 0.8 },
+  { path: "/web-developers-nakuru", priority: 0.8 },
+  { path: "/web-developers-nairobi", priority: 0.8 },
   { path: "/privacy", priority: 0.3 },
 ];
 
@@ -25,7 +29,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...STATIC_ROUTES.map((route) => ({
       url: `${SITE_URL}${route.path}`,
       priority: route.priority,
-      ...(route.path !== "/privacy" ? { lastModified: new Date("2026-09-22T06:00:00Z") } : {}),
+      ...(route.path !== "/privacy" ? { lastModified: new Date(route.path.startsWith("/web-developers-") ? "2026-09-24T00:00:00Z" : "2026-09-22T06:00:00Z") } : {}),
     })),
     ...SERVICE_SLUGS.map((slug) => ({
       url: `${SITE_URL}/services/${slug}`,

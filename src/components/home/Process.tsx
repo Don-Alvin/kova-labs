@@ -37,7 +37,7 @@ export const Process = () => {
                   : ""
               } ${index === 0 ? "md:border-r md:border-border" : ""}`}
             >
-              <p aria-hidden="true" className="text-4xl font-extrabold tracking-tight text-accent opacity-20 lg:text-5xl">
+              <p aria-hidden="true" className="text-4xl font-extrabold tracking-tight text-accent lg:text-5xl">
                 {step.number}
               </p>
               <h3 className="mt-6 text-xl font-semibold">{step.title}</h3>
