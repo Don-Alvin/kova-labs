@@ -105,7 +105,6 @@ export const Footer = () => (
 
     <div className="shell flex flex-col gap-2 border-t border-border px-6 py-6 text-xs text-text-muted md:flex-row md:items-center md:justify-between md:px-12">
       <p>&copy; {new Date().getFullYear()} KovaLab. All rights reserved.</p>
-      <p>Nairobi, Kenya</p>
     </div>
   </footer>
 );

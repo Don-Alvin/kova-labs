@@ -36,6 +36,7 @@ export const NAV_LINKS = [
 ] as const;
 
 export const FOOTER_SERVICES = [
+  { label: "Web developers in Kenya", href: "/web-developers-kenya" },
   { label: "Website design", href: "/services/website-design" },
   { label: "Web applications", href: "/services/web-applications" },
   { label: "Custom software", href: "/services/custom-software" },

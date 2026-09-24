@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     template: "%s | KovaLab",
   },
   description:
-    "Based in Nairobi, Kenya, we build websites, web applications, and custom software for businesses across Kenya and East Africa. Websites from KSh 15,000.",
+    "Based in Kisumu, Kenya, we build websites, web applications, and custom software for businesses across Kenya and East Africa. Websites from KSh 15,000.",
   authors: [{ name: "KovaLab" }],
   metadataBase: new URL(SITE_URL),
   manifest: "/site.webmanifest",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "KovaLab | Software Solutions Studio",
     description:
-      "Based in Nairobi, Kenya, we build websites, web applications, and custom software for businesses across Kenya and East Africa. Websites from KSh 15,000.",
+      "Based in Kisumu, Kenya, we build websites, web applications, and custom software for businesses across Kenya and East Africa. Websites from KSh 15,000.",
     url: SITE_URL,
     siteName: "KovaLab",
     locale: "en_KE",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "KovaLab | Software Solutions Studio",
     description:
-      "Based in Nairobi, Kenya, we build websites, web applications, and custom software for businesses across Kenya and East Africa. Websites from KSh 15,000.",
+      "Based in Kisumu, Kenya, we build websites, web applications, and custom software for businesses across Kenya and East Africa. Websites from KSh 15,000.",
   },
   robots: { index: true, follow: true },
 };

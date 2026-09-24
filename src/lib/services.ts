@@ -14,7 +14,7 @@ export const SERVICES: Record<string, ServiceContent> = {
     "slug": "website-design",
     "name": "Website design",
     "title": "A clear website for your next customer",
-    "description": "Mobile-friendly business websites from KSh 15,000, designed in Nairobi for customers across Kenya and East Africa.",
+    "description": "Mobile-friendly business websites from KSh 15,000, designed in Kisumu for customers across Kenya and East Africa.",
     "quoteHint": "static",
     "included": [
       {
