@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CtaBanner } from "@/components/home/CtaBanner";
@@ -7,7 +6,7 @@ import { MarkPanel } from "@/components/shared/MarkPanel";
 import { pageMetadata } from "@/lib/metadata";
 import { SERVICES, SERVICE_SLUGS } from "@/lib/services";
 import { jsonLd, serviceSchema } from "@/lib/structuredData";
-import { ArrowRight } from "lucide-react";
+import { ProjectShowcases } from "@/components/work/ProjectShowcases";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -98,7 +97,7 @@ export default async function ServicePage({ params }: Params) {
                     : ""
                 }`}
               >
-                <p aria-hidden="true" className="text-4xl font-extrabold tracking-tight text-accent opacity-20">
+                <p aria-hidden="true" className="text-4xl font-extrabold tracking-tight text-accent">
                   {step.number}
                 </p>
                 <h3 className="mt-6 text-lg font-semibold">{step.title}</h3>
@@ -115,43 +114,9 @@ export default async function ServicePage({ params }: Params) {
         <div className="shell px-6 py-16 md:px-12 md:py-24">
           {service.relatedWork.length > 0 ? <h2 className="text-3xl font-bold">Projects like this</h2> : <h2 className="text-3xl font-bold">Let’s scope your project</h2>}
 
-          <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2">
-            {service.relatedWork.map((project) => (
-              <a
-                key={project.domain}
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group border border-border bg-bg transition-all duration-300 hover:scale-[1.02] hover:border-accent hover:shadow-[var(--shadow-lift)]"
-              >
-                <div className="relative h-[220px] overflow-hidden bg-bg-warm lg:h-[300px]">
-                  <div className="absolute inset-0 scale-110 transition-transform duration-500 group-hover:scale-[1.15]">
-                    <Image
-                      src={project.image}
-                      alt={`${project.name} website`}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      className="object-cover"
-                    />
-                  </div>
-                </div>
-                <div className="flex items-center justify-between gap-4 p-6">
-                  <div>
-                    <p className="text-lg font-semibold">{project.name}</p>
-                    <p className="mt-1 text-xs font-light tracking-wide text-text-muted">
-                      {project.domain}
-                    </p>
-                  </div>
-                  <span
-                    aria-hidden="true"
-                    className="flex h-12 w-12 shrink-0 items-center justify-center border border-border transition-colors group-hover:border-accent group-hover:bg-accent group-hover:text-dark"
-                  >
-                    <ArrowRight size={18} strokeWidth={1.5} />
-                  </span>
-                </div>
-              </a>
-            ))}
-          </div>
+          {service.relatedWork.length > 0 && (
+            <ProjectShowcases urls={service.relatedWork.map(project => project.url)} />
+          )}
 
           <Link
             href={service.quoteHint ? `/quote?type=${service.quoteHint}` : "/contact"}

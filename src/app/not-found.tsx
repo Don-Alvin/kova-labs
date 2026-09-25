@@ -12,7 +12,7 @@ export default function NotFound() {
       <div className="shell relative z-10 flex min-h-[60vh] flex-col items-start justify-center px-6 py-16 md:px-12 md:py-24">
         <p
           aria-hidden="true"
-          className="text-7xl font-extrabold leading-none tracking-tight text-accent opacity-20 sm:text-8xl"
+          className="text-7xl font-extrabold leading-none tracking-tight text-accent sm:text-8xl"
         >
           404
         </p>
