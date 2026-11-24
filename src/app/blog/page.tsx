@@ -10,7 +10,7 @@ export const metadata: Metadata = pageMetadata({
   path: "/blog",
   title: "Blog",
   description:
-    "Practical notes on websites, payments, and analytics for businesses across East Africa.",
+    "Practical notes on websites, payments, and analytics for businesses across Kenya.",
 });
 
 export const revalidate = 60;
@@ -45,7 +45,7 @@ export default async function BlogPage() {
       </section>
 
       <section className="border-b border-border">
-        <div className="shell px-6 py-16 md:px-12 md:py-24">
+        <div className="shell px-6 py-12 md:px-12 md:py-16">
           {posts.length === 0 ? (
             <p className="text-text-muted">
               No posts yet. The first one is on its way.

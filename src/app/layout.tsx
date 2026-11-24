@@ -11,11 +11,11 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "KovaLab | Software Solutions Studio",
+    default: "KovaLab | Website Design & Web Development in Kenya",
     template: "%s | KovaLab",
   },
   description:
-    "Based in Kisumu, Kenya, we build websites, web applications, and custom software for businesses across Kenya and East Africa. Websites from KSh 15,000.",
+    "We build websites, web applications, and custom software for businesses across Kenya. Websites from KSh 15,000.",
   authors: [{ name: "KovaLab" }],
   metadataBase: new URL(SITE_URL),
   manifest: "/site.webmanifest",
@@ -23,9 +23,9 @@ export const metadata: Metadata = {
   // This one covers the homepage, which has no metadata export of its own.
   alternates: { canonical: SITE_URL },
   openGraph: {
-    title: "KovaLab | Software Solutions Studio",
+    title: "KovaLab | Website Design & Web Development in Kenya",
     description:
-      "Based in Kisumu, Kenya, we build websites, web applications, and custom software for businesses across Kenya and East Africa. Websites from KSh 15,000.",
+      "We build websites, web applications, and custom software for businesses across Kenya. Websites from KSh 15,000.",
     url: SITE_URL,
     siteName: "KovaLab",
     locale: "en_KE",
@@ -33,9 +33,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "KovaLab | Software Solutions Studio",
+    title: "KovaLab | Website Design & Web Development in Kenya",
     description:
-      "Based in Kisumu, Kenya, we build websites, web applications, and custom software for businesses across Kenya and East Africa. Websites from KSh 15,000.",
+      "We build websites, web applications, and custom software for businesses across Kenya. Websites from KSh 15,000.",
   },
   robots: { index: true, follow: true },
 };

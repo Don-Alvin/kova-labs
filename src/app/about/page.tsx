@@ -7,7 +7,7 @@ export const metadata: Metadata = pageMetadata({
   path: "/about",
   title: "About",
   description:
-    "KovaLab is a software solutions studio in Kisumu, serving businesses across Kenya. Analytical thinking and technical skill, applied to websites that bring in customers.",
+    "KovaLab is a Kenyan software solutions studio building websites, web applications and custom software for businesses across the country.",
 });
 
 const VALUES = [
@@ -53,8 +53,8 @@ export default function AboutPage() {
               The studio behind the work
             </h1>
             <p className="mt-8 max-w-[58ch] font-light leading-relaxed text-text-light/70">
-              KovaLab is a small studio in Kisumu building websites, web
-              applications, custom software, and SEO foundations for businesses across Kenya and East Africa.
+              KovaLab is a Kenyan studio building websites, web
+              applications, custom software, and SEO foundations for businesses across Kenya.
             </p>
           </div>
           <MarkPanel className="min-h-[280px] lg:min-h-[440px]" />

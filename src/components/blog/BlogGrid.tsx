@@ -31,23 +31,21 @@ export const BlogGrid = ({ posts, categories }: BlogGridProps) => {
     });
   }, [posts, category, search]);
 
-  const [featured, ...rest] = filtered;
-  const shown = rest.slice(0, visible);
+  const shown = filtered.slice(0, visible);
 
   const filters = [{ slug: "all", name: "All" }, ...categories];
 
   return (
     <div>
       <div className="flex flex-col gap-6 border-b border-border pb-6 lg:flex-row lg:items-center lg:justify-between">
-        <div className="flex flex-wrap items-center gap-6" role="tablist">
+        <div className="flex flex-wrap items-center gap-6" role="group" aria-label="Filter posts by category">
           {filters.map((item) => {
             const active = category === item.slug;
             return (
               <button
                 key={item.slug}
                 type="button"
-                role="tab"
-                aria-selected={active}
+                aria-pressed={active}
                 onClick={() => {
                   setCategory(item.slug);
                   setVisible(PAGE_SIZE);
@@ -88,21 +86,15 @@ export const BlogGrid = ({ posts, categories }: BlogGridProps) => {
         </p>
       ) : (
         <>
-          {featured ? (
-            <div className="mt-12">
-              <BlogCard post={featured} featured />
-            </div>
-          ) : null}
-
           {shown.length > 0 ? (
-            <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
               {shown.map((post) => (
                 <BlogCard key={post._id} post={post} />
               ))}
             </div>
           ) : null}
 
-          {rest.length > visible ? (
+          {filtered.length > visible ? (
             <button
               type="button"
               onClick={() => setVisible((count) => count + PAGE_SIZE)}

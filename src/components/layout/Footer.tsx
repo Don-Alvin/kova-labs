@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LOCATIONS } from "@/lib/locations";
 import { Logo } from "@/components/Logo";
 import {
   EMAIL,
@@ -18,7 +19,7 @@ export const Footer = () => (
           Software solutions studio
         </p>
         <p className="max-w-[280px] text-sm font-light leading-relaxed text-text-muted">
-          Helping businesses across East Africa get online with websites that
+          Helping businesses across Kenya get online with websites that
           actually work.
         </p>
       </div>
@@ -103,6 +104,9 @@ export const Footer = () => (
       </div>
     </div>
 
+    <nav aria-label="Web development across Kenya" className="shell flex flex-wrap gap-5 border-t border-border px-6 py-6 md:px-12">
+      {LOCATIONS.map(location => <Link key={location} href={`/web-developers-${location.toLowerCase()}`} className="text-sm text-text-muted underline underline-offset-4 hover:text-accent-text">Web developers in {location}</Link>)}
+    </nav>
     <div className="shell flex flex-col gap-2 border-t border-border px-6 py-6 text-xs text-text-muted md:flex-row md:items-center md:justify-between md:px-12">
       <p>&copy; {new Date().getFullYear()} KovaLab. All rights reserved.</p>
     </div>
