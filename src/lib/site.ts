@@ -30,7 +30,7 @@ export const CAL_LINK = process.env.NEXT_PUBLIC_CALCOM_LINK ?? "";
 
 export const NAV_LINKS = [
   { label: "Work", href: "/work" },
-  { label: "Services", href: "/services/website-design" },
+  { label: "Services", href: "/#services" },
   { label: "About", href: "/about" },
   { label: "Blog", href: "/blog" },
 ] as const;

@@ -11,7 +11,7 @@ export const metadata: Metadata = pageMetadata({
   path: "/work",
   title: "Work",
   description:
-    "Website design and development for businesses across East Africa.",
+    "Website design and development for businesses across Kenya.",
 });
 
 export const revalidate = 60;

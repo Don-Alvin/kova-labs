@@ -1,3 +1,4 @@
+import { Explore } from "@/components/home/Explore";
 import { Hero } from "@/components/home/Hero";
 import { Work } from "@/components/home/Work";
 import { Capabilities } from "@/components/home/Capabilities";
@@ -6,6 +7,8 @@ import { FAQ } from "@/components/home/FAQ";
 import { Process } from "@/components/home/Process";
 import { CtaBanner } from "@/components/home/CtaBanner";
 import { jsonLd, organizationSchema } from "@/lib/structuredData";
+
+export const revalidate = 60;
 
 export default function HomePage() {
   return (
@@ -17,6 +20,7 @@ export default function HomePage() {
       <Hero />
       <Work />
       <Capabilities />
+      <Explore />
       <QuoteEstimator />
       <FAQ />
       <Process />

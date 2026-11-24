@@ -29,12 +29,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...STATIC_ROUTES.map((route) => ({
       url: `${SITE_URL}${route.path}`,
       priority: route.priority,
-      ...(route.path !== "/privacy" ? { lastModified: new Date(route.path.startsWith("/web-developers-") ? "2026-09-24T00:00:00Z" : "2026-09-22T06:00:00Z") } : {}),
+      ...(route.path !== "/privacy" ? { lastModified: new Date(["/", "/blog"].includes(route.path) ? "2026-11-23T00:00:00Z" : route.path === "/quote" ? "2026-09-22T06:00:00Z" : "2026-11-12T00:00:00Z") } : {}),
     })),
     ...SERVICE_SLUGS.map((slug) => ({
       url: `${SITE_URL}/services/${slug}`,
       priority: 0.8,
-      lastModified: new Date("2026-09-22T06:00:00Z"),
+      lastModified: new Date("2026-11-23T00:00:00Z"),
     })),
     ...content.map((entry) => ({
       url: `${SITE_URL}/${entry._type === "post" ? "blog" : "work"}/${entry.slug}`,

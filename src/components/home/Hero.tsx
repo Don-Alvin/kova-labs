@@ -132,7 +132,7 @@ export const Hero = () => {
             </h1>
 
             <p className="hero-fade hero-description mt-6 max-w-[42ch] font-light leading-relaxed text-text-light/70">
-              We help small businesses across East Africa get online with
+              We help small businesses across Kenya get online with
               fast, professional websites that bring in customers and build
               trust.
             </p>

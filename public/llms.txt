@@ -1,17 +1,22 @@
-# KovaLab
+﻿# KovaLab
 
-> A software solutions studio in Nairobi, Kenya, building fast websites and web apps for businesses across East Africa. Websites are built for how East African customers actually transact: M-Pesa, Paystack, and WhatsApp checkout are first-class options, not afterthoughts.
+> A software solutions studio in Kenya, building websites, online shops and web applications for Kenyan businesses. Business websites start from KSh 15,000 for up to 3 pages. Domain registration and hosting are billed separately. WhatsApp ordering and integrated payments are scoped according to the project; a WhatsApp order does not confirm payment.
 
 ## Services
-- [Web development](https://www.kovalab.co.ke/services/web-development): fast, professional websites and web applications
-- [UI/UX design](https://www.kovalab.co.ke/services/ui-ux-design): interfaces built for how customers actually decide
-- [Data and analytics](https://www.kovalab.co.ke/services/data-analytics): tracking, dashboards, and reporting that answer real questions
+- [Website design](https://www.kovalab.co.ke/services/website-design): mobile-friendly business websites
+- [Web applications](https://www.kovalab.co.ke/services/web-applications): online shops, booking systems and customer portals
+- [Custom software](https://www.kovalab.co.ke/services/custom-software): business workflows and integrations
+- [SEO setup](https://www.kovalab.co.ke/services/seo-setup): search foundations for your website
+
+## Locations
+- [Web developers in Kenya](https://www.kovalab.co.ke/web-developers-kenya)
+- [Web developers in Nairobi](https://www.kovalab.co.ke/web-developers-nairobi)
+- [Web developers in Kisumu](https://www.kovalab.co.ke/web-developers-kisumu)
+- [Web developers in Nakuru](https://www.kovalab.co.ke/web-developers-nakuru)
 
 ## Key pages
 - [About](https://www.kovalab.co.ke/about): the studio and how it works
-- [Work / portfolio](https://www.kovalab.co.ke/work): case studies from real clients
-- [Get a quote](https://www.kovalab.co.ke/quote): published pricing in Kenyan shillings, no sales call required to see cost
-- [Contact](https://www.kovalab.co.ke/contact): book a free call or reach out directly
-
-## Blog
-- [Notes from the studio](https://www.kovalab.co.ke/blog): practical writing on websites, payments, and analytics for East African businesses
+- [Work / portfolio](https://www.kovalab.co.ke/work): published website projects
+- [Get a quote](https://www.kovalab.co.ke/quote): project estimator in Kenyan shillings
+- [Contact](https://www.kovalab.co.ke/contact): book a call or reach out directly
+- [Notes from the studio](https://www.kovalab.co.ke/blog): practical writing on websites, payments and analytics for Kenyan businesses

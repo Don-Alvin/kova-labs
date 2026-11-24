@@ -36,7 +36,7 @@ export const organizationSchema = () => ({
   telephone: PHONE,
   priceRange: "KSh 15,000 - KSh 50,000+",
   description:
-    "Software solutions studio in Kisumu, Kenya, building fast websites and web apps for businesses across Kenya and East Africa.",
+    "Software solutions studio in Kenya, building fast websites and web apps for businesses across Kenya.",
   address: {
     "@type": "PostalAddress",
     streetAddress: "Oginga Odinga Street",
@@ -45,7 +45,6 @@ export const organizationSchema = () => ({
   },
   areaServed: [
     { "@type": "Country", name: "Kenya" },
-    { "@type": "Place", name: "East Africa" },
   ],
   sameAs: SOCIALS.map((social) => social.href),
 });
@@ -64,7 +63,6 @@ export const serviceSchema = (input: {
   provider: { "@id": `${SITE_URL}/#organization` },
   areaServed: [
     { "@type": "Country", name: "Kenya" },
-    { "@type": "Place", name: "East Africa" },
   ],
 });
 
